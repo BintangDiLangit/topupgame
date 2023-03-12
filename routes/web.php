@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\GetNickNameController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +19,15 @@ use App\Http\Controllers\GetNickNameController;
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/', [MainController::class, 'index']);
+Route::get('/about-us', [MainController::class, 'about']);
 
-Route::get('/detail', function () {
-    return view('detail-topup');
-});
+Route::get('games', [GameController::class, 'listGame']);
+Route::get('detail-game/{slug}', [GameController::class, 'detailGame'])->name('game.detail');
 
-Route::get('services', [LayananController::class,'listLayanan']);
-Route::post('place-order', [OrderController::class,'placeOrder']);
-Route::post('cek-status-order', [OrderController::class,'statusOrder']);
-Route::post('get-nickname-ml', [GetNickNameController::class,'getNickNameMobileLegend']);
+Route::get('game/mobile-legends', [LayananController::class, 'listLayananML']);
+Route::post('place-order', [OrderController::class, 'placeOrder']);
+Route::post('cek-status-order', [OrderController::class, 'statusOrder']);
+Route::post('get-nickname-ml', [GetNickNameController::class, 'getNickNameMobileLegend']);
 
-Route::get('admin/profile', [ProfileController::class,'profile']);
+Route::get('admin/profile', [ProfileController::class, 'profile']);

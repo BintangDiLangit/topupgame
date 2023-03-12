@@ -1,562 +1,859 @@
-<!doctype html>
-<html lang="en">
+@extends('landing.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href={{ asset('css/homepage.css') }}>
-    <link rel="stylesheet" href={{ asset('css/utilities.css') }}>
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-
-    <title>StoreGG</title>
-</head>
-
-<body>
-    <!-- Navbar -->
-    <section>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light bg-white pt-lg-40 pb-lg-40 pt-30 pb-50">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="60"
-                            height="60">
-                            <circle cx="30" cy="30" r="30" fill="#3546AB" />
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <circle cx="30" cy="30" r="30" fill="#00BAFF" />
-                            <path
-                                d="M41.5001 35.0001C52.3001 38.2001 49.6668 48.0001 47.0001 52.5001L71.0001 60.5001L79.5001 -12.9999C63.6667 -13.8333 29.5001 -14.9999 19.5001 -12.9999C7.00007 -10.4999 13.5001 4.00006 12.0001 14.0001C10.5001 24.0001 28.0001 31.0001 41.5001 35.0001Z"
-                                fill="#4D17E2" />
-                            <path
-                                d="M54.495 47.785C54.495 51.285 53.655 54.54 51.975 57.55C50.295 60.56 47.74 63.01 44.31 64.9C40.88 66.79 36.645 67.735 31.605 67.735C26.705 67.735 22.33 66.86 18.48 65.11C14.7 63.29 11.655 60.84 9.345 57.76C7.105 54.61 5.81 51.04 5.46 47.05H15.645C15.855 49.15 16.555 51.215 17.745 53.245C19.005 55.205 20.755 56.85 22.995 58.18C25.305 59.44 28.07 60.07 31.29 60.07C35.49 60.07 38.71 58.95 40.95 56.71C43.19 54.47 44.31 51.6 44.31 48.1C44.31 45.09 43.505 42.64 41.895 40.75C40.355 38.86 38.43 37.39 36.12 36.34C33.81 35.22 30.66 34.03 26.67 32.77C21.98 31.23 18.2 29.795 15.33 28.465C12.53 27.065 10.115 25 8.085 22.27C6.125 19.54 5.145 15.935 5.145 11.455C5.145 7.60499 6.055 4.20999 7.875 1.27C9.765 -1.67 12.425 -3.945 15.855 -5.555C19.355 -7.165 23.45 -7.97 28.14 -7.97C35.42 -7.97 41.195 -6.185 45.465 -2.615C49.735 0.884996 52.22 5.365 52.92 10.825H42.63C42.07 7.885 40.565 5.295 38.115 3.055C35.665 0.814997 32.34 -0.305003 28.14 -0.305003C24.29 -0.305003 21.21 0.709996 18.9 2.73999C16.59 4.69999 15.435 7.5 15.435 11.14C15.435 14.01 16.17 16.355 17.64 18.175C19.18 19.925 21.07 21.325 23.31 22.375C25.55 23.355 28.63 24.475 32.55 25.735C37.31 27.275 41.125 28.745 43.995 30.145C46.935 31.545 49.42 33.68 51.45 36.55C53.48 39.35 54.495 43.095 54.495 47.785Z"
-                                fill="white" />
-                        </g>
-                    </svg>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto text-lg gap-lg-0 gap-2">
-                        <li class="nav-item my-auto">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item my-auto">
-                            <a class="nav-link" href="#games">Games</a>
-                        </li>
-                        <li class="nav-item my-auto">
-                            <a class="nav-link" href="#">Rewards</a>
-                        </li>
-
-                        <li class="nav-item my-auto">
-                            <a class="nav-link" href="#">Discover</a>
-                        </li>
-                        <li class="nav-item my-auto me-lg-20">
-                            <a class="nav-link" href="#">Global Rank</a>
-                        </li>
-                        <li class="nav-item my-auto">
-                            <a class="btn btn-sign-in d-flex justify-content-center ms-lg-2 rounded-pill"
-                                href="./src/sign-in.html" role="button">Sign
-                                In</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </section>
-
-    <!-- Header -->
-    <section class="header pt-lg-60 pb-50">
-        <div class="container-xxl container-fluid">
-            <div class="row gap-lg-0 gap-5">
-                <div class="col-lg-6 col-12 my-auto">
-                    <p class="text-support text-lg color-palette-2">
-                        Halo gamers,
-                    </p>
-                    <h1 class="header-title color-palette-1 fw-bold">
-                        Topup & Get <span class="d-sm-inline d-none">a</span><span class="d-sm-none d-inline">a
-                        </span><span class="underline-blue"> New</span> <br class="d-sm-block d-none"> <span
-                            class="underline-blue">Experience</span> in Gaming
-                    </h1>
-                    <p class="mt-30 mb-40 text-lg color-palette-1">Kami menyediakan jutaan cara untuk membantu<br
-                            class="d-md-block d-none"> players menjadi pemenang sejati
-                    </p>
-                    <div class="d-flex flex-lg-row flex-column gap-4">
-                        <a class="btn btn-get text-lg text-white rounded-pill" href="#feature" role="button">Get
-                            Started</a>
-                        <a class="btn-learn text-lg color-palette-1 my-auto text-center" href="#" role="button">Learn
-                            More</a>
+@section('content')
+    <!-- slider-area -->
+    <section class="slider__area slider__bg" data-background="assets/img/slider/slider_bg.jpg">
+        <div class="slider-activee">
+            <div class="single-slider">
+                <div class="container custom-container">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-6">
+                            <div class="slider__content">
+                                <h6 class="sub-title wow fadeInUp" data-wow-delay=".2s">GAMER SHOP</h6>
+                                <h2 class="title wow fadeInUp" data-wow-delay=".5s">steaming</h2>
+                                <p class="wow fadeInUp" data-wow-delay=".8s">top up games online</p>
+                                <div class="slider__btn wow fadeInUp" data-wow-delay="1.2s">
+                                    <a href="contact.html" class="tg-btn-1"><span>contact us</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-5 col-lg-6">
+                            <div class="slider__img text-center">
+                                <img src="assets/img/slider/slider_img01.png" data-magnetic alt="img">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-12 d-lg-block d-none">
-                    <div class="d-flex justify-content-lg-end justify-content-center me-lg-5">
-                        <div class="position-relative" data-aos="zoom-in">
-                            <img src="./assets/img/Header-1.png" class="img-fluid" alt="">
-                            <div class="card left-card position-absolute border-0">
-                                <div class="d-flex align-items-center mb-16 gap-3">
-                                    <img src="./assets/img/Header-2.png" width="40" height="40" class="rounded-pill"
-                                        alt="">
-                                    <div>
-                                        <p class="text-sm fw-medium color-palette-1 m-0">Shayna Anne</p>
-                                        <p class="text-xs fw-light color-palette-2 m-0">Professional Gamer</p>
+            </div>
+        </div>
+        <div class="slider__shapes">
+            <img src="assets/img/slider/slider_shape01.png" alt="shape">
+            <img src="assets/img/slider/slider_shape02.png" alt="shape">
+            <img src="assets/img/slider/slider_shape03.png" alt="shape">
+            <img src="assets/img/slider/slider_shape04.png" alt="shape">
+        </div>
+        <div class="slider__brand-wrap">
+            <div class="container custom-container">
+                <ul class="slider__brand-list list-wrap">
+                    <li><a href="#"><img src="assets/img/brand/brand_logo01.png" alt="brand"></a></li>
+                    <li><a href="#"><img src="assets/img/brand/brand_logo02.png" alt="brand"></a></li>
+                    <li><a href="#"><img src="assets/img/brand/brand_logo03.png" alt="brand"></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- slider-area-end -->
+
+    <!-- NFT-item-area -->
+    <section class="nft-item__area">
+        <div class="container custom-container">
+            <div class="row justify-content-center">
+                {{-- <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
+                        <div class="nft-item__box">
+                            <div class="nft-item__thumb">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img01.jpg"
+                                        alt="img"></a>
+                            </div>
+                            <div class="nft-item__content">
+                                <h4 class="title"><a href="shop-details.html">wolf gaming art</a></h4>
+                                <div class="nft-item__avatar">
+                                    <div class="avatar-img">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <h5 class="name"><a href="shop-details.html">Alax Max</a></h5>
+                                        <span class="designation">Creator</span>
                                     </div>
                                 </div>
-                                <div class="d-flex gap-2">
-                                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.0489 0.927049C11.3483 0.0057386 12.6517 0.00574004 12.9511 0.927051L14.9187 6.98278C15.0526 7.3948 15.4365 7.67376 15.8697 7.67376H22.2371C23.2058 7.67376 23.6086 8.91338 22.8249 9.48278L17.6736 13.2254C17.3231 13.4801 17.1764 13.9314 17.3103 14.3435L19.2779 20.3992C19.5773 21.3205 18.5228 22.0866 17.7391 21.5172L12.5878 17.7746C12.2373 17.5199 11.7627 17.5199 11.4122 17.7746L6.2609 21.5172C5.47719 22.0866 4.42271 21.3205 4.72206 20.3992L6.68969 14.3435C6.82356 13.9314 6.6769 13.4801 6.32642 13.2254L1.17511 9.48278C0.391392 8.91338 0.794168 7.67376 1.76289 7.67376H8.13026C8.56349 7.67376 8.94744 7.3948 9.08132 6.98278L11.0489 0.927049Z"
-                                            fill="#FEBD57" />
-                                    </svg>
-                                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.0489 0.927049C11.3483 0.0057386 12.6517 0.00574004 12.9511 0.927051L14.9187 6.98278C15.0526 7.3948 15.4365 7.67376 15.8697 7.67376H22.2371C23.2058 7.67376 23.6086 8.91338 22.8249 9.48278L17.6736 13.2254C17.3231 13.4801 17.1764 13.9314 17.3103 14.3435L19.2779 20.3992C19.5773 21.3205 18.5228 22.0866 17.7391 21.5172L12.5878 17.7746C12.2373 17.5199 11.7627 17.5199 11.4122 17.7746L6.2609 21.5172C5.47719 22.0866 4.42271 21.3205 4.72206 20.3992L6.68969 14.3435C6.82356 13.9314 6.6769 13.4801 6.32642 13.2254L1.17511 9.48278C0.391392 8.91338 0.794168 7.67376 1.76289 7.67376H8.13026C8.56349 7.67376 8.94744 7.3948 9.08132 6.98278L11.0489 0.927049Z"
-                                            fill="#FEBD57" />
-                                    </svg>
-                                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.0489 0.927049C11.3483 0.0057386 12.6517 0.00574004 12.9511 0.927051L14.9187 6.98278C15.0526 7.3948 15.4365 7.67376 15.8697 7.67376H22.2371C23.2058 7.67376 23.6086 8.91338 22.8249 9.48278L17.6736 13.2254C17.3231 13.4801 17.1764 13.9314 17.3103 14.3435L19.2779 20.3992C19.5773 21.3205 18.5228 22.0866 17.7391 21.5172L12.5878 17.7746C12.2373 17.5199 11.7627 17.5199 11.4122 17.7746L6.2609 21.5172C5.47719 22.0866 4.42271 21.3205 4.72206 20.3992L6.68969 14.3435C6.82356 13.9314 6.6769 13.4801 6.32642 13.2254L1.17511 9.48278C0.391392 8.91338 0.794168 7.67376 1.76289 7.67376H8.13026C8.56349 7.67376 8.94744 7.3948 9.08132 6.98278L11.0489 0.927049Z"
-                                            fill="#FEBD57" />
-                                    </svg>
-                                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.0489 0.927049C11.3483 0.0057386 12.6517 0.00574004 12.9511 0.927051L14.9187 6.98278C15.0526 7.3948 15.4365 7.67376 15.8697 7.67376H22.2371C23.2058 7.67376 23.6086 8.91338 22.8249 9.48278L17.6736 13.2254C17.3231 13.4801 17.1764 13.9314 17.3103 14.3435L19.2779 20.3992C19.5773 21.3205 18.5228 22.0866 17.7391 21.5172L12.5878 17.7746C12.2373 17.5199 11.7627 17.5199 11.4122 17.7746L6.2609 21.5172C5.47719 22.0866 4.42271 21.3205 4.72206 20.3992L6.68969 14.3435C6.82356 13.9314 6.6769 13.4801 6.32642 13.2254L1.17511 9.48278C0.391392 8.91338 0.794168 7.67376 1.76289 7.67376H8.13026C8.56349 7.67376 8.94744 7.3948 9.08132 6.98278L11.0489 0.927049Z"
-                                            fill="#FEBD57" />
-                                    </svg>
-                                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.0489 0.927049C11.3483 0.0057386 12.6517 0.00574004 12.9511 0.927051L14.9187 6.98278C15.0526 7.3948 15.4365 7.67376 15.8697 7.67376H22.2371C23.2058 7.67376 23.6086 8.91338 22.8249 9.48278L17.6736 13.2254C17.3231 13.4801 17.1764 13.9314 17.3103 14.3435L19.2779 20.3992C19.5773 21.3205 18.5228 22.0866 17.7391 21.5172L12.5878 17.7746C12.2373 17.5199 11.7627 17.5199 11.4122 17.7746L6.2609 21.5172C5.47719 22.0866 4.42271 21.3205 4.72206 20.3992L6.68969 14.3435C6.82356 13.9314 6.6769 13.4801 6.32642 13.2254L1.17511 9.48278C0.391392 8.91338 0.794168 7.67376 1.76289 7.67376H8.13026C8.56349 7.67376 8.94744 7.3948 9.08132 6.98278L11.0489 0.927049Z"
-                                            fill="#FEBD57" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="card right-card position-absolute border-0">
-                                <div class="position-relative d-flex flex-row justify-content-center mb-24">
-                                    <img src="./assets/img/Header-3.png" class="rounded-pill" alt="">
-                                    <p class="right-card-support text-white text-xxs text-center position-absolute m-0">
-                                        New</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-center m-0 fw-medium color-palette-1">Lann Knight</p>
-                                    <p class="fw-light text-center m-0 color-palette-2 text-xs">Dota 2</p>
+                                <div class="nft-item__bid">
+                                    <div class="nft-item__price">
+                                        <p>1.002 <span class="currency">Eth</span></p>
+                                        <a href="shop-details.html" class="bid-btn">Bid <i
+                                                class="fas fa-long-arrow-alt-right"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div> --}}
+                @foreach ($games as $item)
+                    <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
+                        <div class="nft-item__box">
+                            <div class="nft-item__thumb">
+                                <a href="/game/mobile-legends"><img src="{{ $item->image }}" alt="img"></a>
+                            </div>
+                            <div class="nft-item__content">
+                                <h4 class="title"><a href="/game/mobile-legends">{{ $item->name }}</a></h4>
+                                {{-- <div class="nft-item__avatar">
+                                        <div class="avatar-img">
+                                            <a href="/game/mobile-legends"><img src="assets/img/nft/nft_avatar.png"
+                                                    alt="img"></a>
+                                        </div>
+                                        <div class="avatar-name">
+                                            <h5 class="name"><a href="/game/mobile-legends">Alax Max</a></h5>
+                                            <span class="designation">Creator</span>
+                                        </div>
+                                    </div> --}}
+                                <div class="nft-item__bid mt-5">
+                                    <div class="nft-item__price">
+                                        <p> <span class="currency">ML Store</span></p>
+                                        <a href="/game/mobile-legends" class="bid-btn">Go! <i
+                                                class="fas fa-long-arrow-alt-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{-- <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
+                        <div class="nft-item__box">
+                            <div class="nft-item__thumb">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img03.jpg"
+                                        alt="img"></a>
+                            </div>
+                            <div class="nft-item__content">
+                                <h4 class="title"><a href="shop-details.html">girl firefly art</a></h4>
+                                <div class="nft-item__avatar">
+                                    <div class="avatar-img">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="avatar-name">
+                                        <h5 class="name"><a href="shop-details.html">Alax Max</a></h5>
+                                        <span class="designation">Creator</span>
+                                    </div>
+                                </div>
+                                <div class="nft-item__bid">
+                                    <div class="nft-item__price">
+                                        <p>1.024 <span class="currency">Eth</span></p>
+                                        <a href="shop-details.html" class="bid-btn">Bid <i
+                                                class="fas fa-long-arrow-alt-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+            </div>
+        </div>
+    </section>
+    <!-- NFT-item-area-end -->
 
+    <!-- area-background-start -->
+    <div class="area-background" data-background="assets/img/bg/area_bg01.jpg">
+
+        <!-- about-area -->
+        <section class="about__area section-pt-130 section-pb-130">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-7 col-md-10">
+                        <div class="section__title text-center mb-60">
+                            <span class="sub-title tg__animate-text">know about us</span>
+                            <h3 class="title">top rated steamers</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-10">
+                        <div class="about__tab-wrap">
+                            <div class="about__buttons">
+                                <a href="shop.html" class="tg-btn-2">buy Hero</a>
+                                <a href="shop.html" class="tg-btn-2 -secondary">buy nfts</a>
+                            </div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="about01-tab" data-bs-toggle="tab"
+                                        data-bs-target="#about01" type="button" role="tab" aria-controls="about01"
+                                        aria-selected="true"><span class="img-shape"></span><img
+                                            src="assets/img/others/about_tab01.png" alt="img"></button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="about02-tab" data-bs-toggle="tab" data-bs-target="#about02"
+                                        type="button" role="tab" aria-controls="about02"
+                                        aria-selected="false"><span class="img-shape"></span><img
+                                            src="assets/img/others/about_tab02.png" alt="img"></button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="about03-tab" data-bs-toggle="tab"
+                                        data-bs-target="#about03" type="button" role="tab" aria-controls="about03"
+                                        aria-selected="false"><span class="img-shape"></span><img
+                                            src="assets/img/others/about_tab03.png" alt="img"></button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="about04-tab" data-bs-toggle="tab"
+                                        data-bs-target="#about04" type="button" role="tab" aria-controls="about04"
+                                        aria-selected="false"><span class="img-shape"></span><img
+                                            src="assets/img/others/about_tab04.png" alt="img"></button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="about05-tab" data-bs-toggle="tab"
+                                        data-bs-target="#about05" type="button" role="tab" aria-controls="about05"
+                                        aria-selected="false"><span class="img-shape"></span><img
+                                            src="assets/img/others/about_tab05.png" alt="img"></button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="about06-tab" data-bs-toggle="tab"
+                                        data-bs-target="#about06" type="button" role="tab" aria-controls="about06"
+                                        aria-selected="false"><span class="img-shape"></span><img
+                                            src="assets/img/others/about_tab06.png" alt="img"></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane show active" id="about01" role="tabpanel" aria-labelledby="about01-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-10">
+                                <div class="about__img">
+                                    <img src="assets/img/others/about_img01.jpg" alt="img">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-10">
+                                <div class="about__flex-wrap">
+                                    <div class="about__content-wrap">
+                                        <div class="about__content">
+                                            <h4 class="title">human game</h4>
+                                            <span class="rate">rate 50%</span>
+                                            <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
+                                                sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra
+                                                tellus miolslis, tincidunt massa venenatis.</p>
+                                        </div>
+                                        <div class="about__content-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/features_icon01.png" alt="img"> Chichi
+                                                    Dragon Ball</li>
+                                                <li><img src="assets/img/icons/features_icon02.png" alt="img"> Space
+                                                    Babe Night</li>
+                                                <li><img src="assets/img/icons/features_icon03.png" alt="img"> Dragon
+                                                    Ball</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about__btn-wrap">
+                                        <ul class="list-wrap">
+                                            <li><a href="shop-details.html">Dragon Ball</a></li>
+                                            <li><a href="shop.html">nft market</a></li>
+                                            <li><a href="contact-2.html">support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="about02" role="tabpanel" aria-labelledby="about02-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-10">
+                                <div class="about__img">
+                                    <img src="assets/img/others/about_img02.jpg" alt="img">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-10">
+                                <div class="about__flex-wrap">
+                                    <div class="about__content-wrap">
+                                        <div class="about__content">
+                                            <h4 class="title">Axie Infinity</h4>
+                                            <span class="rate">rate 60%</span>
+                                            <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
+                                                sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra
+                                                tellus miolslis, tincidunt massa venenatis.</p>
+                                        </div>
+                                        <div class="about__content-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/features_icon01.png" alt="img"> Chichi
+                                                    Dragon Ball</li>
+                                                <li><img src="assets/img/icons/features_icon02.png" alt="img"> Space
+                                                    Babe Night</li>
+                                                <li><img src="assets/img/icons/features_icon03.png" alt="img"> Dragon
+                                                    Ball</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about__btn-wrap">
+                                        <ul class="list-wrap">
+                                            <li><a href="shop-details.html">Dragon Ball</a></li>
+                                            <li><a href="shop.html">nft market</a></li>
+                                            <li><a href="contact-2.html">support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="about03" role="tabpanel" aria-labelledby="about03-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-10">
+                                <div class="about__img">
+                                    <img src="assets/img/others/about_img03.jpg" alt="img">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-10">
+                                <div class="about__flex-wrap">
+                                    <div class="about__content-wrap">
+                                        <div class="about__content">
+                                            <h4 class="title">The Walking Dead</h4>
+                                            <span class="rate">rate 75%</span>
+                                            <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
+                                                sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra
+                                                tellus miolslis, tincidunt massa venenatis.</p>
+                                        </div>
+                                        <div class="about__content-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/features_icon01.png" alt="img"> Chichi
+                                                    Dragon Ball</li>
+                                                <li><img src="assets/img/icons/features_icon02.png" alt="img"> Space
+                                                    Babe Night</li>
+                                                <li><img src="assets/img/icons/features_icon03.png" alt="img"> Dragon
+                                                    Ball</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about__btn-wrap">
+                                        <ul class="list-wrap">
+                                            <li><a href="shop-details.html">Dragon Ball</a></li>
+                                            <li><a href="shop.html">nft market</a></li>
+                                            <li><a href="contact-2.html">support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="about04" role="tabpanel" aria-labelledby="about04-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-10">
+                                <div class="about__img">
+                                    <img src="assets/img/others/about_img04.jpg" alt="img">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-10">
+                                <div class="about__flex-wrap">
+                                    <div class="about__content-wrap">
+                                        <div class="about__content">
+                                            <h4 class="title">The Dogami</h4>
+                                            <span class="rate">rate 65%</span>
+                                            <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
+                                                sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra
+                                                tellus miolslis, tincidunt massa venenatis.</p>
+                                        </div>
+                                        <div class="about__content-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/features_icon01.png" alt="img"> Chichi
+                                                    Dragon Ball</li>
+                                                <li><img src="assets/img/icons/features_icon02.png" alt="img"> Space
+                                                    Babe Night</li>
+                                                <li><img src="assets/img/icons/features_icon03.png" alt="img"> Dragon
+                                                    Ball</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about__btn-wrap">
+                                        <ul class="list-wrap">
+                                            <li><a href="shop-details.html">Dragon Ball</a></li>
+                                            <li><a href="shop.html">nft market</a></li>
+                                            <li><a href="contact-2.html">support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="about05" role="tabpanel" aria-labelledby="about05-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-10">
+                                <div class="about__img">
+                                    <img src="assets/img/others/about_img05.jpg" alt="img">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-10">
+                                <div class="about__flex-wrap">
+                                    <div class="about__content-wrap">
+                                        <div class="about__content">
+                                            <h4 class="title">The Sandbox</h4>
+                                            <span class="rate">rate 75%</span>
+                                            <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
+                                                sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra
+                                                tellus miolslis, tincidunt massa venenatis.</p>
+                                        </div>
+                                        <div class="about__content-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/features_icon01.png" alt="img"> Chichi
+                                                    Dragon Ball</li>
+                                                <li><img src="assets/img/icons/features_icon02.png" alt="img"> Space
+                                                    Babe Night</li>
+                                                <li><img src="assets/img/icons/features_icon03.png" alt="img"> Dragon
+                                                    Ball</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about__btn-wrap">
+                                        <ul class="list-wrap">
+                                            <li><a href="shop-details.html">Dragon Ball</a></li>
+                                            <li><a href="shop.html">nft market</a></li>
+                                            <li><a href="contact-2.html">support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="about06" role="tabpanel" aria-labelledby="about06-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-10">
+                                <div class="about__img">
+                                    <img src="assets/img/others/about_img06.jpg" alt="img">
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-10">
+                                <div class="about__flex-wrap">
+                                    <div class="about__content-wrap">
+                                        <div class="about__content">
+                                            <h4 class="title">Pegaxy Horses</h4>
+                                            <span class="rate">rate 85%</span>
+                                            <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
+                                                sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra
+                                                tellus miolslis, tincidunt massa venenatis.</p>
+                                        </div>
+                                        <div class="about__content-list">
+                                            <ul class="list-wrap">
+                                                <li><img src="assets/img/icons/features_icon01.png" alt="img"> Chichi
+                                                    Dragon Ball</li>
+                                                <li><img src="assets/img/icons/features_icon02.png" alt="img"> Space
+                                                    Babe Night</li>
+                                                <li><img src="assets/img/icons/features_icon03.png" alt="img"> Dragon
+                                                    Ball</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="about__btn-wrap">
+                                        <ul class="list-wrap">
+                                            <li><a href="shop-details.html">Dragon Ball</a></li>
+                                            <li><a href="shop.html">nft market</a></li>
+                                            <li><a href="contact-2.html">support</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- about-area-end -->
+
+        <!-- gallery-area -->
+        <section class="gallery__area fix section-pb-130">
+            <div class="gallery__slider">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-9 col-lg-10 col-md-11">
+                            <div class="swiper-container gallery-active">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="gallery__item">
+                                            <div class="gallery__thumb">
+                                                <a href="assets/img/gallery/gallery01.jpg" data-cursor="-theme"
+                                                    data-cursor-text="View <br> Image" class="popup-image"
+                                                    title="PUBG Tournament"><img src="assets/img/gallery/gallery01.jpg"
+                                                        alt="img"></a>
+                                            </div>
+                                            <div class="gallery__content">
+                                                <h3 class="title">pubg tournament</h3>
+                                                <span class="rate">rate 50%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="gallery__item">
+                                            <div class="gallery__thumb">
+                                                <a href="assets/img/gallery/gallery02.jpg" data-cursor="-theme"
+                                                    data-cursor-text="View <br> Image" class="popup-image"
+                                                    title="Assassin's Creed"><img src="assets/img/gallery/gallery02.jpg"
+                                                        alt="img"></a>
+                                            </div>
+                                            <div class="gallery__content">
+                                                <h3 class="title">Assassin's Creed</h3>
+                                                <span class="rate">rate 65%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="gallery__item">
+                                            <div class="gallery__thumb">
+                                                <a href="assets/img/gallery/gallery03.jpg" data-cursor="-theme"
+                                                    data-cursor-text="View <br> Image" class="popup-image"
+                                                    title="World of Warcraft"><img src="assets/img/gallery/gallery03.jpg"
+                                                        alt="img"></a>
+                                            </div>
+                                            <div class="gallery__content">
+                                                <h3 class="title">World of Warcraft</h3>
+                                                <span class="rate">rate 60%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="gallery__item">
+                                            <div class="gallery__thumb">
+                                                <a href="assets/img/gallery/gallery04.jpg" data-cursor="-theme"
+                                                    data-cursor-text="View <br> Image" class="popup-image"
+                                                    title="The Chant 2"><img src="assets/img/gallery/gallery04.jpg"
+                                                        alt="img"></a>
+                                            </div>
+                                            <div class="gallery__content">
+                                                <h3 class="title">The Chant s.2</h3>
+                                                <span class="rate">rate 70%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="gallery__item">
+                                            <div class="gallery__thumb">
+                                                <a href="assets/img/gallery/gallery05.jpg" data-cursor="-theme"
+                                                    data-cursor-text="View <br> Image" class="popup-image"
+                                                    title="Dota 2 tournament"><img src="assets/img/gallery/gallery05.jpg"
+                                                        alt="img"></a>
+                                            </div>
+                                            <div class="gallery__content">
+                                                <h3 class="title">Dota 2 tournament</h3>
+                                                <span class="rate">rate 85%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- scrollbar -->
+                                <div class="swiper-scrollbar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- gallery-area-end -->
+
+    </div>
+    <!-- area-background-end -->
+
+    <!-- team-area -->
+    <section class="team__area team-bg section-pt-130 section-pb-100" data-background="assets/img/bg/team_bg.jpg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-7 col-md-10">
+                    <div class="section__title text-center mb-60">
+                        <span class="sub-title tg__animate-text">our team member</span>
+                        <h3 class="title">ACTIVE TEAM MEMBERS</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+                    <div class="team__item">
+                        <div class="team__thumb">
+                            <a href="team-details.html"><img src="assets/img/team/team01.png" alt="img"></a>
+                        </div>
+                        <div class="team__content">
+                            <h4 class="name"><a href="team-details.html">killer master</a></h4>
+                            <span class="designation">Blockchain Expert</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
+                    <div class="team__item">
+                        <div class="team__thumb">
+                            <a href="team-details.html"><img src="assets/img/team/team02.png" alt="img"></a>
+                        </div>
+                        <div class="team__content">
+                            <h4 class="name"><a href="team-details.html">tanu mark</a></h4>
+                            <span class="designation">Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
+                    <div class="team__item">
+                        <div class="team__thumb">
+                            <a href="team-details.html"><img src="assets/img/team/team03.png" alt="img"></a>
+                        </div>
+                        <div class="team__content">
+                            <h4 class="name"><a href="team-details.html">Thompson Scot</a></h4>
+                            <span class="designation">Art Director</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                    <div class="team__item">
+                        <div class="team__thumb">
+                            <a href="team-details.html"><img src="assets/img/team/team04.png" alt="img"></a>
+                        </div>
+                        <div class="team__content">
+                            <h4 class="name"><a href="team-details.html">Shakh Danial</a></h4>
+                            <span class="designation">Crypto Advisor</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- team-area-end -->
 
-    <!-- 3 Column - Feature -->
-    <section id="feature" class="feature pt-50 pb-50">
-        <div class="container-fluid">
-            <h2 class="text-4xl fw-bold color-palette-1 text-center mb-30">It’s Really That<br> Easy to Win the Game
-            </h2>
-            <div class="row gap-lg-0 gap-4" data-aos="fade-up">
-                <div class="col-lg-4">
-                    <div class="card feature-card border-0">
-                        <svg class="mb-30" width="80" height="80" viewBox="0 0 80 80" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0-icon1" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="80"
-                                height="80">
-                                <circle cx="40" cy="40" r="40" fill="#D7D7F8" />
-                            </mask>
-                            <g mask="url(#mask0-icon1)">
-                                <circle cx="40" cy="40" r="40" fill="#D7D7F8" />
-                                <mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="-12" y="23" width="67"
-                                    height="73">
-                                    <path d="M-12 23H33C45.1503 23 55 32.8497 55 45V96H-12V23Z" fill="#4D17E2" />
-                                </mask>
-                                <g mask="url(#mask1)">
-                                    <path d="M-12 23H33C45.1503 23 55 32.8497 55 45V96H-12V23Z" fill="#695DE9" />
-                                    <path d="M37 55H-4" stroke="white" stroke-width="4" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M23 64L-4 64" stroke="#B7B0F4" stroke-width="4" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <rect x="23" y="13" width="52" height="34" rx="13" fill="#5C52C7" />
-                                </g>
-                                <rect x="27" y="16" width="41" height="27" rx="13" fill="#2B2467" />
-                                <circle cx="47.5" cy="29.5" r="5.5" stroke="white" stroke-width="4" />
-                            </g>
-                        </svg>
-                        <p class="fw-semibold text-2xl mb-2 color-palette-1">1. Start</p>
-                        <p class="text-lg color-palette-1 mb-0">Pilih salah satu game<br>
-                            yang ingin kamu top up</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card feature-card border-0">
-                        <svg class="mb-30" width="80" height="80" viewBox="0 0 80 80" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0-icon2" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="80"
-                                height="80">
-                                <circle cx="40" cy="40" r="40" fill="#D7D7F8" />
-                            </mask>
-                            <g mask="url(#mask0-icon2)">
-                                <circle cx="40" cy="40" r="40" fill="#D7D7F8" />
-                                <rect x="-14" y="16" width="62" height="82" rx="16" fill="#695DE9" />
-                                <path d="M32 36H5" stroke="white" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M27 45L9 45" stroke="#B7B0F4" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <rect x="56" y="37" width="49" height="75" rx="16" fill="#2B2467" />
-                                <path d="M97 50H70" stroke="white" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M92 59L74 59" stroke="#6B63AC" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </g>
-                        </svg>
-                        <p class="fw-semibold text-2xl mb-2 color-palette-1">2. Fill Up</p>
-                        <p class="text-lg color-palette-1 mb-0">Top up sesuai dengan<br>
-                            nominal yang sudah tersedia</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card feature-card border-0">
-                        <svg class="mb-30" width="80" height="80" viewBox="0 0 80 80" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <mask id="mask0-icon3" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="80"
-                                height="80">
-                                <circle cx="40" cy="40" r="40" fill="#D7D7F8" />
-                            </mask>
-                            <g mask="url(#mask0-icon3)">
-                                <circle cx="40" cy="40" r="40" fill="#D7D7F8" />
-                                <rect x="13" y="25" width="54" height="61" rx="16" fill="#695DE9" />
-                                <path d="M50 46L50 68" stroke="white" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M40 54L40 68" stroke="#B7B0F4" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M30 60L30 68" stroke="#B7B0F4" stroke-width="4" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <circle cx="40" cy="26" r="14" fill="#2B2467" />
-                                <path
-                                    d="M39.0489 18.927C39.3483 18.0057 40.6517 18.0057 40.9511 18.9271L42.0206 22.2188C42.1545 22.6309 42.5385 22.9098 42.9717 22.9098H46.4329C47.4016 22.9098 47.8044 24.1494 47.0207 24.7188L44.2205 26.7533C43.87 27.0079 43.7234 27.4593 43.8572 27.8713L44.9268 31.1631C45.2261 32.0844 44.1717 32.8506 43.388 32.2812L40.5878 30.2467C40.2373 29.9921 39.7627 29.9921 39.4122 30.2467L36.612 32.2812C35.8283 32.8506 34.7739 32.0844 35.0732 31.1631L36.1428 27.8713C36.2766 27.4593 36.13 27.0079 35.7795 26.7533L32.9793 24.7188C32.1956 24.1494 32.5984 22.9098 33.5671 22.9098H37.0283C37.4615 22.9098 37.8455 22.6309 37.9794 22.2188L39.0489 18.927Z"
-                                    fill="white" />
-                            </g>
-                        </svg>
-                        <p class="fw-semibold text-2xl mb-2 color-palette-1">3. Be a Winner</p>
-                        <p class="text-lg color-palette-1 mb-0">Siap digunakan untuk<br>
-                            improve permainan kamu</p>
+    <!-- video-area -->
+    <section class="video__area video-bg tg-jarallax" data-background="assets/img/bg/video_bg.jpg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-8 col-md-11">
+                    <div class="video__content text-center">
+                        <a href="https://www.youtube.com/watch?v=ssrNcwxALS4" class="popup-video"><i
+                                class="flaticon-play"></i></a>
+                        <h2 class="title">JOIN THE <span>COMMUNITY</span></h2>
+                        <p>Join our Discord community and choosec onsteur</p>
+                        <a href="https://discord.com/" target="_blank" class="video__btn tg-btn-1"><span>join
+                                discord</span></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- video-area-end -->
 
-    <!-- 5 Column - Featured-game -->
-    <section class="featured-game pt-50 pb-50" id="games">
-        <div class="container-fluid">
-            <h2 class="text-4xl fw-bold color-palette-1 mb-30">Our Featured<br> Games This Year
-            </h2>
-            <div class="d-flex flex-row flex-lg-wrap overflow-setting justify-content-lg-between gap-lg-3 gap-4"
-                data-aos="fade-up">
-                <div class="featured-game-card position-relative">
-                    <a href="./src/detail.html">
-                        <div class="blur-sharp">
-                            <img src="./assets/img/Thumbnail-1.jpg" width="205" height="270" alt="">
-                        </div>
-                        <div class="cover position-absolute bottom-0 m-32">
-                            <div class="d-flex flex-column h-100 justify-content-between text-decoration-none">
-                                <div class="game-icon mx-auto">
-                                    <svg width="54" height="36" viewBox="0 0 54 36" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M48.8309 6.33404C41.7479 -5.30296 31.0779 2.79304 31.0779 2.79304C30.3859 3.31604 29.1099 3.74604 28.2429 3.74804L25.3849 3.75004C24.5179 3.75104 23.2419 3.32104 22.5509 2.79804C22.5509 2.79804 11.8799 -5.29996 4.79595 6.33704C-2.28605 17.97 0.567947 30.639 0.567947 30.639C1.06795 33.741 2.71595 35.811 5.82595 35.551C8.92695 35.292 15.6579 27.197 15.6579 27.197C16.2139 26.53 17.3789 25.985 18.2439 25.985L35.3779 25.982C36.2439 25.982 37.4079 26.527 37.9629 27.194C37.9629 27.194 44.6949 35.289 47.8009 35.548C50.9069 35.808 52.5589 33.736 53.0559 30.636C53.0549 30.636 55.9139 17.969 48.8309 6.33404ZM20.3739 15.806H16.6999V19.347C16.6999 19.347 15.9219 19.941 14.7179 19.926C13.5159 19.908 12.9719 19.278 12.9719 19.278V15.807H9.50195C9.50195 15.807 9.06895 15.363 8.95295 14.194C8.83895 13.025 9.43195 12.08 9.43195 12.08H13.1069V8.40604C13.1069 8.40604 13.8629 8.00104 14.9499 8.03204C16.0379 8.06604 16.8349 8.47504 16.8349 8.47504L16.8199 12.079H20.2899C20.2899 12.079 20.8959 12.857 20.9459 13.797C20.9959 14.738 20.3739 15.806 20.3739 15.806ZM37.2259 19.842C35.6169 19.842 34.3199 18.541 34.3199 16.934C34.3199 15.324 35.6169 14.026 37.2259 14.026C38.8279 14.026 40.1349 15.324 40.1349 16.934C40.1349 18.542 38.8279 19.842 37.2259 19.842ZM37.2259 11.841C35.6169 11.841 34.3199 10.541 34.3199 8.93404C34.3199 7.32404 35.6169 6.02604 37.2259 6.02604C38.8279 6.02604 40.1349 7.32404 40.1349 8.93404C40.1349 10.542 38.8279 11.841 37.2259 11.841ZM44.4679 16.136C42.8589 16.136 41.5619 14.836 41.5619 13.228C41.5619 11.619 42.8589 10.32 44.4679 10.32C46.0699 10.32 47.3769 11.619 47.3769 13.228C47.3769 14.836 46.0699 16.136 44.4679 16.136Z"
-                                            fill="white" />
-                                    </svg>
+    <!-- roadMap-area -->
+    <section class="roadMap__area roadMap-bg section-pt-150 section-pb-150"
+        data-background="assets/img/bg/roadmap_bg.jpg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="roadMap__inner">
+                        <div class="row">
+                            <div class="col-xl-5 col-lg-6">
+                                <div class="roadMap__content">
+                                    <h2 class="title">a look into roadmaps seasons</h2>
+                                    <p>With Season 1 Ending with our play and Duis elementum sollicitudin is yaugue
+                                        euismods Nulla ulla Player-focused updates games from Mobile App and Enjoy.
+                                    </p>
+                                    <a href="contact.html" class="tg-btn-1 -btn-yellow"><span>roadmap</span></a>
                                 </div>
-                                <div>
-                                    <p class="fw-semibold text-white text-xl m-0">Super Mechs</p>
-                                    <p class="fw-light text-white m-0">Mobile</p>
+                                <div class="roadMap__img">
+                                    <img src="assets/img/others/roadmap.png" class="tg-parallax" data-scale="1.5"
+                                        data-orientation="down" alt="">
                                 </div>
                             </div>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="featured-game-card position-relative">
-                    <a href="./src/detail.html">
-                        <div class="blur-sharp">
-                            <img src="./assets/img/Thumbnail-2.jpg" width="205" height="270" alt="">
-                        </div>
-                        <div class="cover position-absolute bottom-0 m-32">
-                            <div class="d-flex flex-column h-100 justify-content-between text-decoration-none">
-                                <div class="game-icon mx-auto">
-                                    <svg width="54" height="36" viewBox="0 0 54 36" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M48.8309 6.33404C41.7479 -5.30296 31.0779 2.79304 31.0779 2.79304C30.3859 3.31604 29.1099 3.74604 28.2429 3.74804L25.3849 3.75004C24.5179 3.75104 23.2419 3.32104 22.5509 2.79804C22.5509 2.79804 11.8799 -5.29996 4.79595 6.33704C-2.28605 17.97 0.567947 30.639 0.567947 30.639C1.06795 33.741 2.71595 35.811 5.82595 35.551C8.92695 35.292 15.6579 27.197 15.6579 27.197C16.2139 26.53 17.3789 25.985 18.2439 25.985L35.3779 25.982C36.2439 25.982 37.4079 26.527 37.9629 27.194C37.9629 27.194 44.6949 35.289 47.8009 35.548C50.9069 35.808 52.5589 33.736 53.0559 30.636C53.0549 30.636 55.9139 17.969 48.8309 6.33404ZM20.3739 15.806H16.6999V19.347C16.6999 19.347 15.9219 19.941 14.7179 19.926C13.5159 19.908 12.9719 19.278 12.9719 19.278V15.807H9.50195C9.50195 15.807 9.06895 15.363 8.95295 14.194C8.83895 13.025 9.43195 12.08 9.43195 12.08H13.1069V8.40604C13.1069 8.40604 13.8629 8.00104 14.9499 8.03204C16.0379 8.06604 16.8349 8.47504 16.8349 8.47504L16.8199 12.079H20.2899C20.2899 12.079 20.8959 12.857 20.9459 13.797C20.9959 14.738 20.3739 15.806 20.3739 15.806ZM37.2259 19.842C35.6169 19.842 34.3199 18.541 34.3199 16.934C34.3199 15.324 35.6169 14.026 37.2259 14.026C38.8279 14.026 40.1349 15.324 40.1349 16.934C40.1349 18.542 38.8279 19.842 37.2259 19.842ZM37.2259 11.841C35.6169 11.841 34.3199 10.541 34.3199 8.93404C34.3199 7.32404 35.6169 6.02604 37.2259 6.02604C38.8279 6.02604 40.1349 7.32404 40.1349 8.93404C40.1349 10.542 38.8279 11.841 37.2259 11.841ZM44.4679 16.136C42.8589 16.136 41.5619 14.836 41.5619 13.228C41.5619 11.619 42.8589 10.32 44.4679 10.32C46.0699 10.32 47.3769 11.619 47.3769 13.228C47.3769 14.836 46.0699 16.136 44.4679 16.136Z"
-                                            fill="white" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="fw-semibold text-white text-xl m-0">Call of Duty: Modern</p>
-                                    <p class="fw-light text-white m-0">Mobile</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="featured-game-card position-relative">
-                    <a href="./src/detail.html">
-                        <div class="blur-sharp">
-                            <img src="./assets/img/Thumbnail-3.jpg" width="205" height="270" alt="">
-                        </div>
-                        <div class="cover position-absolute bottom-0 m-32">
-                            <div class="d-flex flex-column h-100 justify-content-between text-decoration-none">
-                                <div class="game-icon mx-auto">
-                                    <svg width="54" height="36" viewBox="0 0 54 36" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M48.8309 6.33404C41.7479 -5.30296 31.0779 2.79304 31.0779 2.79304C30.3859 3.31604 29.1099 3.74604 28.2429 3.74804L25.3849 3.75004C24.5179 3.75104 23.2419 3.32104 22.5509 2.79804C22.5509 2.79804 11.8799 -5.29996 4.79595 6.33704C-2.28605 17.97 0.567947 30.639 0.567947 30.639C1.06795 33.741 2.71595 35.811 5.82595 35.551C8.92695 35.292 15.6579 27.197 15.6579 27.197C16.2139 26.53 17.3789 25.985 18.2439 25.985L35.3779 25.982C36.2439 25.982 37.4079 26.527 37.9629 27.194C37.9629 27.194 44.6949 35.289 47.8009 35.548C50.9069 35.808 52.5589 33.736 53.0559 30.636C53.0549 30.636 55.9139 17.969 48.8309 6.33404ZM20.3739 15.806H16.6999V19.347C16.6999 19.347 15.9219 19.941 14.7179 19.926C13.5159 19.908 12.9719 19.278 12.9719 19.278V15.807H9.50195C9.50195 15.807 9.06895 15.363 8.95295 14.194C8.83895 13.025 9.43195 12.08 9.43195 12.08H13.1069V8.40604C13.1069 8.40604 13.8629 8.00104 14.9499 8.03204C16.0379 8.06604 16.8349 8.47504 16.8349 8.47504L16.8199 12.079H20.2899C20.2899 12.079 20.8959 12.857 20.9459 13.797C20.9959 14.738 20.3739 15.806 20.3739 15.806ZM37.2259 19.842C35.6169 19.842 34.3199 18.541 34.3199 16.934C34.3199 15.324 35.6169 14.026 37.2259 14.026C38.8279 14.026 40.1349 15.324 40.1349 16.934C40.1349 18.542 38.8279 19.842 37.2259 19.842ZM37.2259 11.841C35.6169 11.841 34.3199 10.541 34.3199 8.93404C34.3199 7.32404 35.6169 6.02604 37.2259 6.02604C38.8279 6.02604 40.1349 7.32404 40.1349 8.93404C40.1349 10.542 38.8279 11.841 37.2259 11.841ZM44.4679 16.136C42.8589 16.136 41.5619 14.836 41.5619 13.228C41.5619 11.619 42.8589 10.32 44.4679 10.32C46.0699 10.32 47.3769 11.619 47.3769 13.228C47.3769 14.836 46.0699 16.136 44.4679 16.136Z"
-                                            fill="white" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="fw-semibold text-white text-xl m-0">Mobile Legends</p>
-                                    <p class="fw-light text-white m-0">Mobile</p>
+                            <div class="col-xl-7 col-lg-6">
+                                <div class="roadMap__steps-wrap">
+                                    <div class="roadMap__steps-item active">
+                                        <h3 class="title">season 1</h3>
+                                        <ul class="roadMap__list list-wrap">
+                                            <li class="active tg__animate-text style2">Battle Practice Mode</li>
+                                            <li class="active tg__animate-text style2">Android Mobile</li>
+                                            <li class="active tg__animate-text style2">iOS Open Beta</li>
+                                            <li class="active tg__animate-text style2">Land Creation & Building
+                                            </li>
+                                        </ul>
+                                        <img src="assets/img/others/roadmap_img.png" alt="img"
+                                            class="roadMap__steps-img">
+                                    </div>
+                                    <div class="roadMap__steps-item">
+                                        <h3 class="title">season 2</h3>
+                                        <ul class="roadMap__list list-wrap">
+                                            <li class="active tg__animate-text style2">Land Creation & Building
+                                            </li>
+                                            <li class="active tg__animate-text style2">Android Mobile</li>
+                                            <li class="tg__animate-text style2">iOS Open Beta</li>
+                                            <li class="tg__animate-text style2">Land Creation & Building</li>
+                                        </ul>
+                                        <img src="assets/img/others/roadmap_img.png" alt="img"
+                                            class="roadMap__steps-img">
+                                    </div>
+                                    <div class="roadMap__steps-item">
+                                        <h3 class="title">season 3</h3>
+                                        <ul class="roadMap__list list-wrap">
+                                            <li class="tg__animate-text style2">Switch to 3D gameplay</li>
+                                            <li class="tg__animate-text style2">Android Mobile</li>
+                                            <li class="tg__animate-text style2">iOS Open Beta</li>
+                                            <li class="tg__animate-text style2">Land Creation & Building</li>
+                                        </ul>
+                                        <img src="assets/img/others/roadmap_img.png" alt="img"
+                                            class="roadMap__steps-img">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="featured-game-card position-relative">
-                    <a href="./src/detail.html">
-                        <div class="blur-sharp">
-                            <img src="./assets/img/Thumbnail-4.jpg" width="205" height="270" alt="">
-                        </div>
-                        <div class="cover position-absolute bottom-0 m-32">
-                            <div class="d-flex flex-column h-100 justify-content-between text-decoration-none">
-                                <div class="game-icon mx-auto">
-                                    <svg width="54" height="36" viewBox="0 0 54 36" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M48.8309 6.33404C41.7479 -5.30296 31.0779 2.79304 31.0779 2.79304C30.3859 3.31604 29.1099 3.74604 28.2429 3.74804L25.3849 3.75004C24.5179 3.75104 23.2419 3.32104 22.5509 2.79804C22.5509 2.79804 11.8799 -5.29996 4.79595 6.33704C-2.28605 17.97 0.567947 30.639 0.567947 30.639C1.06795 33.741 2.71595 35.811 5.82595 35.551C8.92695 35.292 15.6579 27.197 15.6579 27.197C16.2139 26.53 17.3789 25.985 18.2439 25.985L35.3779 25.982C36.2439 25.982 37.4079 26.527 37.9629 27.194C37.9629 27.194 44.6949 35.289 47.8009 35.548C50.9069 35.808 52.5589 33.736 53.0559 30.636C53.0549 30.636 55.9139 17.969 48.8309 6.33404ZM20.3739 15.806H16.6999V19.347C16.6999 19.347 15.9219 19.941 14.7179 19.926C13.5159 19.908 12.9719 19.278 12.9719 19.278V15.807H9.50195C9.50195 15.807 9.06895 15.363 8.95295 14.194C8.83895 13.025 9.43195 12.08 9.43195 12.08H13.1069V8.40604C13.1069 8.40604 13.8629 8.00104 14.9499 8.03204C16.0379 8.06604 16.8349 8.47504 16.8349 8.47504L16.8199 12.079H20.2899C20.2899 12.079 20.8959 12.857 20.9459 13.797C20.9959 14.738 20.3739 15.806 20.3739 15.806ZM37.2259 19.842C35.6169 19.842 34.3199 18.541 34.3199 16.934C34.3199 15.324 35.6169 14.026 37.2259 14.026C38.8279 14.026 40.1349 15.324 40.1349 16.934C40.1349 18.542 38.8279 19.842 37.2259 19.842ZM37.2259 11.841C35.6169 11.841 34.3199 10.541 34.3199 8.93404C34.3199 7.32404 35.6169 6.02604 37.2259 6.02604C38.8279 6.02604 40.1349 7.32404 40.1349 8.93404C40.1349 10.542 38.8279 11.841 37.2259 11.841ZM44.4679 16.136C42.8589 16.136 41.5619 14.836 41.5619 13.228C41.5619 11.619 42.8589 10.32 44.4679 10.32C46.0699 10.32 47.3769 11.619 47.3769 13.228C47.3769 14.836 46.0699 16.136 44.4679 16.136Z"
-                                            fill="white" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="fw-semibold text-white text-xl m-0">Clash of Clans</p>
-                                    <p class="fw-light text-white m-0">Mobile</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="featured-game-card position-relative">
-                    <a href="./src/detail.html">
-                        <div class="blur-sharp">
-                            <img src="./assets/img/Thumbnail-5.png" width="205" height="270" alt="">
-                        </div>
-                        <div class="cover position-absolute bottom-0 m-32">
-                            <div class="d-flex flex-column h-100 justify-content-between text-decoration-none">
-                                <div class="game-icon mx-auto">
-                                    <svg width="54" height="36" viewBox="0 0 54 36" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M48.8309 6.33404C41.7479 -5.30296 31.0779 2.79304 31.0779 2.79304C30.3859 3.31604 29.1099 3.74604 28.2429 3.74804L25.3849 3.75004C24.5179 3.75104 23.2419 3.32104 22.5509 2.79804C22.5509 2.79804 11.8799 -5.29996 4.79595 6.33704C-2.28605 17.97 0.567947 30.639 0.567947 30.639C1.06795 33.741 2.71595 35.811 5.82595 35.551C8.92695 35.292 15.6579 27.197 15.6579 27.197C16.2139 26.53 17.3789 25.985 18.2439 25.985L35.3779 25.982C36.2439 25.982 37.4079 26.527 37.9629 27.194C37.9629 27.194 44.6949 35.289 47.8009 35.548C50.9069 35.808 52.5589 33.736 53.0559 30.636C53.0549 30.636 55.9139 17.969 48.8309 6.33404ZM20.3739 15.806H16.6999V19.347C16.6999 19.347 15.9219 19.941 14.7179 19.926C13.5159 19.908 12.9719 19.278 12.9719 19.278V15.807H9.50195C9.50195 15.807 9.06895 15.363 8.95295 14.194C8.83895 13.025 9.43195 12.08 9.43195 12.08H13.1069V8.40604C13.1069 8.40604 13.8629 8.00104 14.9499 8.03204C16.0379 8.06604 16.8349 8.47504 16.8349 8.47504L16.8199 12.079H20.2899C20.2899 12.079 20.8959 12.857 20.9459 13.797C20.9959 14.738 20.3739 15.806 20.3739 15.806ZM37.2259 19.842C35.6169 19.842 34.3199 18.541 34.3199 16.934C34.3199 15.324 35.6169 14.026 37.2259 14.026C38.8279 14.026 40.1349 15.324 40.1349 16.934C40.1349 18.542 38.8279 19.842 37.2259 19.842ZM37.2259 11.841C35.6169 11.841 34.3199 10.541 34.3199 8.93404C34.3199 7.32404 35.6169 6.02604 37.2259 6.02604C38.8279 6.02604 40.1349 7.32404 40.1349 8.93404C40.1349 10.542 38.8279 11.841 37.2259 11.841ZM44.4679 16.136C42.8589 16.136 41.5619 14.836 41.5619 13.228C41.5619 11.619 42.8589 10.32 44.4679 10.32C46.0699 10.32 47.3769 11.619 47.3769 13.228C47.3769 14.836 46.0699 16.136 44.4679 16.136Z"
-                                            fill="white" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="fw-semibold text-white text-xl m-0">Valorant</p>
-                                    <p class="fw-light text-white m-0">Desktop</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reached -->
-    <section class="reached pt-50 pb-50">
-        <div class="container-fluid">
-            <div class="d-flex flex-lg-row flex-column align-items-center justify-content-center gap-lg-0 gap-4">
-                <div class="me-lg-35">
-                    <p class="text-4xl text-lg-start text-center color-palette-1 fw-bold m-0">290M+</p>
-                    <p class="text-lg text-lg-start text-center color-palette-2 m-0">Players Top Up</p>
-                </div>
-                <div class="vertical-line me-lg-35 ms-lg-35 d-lg-block d-none"></div>
-                <div class="horizontal-line mt-6 mb-6 me-lg-35 ms-lg-35 d-lg-none d-block"></div>
-                <div class="me-lg-35 ms-lg-35">
-                    <p class="text-4xl text-lg-start text-center color-palette-1 fw-bold m-0">12.500</p>
-                    <p class="text-lg text-lg-start text-center color-palette-2 m-0">Games Available</p>
-                </div>
-                <div class="horizontal-line mt-6 mb-6 me-lg-35 ms-lg-35 d-lg-none d-block"></div>
-                <div class="vertical-line me-lg-35 ms-lg-35 d-lg-block d-none"></div>
-                <div class="me-lg-35 ms-lg-35">
-                    <p class="text-4xl text-lg-start text-center color-palette-1 fw-bold m-0">99,9%</p>
-                    <p class="text-lg text-lg-start text-center color-palette-2 m-0">Happy Players</p>
-                </div>
-                <div class="horizontal-line mt-6 mb-6 me-lg-35 ms-lg-35 d-lg-none d-block"></div>
-                <div class="vertical-line me-lg-35 ms-lg-35 d-lg-block d-none"></div>
-                <div class="me-lg-35 ms-lg-35">
-                    <p class="text-4xl text-lg-start text-center color-palette-1 fw-bold m-0">4.7</p>
-                    <p class="text-lg text-lg-start text-center color-palette-2 m-0">Rating Worldwide</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Story -->
-    <section class="story pt-50 pb-50">
-        <div class="container-xxl container-fluid">
-            <div class="row align-items-center px-lg-5 mx-auto gap-lg-0 gap-4">
-                <div class="col-lg-7 col-12 d-lg-flex d-none justify-content-lg-end pe-lg-60" data-aos="zoom-in">
-                    <img src="./assets/img/Header-9.png" width="612" height="452" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-5 col-12 ps-lg-60">
-                    <div class="">
-                        <h2 class="text-4xl fw-bold color-palette-1 mb-30">Win the battle.<br> Be the Champion.
-                        </h2>
-                        <p class="text-lg color-palette-1 mb-30">Kami menyediakan jutaan cara untuk<br
-                                class="d-sm-block d-none">
-                            membantu players menjadi<br class="d-sm-block d-none"> pemenang sejati</p>
-                        <div class="d-md-block d-flex flex-column w-100">
-                            <a class="btn btn-read text-lg rounded-pill" href="#" role="button">Read Story</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- roadMap-area-end -->
 
-    <!-- Footer -->
-    <section class="footer pt-50">
-        <footer>
-            <div class="container-fluid">
+    <!-- trending-nft-area -->
+    <section class="trendingNft-area section-pt-120 section-pb-90">
+        <div class="container">
+            <div class="trendingNft__title-wrap">
                 <div class="row">
-                    <div class="col-lg-4 text-lg-start text-center">
-                        <a href="" class="mb-30">
-                            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="60"
-                                    height="60">
-                                    <circle cx="30" cy="30" r="30" fill="#3546AB" />
-                                </mask>
-                                <g mask="url(#mask0)">
-                                    <circle cx="30" cy="30" r="30" fill="#00BAFF" />
-                                    <path
-                                        d="M41.5001 35.0001C52.3001 38.2001 49.6668 48.0001 47.0001 52.5001L71.0001 60.5001L79.5001 -12.9999C63.6667 -13.8333 29.5001 -14.9999 19.5001 -12.9999C7.00007 -10.4999 13.5001 4.00006 12.0001 14.0001C10.5001 24.0001 28.0001 31.0001 41.5001 35.0001Z"
-                                        fill="#4D17E2" />
-                                    <path
-                                        d="M54.495 47.785C54.495 51.285 53.655 54.54 51.975 57.55C50.295 60.56 47.74 63.01 44.31 64.9C40.88 66.79 36.645 67.735 31.605 67.735C26.705 67.735 22.33 66.86 18.48 65.11C14.7 63.29 11.655 60.84 9.345 57.76C7.105 54.61 5.81 51.04 5.46 47.05H15.645C15.855 49.15 16.555 51.215 17.745 53.245C19.005 55.205 20.755 56.85 22.995 58.18C25.305 59.44 28.07 60.07 31.29 60.07C35.49 60.07 38.71 58.95 40.95 56.71C43.19 54.47 44.31 51.6 44.31 48.1C44.31 45.09 43.505 42.64 41.895 40.75C40.355 38.86 38.43 37.39 36.12 36.34C33.81 35.22 30.66 34.03 26.67 32.77C21.98 31.23 18.2 29.795 15.33 28.465C12.53 27.065 10.115 25 8.085 22.27C6.125 19.54 5.145 15.935 5.145 11.455C5.145 7.60499 6.055 4.20999 7.875 1.27C9.765 -1.67 12.425 -3.945 15.855 -5.555C19.355 -7.165 23.45 -7.97 28.14 -7.97C35.42 -7.97 41.195 -6.185 45.465 -2.615C49.735 0.884996 52.22 5.365 52.92 10.825H42.63C42.07 7.885 40.565 5.295 38.115 3.055C35.665 0.814997 32.34 -0.305003 28.14 -0.305003C24.29 -0.305003 21.21 0.709996 18.9 2.73999C16.59 4.69999 15.435 7.5 15.435 11.14C15.435 14.01 16.17 16.355 17.64 18.175C19.18 19.925 21.07 21.325 23.31 22.375C25.55 23.355 28.63 24.475 32.55 25.735C37.31 27.275 41.125 28.745 43.995 30.145C46.935 31.545 49.42 33.68 51.45 36.55C53.48 39.35 54.495 43.095 54.495 47.785Z"
-                                        fill="white" />
-                                </g>
-                            </svg>
-                        </a>
-                        <p class="mt-30 text-lg color-palette-1 mb-30">StoreGG membantu gamers<br> untuk menjadi
-                            pemenang sejati</p>
-                        <p class="mt-30 text-lg color-palette-1 mb-30">Copyright 2021. All Rights Reserved.</p>
+                    <div class="col-md-7">
+                        <div class="trendingNft__title">
+                            <h2 class="title">top Trending <img src="assets/img/icons/fire.png" width="35"
+                                    alt="icon"></h2>
+                        </div>
                     </div>
-                    <div class="col-lg-8 mt-lg-0 mt-20">
-                        <div class="row gap-sm-0">
-                            <div class="col-md-4 col-6 mb-lg-0 mb-25">
-                                <p class="text-lg fw-semibold color-palette-1 mb-12">Company</p>
-                                <ul class="list-unstyled">
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">About Us</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">Press
-                                            Release</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">Terms of Use</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">Privacy &
-                                            Policy</a>
-                                    </li>
-                                </ul>
+                    <div class="col-md-5">
+                        <div class="trendingNft__nav">
+                            <button class="slider-button-prev"><i class="fas fa-angle-left"></i></button>
+                            <button class="slider-button-next"><i class="fas fa-angle-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-container trendingNft-active">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="trendingNft__item">
+                            <div class="trendingNft__item-top">
+                                <div class="trendingNft__item-avatar">
+                                    <div class="image">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar01.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="info">
+                                        <h6 class="name">Crypto Max</h6>
+                                        <a href="shop-details.html" class="userName">@Jon Max</a>
+                                    </div>
+                                </div>
+                                <div class="trendingNft__item-wish">
+                                    <a href="#"><i class="far fa-heart"></i></a>
+                                </div>
                             </div>
-                            <div class="col-md-4 col-6 mb-lg-0 mb-25">
-                                <p class="text-lg fw-semibold color-palette-1 mb-12">Support</p>
-                                <ul class="list-unstyled">
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">Refund
-                                            Policy</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">Unlock
-                                            Rewards</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="" class="text-lg color-palette-1 text-decoration-none">Live
-                                            Chatting</a>
-                                    </li>
-                                </ul>
+                            <div class="trendingNft__item-image">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img04.jpg" alt="img"></a>
                             </div>
-                            <div class="col-md-4 col-12 mt-lg-0 mt-md-0 mt-25">
-                                <p class="text-lg fw-semibold color-palette-1 mb-12">Connect</p>
-                                <ul class="list-unstyled">
-                                    <li class="mb-6">
-                                        <a href="mailto: hi@store.gg"
-                                            class="text-lg color-palette-1 text-decoration-none">hi@store.gg</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="mailto: team@store.gg"
-                                            class="text-lg color-palette-1 text-decoration-none">team@store.gg</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="http://maps.google.com/?q=Pasific 12,
-                                        Jakarta Selatan" class="text-lg color-palette-1 text-decoration-none">Pasific
-                                            12,
-                                            Jakarta Selatan</a>
-                                    </li>
-                                    <li class="mb-6">
-                                        <a href="tel: 02111229090"
-                                            class="text-lg color-palette-1 text-decoration-none">021 - 1122 -
-                                            9090</a>
-                                    </li>
-                                </ul>
+                            <div class="trendingNft__item-bottom">
+                                <div class="trendingNft__item-price">
+                                    <span class="bid">Last Bid</span>
+                                    <h6 class="eth"><i class="fab fa-ethereum"></i> 1.002 <span>Eth</span></h6>
+                                </div>
+                                <a href="shop-details.html" class="bid-btn">Bid <i
+                                        class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="trendingNft__item">
+                            <div class="trendingNft__item-top">
+                                <div class="trendingNft__item-avatar">
+                                    <div class="image">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar02.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="info">
+                                        <h6 class="name">Golden Crypto</h6>
+                                        <a href="shop-details.html" class="userName">@Jon Max</a>
+                                    </div>
+                                </div>
+                                <div class="trendingNft__item-wish">
+                                    <a href="shop-details.html"><i class="far fa-heart"></i></a>
+                                </div>
+                            </div>
+                            <div class="trendingNft__item-image">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img05.jpg" alt="img"></a>
+                            </div>
+                            <div class="trendingNft__item-bottom">
+                                <div class="trendingNft__item-price">
+                                    <span class="bid">Last Bid</span>
+                                    <h6 class="eth"><i class="fab fa-ethereum"></i> 1.004 <span>Eth</span></h6>
+                                </div>
+                                <a href="shop-details.html" class="bid-btn">Bid <i
+                                        class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="trendingNft__item">
+                            <div class="trendingNft__item-top">
+                                <div class="trendingNft__item-avatar">
+                                    <div class="image">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar03.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="info">
+                                        <h6 class="name">Black Crypto</h6>
+                                        <a href="shop-details.html" class="userName">@Jon Max</a>
+                                    </div>
+                                </div>
+                                <div class="trendingNft__item-wish">
+                                    <a href="shop-details.html"><i class="far fa-heart"></i></a>
+                                </div>
+                            </div>
+                            <div class="trendingNft__item-image">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img06.jpg" alt="img"></a>
+                            </div>
+                            <div class="trendingNft__item-bottom">
+                                <div class="trendingNft__item-price">
+                                    <span class="bid">Last Bid</span>
+                                    <h6 class="eth"><i class="fab fa-ethereum"></i> 1.005 <span>Eth</span></h6>
+                                </div>
+                                <a href="shop-details.html" class="bid-btn">Bid <i
+                                        class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="trendingNft__item">
+                            <div class="trendingNft__item-top">
+                                <div class="trendingNft__item-avatar">
+                                    <div class="image">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar02.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="info">
+                                        <h6 class="name">Luck Crypto</h6>
+                                        <a href="shop-details.html" class="userName">@Jon Max</a>
+                                    </div>
+                                </div>
+                                <div class="trendingNft__item-wish">
+                                    <a href="shop-details.html"><i class="far fa-heart"></i></a>
+                                </div>
+                            </div>
+                            <div class="trendingNft__item-image">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img07.jpg" alt="img"></a>
+                            </div>
+                            <div class="trendingNft__item-bottom">
+                                <div class="trendingNft__item-price">
+                                    <span class="bid">Last Bid</span>
+                                    <h6 class="eth"><i class="fab fa-ethereum"></i> 1.005 <span>Eth</span></h6>
+                                </div>
+                                <a href="shop-details.html" class="bid-btn">Bid <i
+                                        class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="trendingNft__item">
+                            <div class="trendingNft__item-top">
+                                <div class="trendingNft__item-avatar">
+                                    <div class="image">
+                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar03.png"
+                                                alt="img"></a>
+                                    </div>
+                                    <div class="info">
+                                        <h6 class="name">King Crypto</h6>
+                                        <a href="shop-details.html" class="userName">@Jon Max</a>
+                                    </div>
+                                </div>
+                                <div class="trendingNft__item-wish">
+                                    <a href="shop-details.html"><i class="far fa-heart"></i></a>
+                                </div>
+                            </div>
+                            <div class="trendingNft__item-image">
+                                <a href="shop-details.html"><img src="assets/img/nft/nft_img08.jpg" alt="img"></a>
+                            </div>
+                            <div class="trendingNft__item-bottom">
+                                <div class="trendingNft__item-price">
+                                    <span class="bid">Last Bid</span>
+                                    <h6 class="eth"><i class="fab fa-ethereum"></i> 1.005 <span>Eth</span></h6>
+                                </div>
+                                <a href="shop-details.html" class="bid-btn">Bid <i
+                                        class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
     </section>
-
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-    </script>
-
-    <!-- AOS Animation -->
-    <script>
-        AOS.init();
-    </script>
-</body>
-
-</html>
+    <!-- trending-nft-end -->
+@endsection
