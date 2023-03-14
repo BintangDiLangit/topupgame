@@ -34,7 +34,6 @@ class LayananController extends Controller
 
         $dataTP = '';
         $dataWDP = '';
-
         for ($i = 0; $i < count($dataMLA); $i++) {
             if ($dataMLA[$i]['code'] == 'MLTP-S2') {
                 $dataTP = $dataMLA[$i];
@@ -45,7 +44,7 @@ class LayananController extends Controller
         }
 
         $data = ['data_tp' => $dataTP, 'data_wdp' => $dataWDP, 'data_mlb' => $dataMLB];
-        // dd($data['data_wdp']);
+       
         return view('games.mobilelegends', compact('data'));
     }
 }
