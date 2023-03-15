@@ -17,18 +17,21 @@ class GameDetailSeeder extends Seeder
             'game_id' => 1,
             'name' => 'Twilight Pass',
             'slug' => 'twilight-pass',
+            'desc' => 'tes1'
         ]);
 
         DB::table('game_details')->insert([
             'game_id' => 1,
             'name' => 'Weekly Diamond Pass',
             'slug' => 'weekly-diamond-pass',
+            'desc' => 'tes1'
         ]);
 
         DB::table('game_details')->insert([
             'game_id' => 1,
             'name' => 'Diamonds',
             'slug' => 'diamonds',
+            'desc' => 'tes1'
         ]);
     }
 }

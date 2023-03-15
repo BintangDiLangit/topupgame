@@ -10,4 +10,9 @@ class Games extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function gameDetails()
+    {
+        return $this->hasMany(GameDetail::class, 'game_id');
+    }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('game_id')->references('id')->on('games');
             $table->string('name');
             $table->string('slug');
+            $table->text('desc');
             $table->timestamps();
         });
     }

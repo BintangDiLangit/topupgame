@@ -27,34 +27,22 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="one-tab" data-bs-toggle="tab" data-bs-target="#one"
                                 type="button" role="tab" aria-controls="one" aria-selected="true">
-                                <img src="assets/img/products/shop_nav01.jpg" alt="img">
+                                <img src="{{ asset('assets/img/products/diamond.png') }}" alt="img">
                             </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
                             <button class="nav-link" id="two-tab" data-bs-toggle="tab" data-bs-target="#two"
-                                type="button" role="tab" aria-controls="two" aria-selected="false">
-                                <img src="assets/img/products/shop_nav02.jpg" alt="img">
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="three-tab" data-bs-toggle="tab" data-bs-target="#three"
-                                type="button" role="tab" aria-controls="three" aria-selected="false">
-                                <img src="assets/img/products/shop_nav03.jpg" alt="img">
+                                type="button" role="tab" aria-controls="two" aria-selected="true">
+                                <img src="{{ asset('assets/img/products/diamond-2.png') }}" alt="img">
                             </button>
                         </li>
                     </ul>
                     <div class="tab-content" id="imageTabContent">
                         <div class="tab-pane show active" id="one" role="tabpanel" aria-labelledby="one-tab">
-                            <a href="assets/img/products/shop_details01.jpg" class="popup-image"><img
-                                    src="assets/img/products/shop_details01.jpg" alt="img"></a>
+                            <a href="{{ asset('assets/img/products/diamond.png') }}" class="popup-image"><img
+                                    src="{{ asset('assets/img/products/diamond.png') }}" alt="img"></a>
                         </div>
-                        <div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">
-                            <a href="assets/img/products/shop_details02.jpg" class="popup-image"><img
-                                    src="assets/img/products/shop_details02.jpg" alt="img"></a>
-                        </div>
-                        <div class="tab-pane" id="three" role="tabpanel" aria-labelledby="three-tab">
-                            <a href="assets/img/products/shop_details03.jpg" class="popup-image"><img
-                                    src="assets/img/products/shop_details03.jpg" alt="img"></a>
+                        <div class="tab-pane show" id="two" role="tabpanel" aria-labelledby="two-tab">
+                            <a href="{{ asset('assets/img/products/diamond-2.png') }}" class="popup-image"><img
+                                    src="{{ asset('assets/img/products/diamond-2.png') }}" alt="img"></a>
                         </div>
                     </div>
                 </div>
@@ -67,34 +55,47 @@
                         <i class="fas fa-star"></i>
                         <span class="rating-count">( 3 Customer Review )</span>
                     </div>
-                    <h2 class="title">game controller</h2>
+                    <h2 class="title">{{ $game->name . ' (' . $game->game->name . ')' }}</h2>
                     <div class="shop__details-price">
-                        <span class="amount">$25.45 <span class="stock-status">- IN STOCK</span></span>
+                        <span class="amount">
+                            {{ 'Rp ' . number_format($mlB[0]['price']['basic'], 0, ',', '.') }}<span class="stock-status">-
+                                IN
+                                STOCK</span></span>
                     </div>
                     <div class="shop__details-short-description">
                         <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum solliciin is yaugue
                             euismods Nulla ullaorper.</p>
                     </div>
-                    <div class="shop__details-model d-flex align-items-center">
-                        <p class="model m-0">Model:</p>
-                        <ul class="list-wrap d-flex align-items-center">
-                            <li class="active">Gat</li>
-                            <li>dat4</li>
-                            <li>rt30</li>
-                        </ul>
-                    </div>
-                    <div class="shop__details-qty">
-                        <div class="cart-plus-minus d-flex flex-wrap align-items-center">
-                            <form action="#" class="quantity num-block">
-                                <input type="text" class="in-num" value="1" readonly="">
-                                <div class="qtybutton-box">
-                                    <span class="plus"><i class="fas fa-angle-up"></i></span>
-                                    <span class="minus dis"><i class="fas fa-angle-down"></i></span>
+                    <form action="#" class="offCanvas__newsletter-form">
+                        <div class="shop__details-model d-flex align-items-center">
+                            <p class="model m-0">Diamonds:</p>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col">
+                                    <div class="shop__ordering">
+                                        <select name="orderby" class="orderby">
+                                            @foreach ($mlB as $item)
+                                                <option value="">
+                                                    <li>{{ $item['name'] }}</li>
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </form>
-                            <button class="shop__details-cart-btn">add to cart</button>
+                                <div class="col"></div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="offCanvas__newsletter">
+                            <h4 class="small-title">Total</h4>
+                            <input type="email" placeholder="0">
+
+                        </div>
+                        <div class="shop__details-qty">
+                            <div class="cart-plus-minus d-flex flex-wrap align-items-center">
+                                <button class="shop__details-cart-btn">pay</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="shop__details-bottom">
                         <div class="posted_in">
                             <b>Categories :</b>
@@ -193,82 +194,6 @@
                                     <div class="right-rc">
                                         <a href="#">Write a review</a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="related__product-area">
-                <div class="related__product-wrapper">
-                    <h2 class="related-title">Related Products</h2>
-                    <div
-                        class="row justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1">
-                        <div class="col">
-                            <div class="shop__item">
-                                <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img src="assets/img/products/product01.jpg"
-                                            alt="img"></a>
-                                    <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
-                                </div>
-                                <div class="shop__item-line"></div>
-                                <div class="shop__item-content">
-                                    <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">Nintendo Switch</a></h4>
-                                        <div class="shop__item-price">$29</div>
-                                    </div>
-                                    <div class="shop__item-cat"><a href="shop.html">E-SPORTS</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="shop__item">
-                                <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img src="assets/img/products/product02.jpg"
-                                            alt="img"></a>
-                                    <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
-                                </div>
-                                <div class="shop__item-line"></div>
-                                <div class="shop__item-content">
-                                    <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">Headphone</a></h4>
-                                        <div class="shop__item-price">$69</div>
-                                    </div>
-                                    <div class="shop__item-cat"><a href="shop.html">accessories</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="shop__item">
-                                <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img src="assets/img/products/product03.jpg"
-                                            alt="img"></a>
-                                    <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
-                                </div>
-                                <div class="shop__item-line"></div>
-                                <div class="shop__item-content">
-                                    <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">replica Axe</a></h4>
-                                        <div class="shop__item-price">$39</div>
-                                    </div>
-                                    <div class="shop__item-cat"><a href="shop.html">E-SPORTS</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="shop__item">
-                                <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img src="assets/img/products/product04.jpg"
-                                            alt="img"></a>
-                                    <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
-                                </div>
-                                <div class="shop__item-line"></div>
-                                <div class="shop__item-content">
-                                    <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">ps5 controller</a></h4>
-                                        <div class="shop__item-price">$49</div>
-                                    </div>
-                                    <div class="shop__item-cat"><a href="shop.html">accessories</a></div>
                                 </div>
                             </div>
                         </div>

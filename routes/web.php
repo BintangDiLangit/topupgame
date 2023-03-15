@@ -23,7 +23,7 @@ Route::get('/', [MainController::class, 'index']);
 Route::get('/about-us', [MainController::class, 'about']);
 
 Route::get('games', [GameController::class, 'listGame']);
-Route::get('detail-game/{slug}', [GameController::class, 'detailGame'])->name('game.detail');
+Route::get('detail-game/{game_name}/{slug}', [GameController::class, 'detailGame'])->name('game.detail');
 
 Route::get('game/mobile-legends', [LayananController::class, 'listLayananML']);
 Route::post('place-order', [OrderController::class, 'placeOrder']);

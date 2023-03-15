@@ -41,14 +41,22 @@
                         <div class="col">
                             <div class="shop__item">
                                 <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img
+                                    <a
+                                        href="{{ route('game.detail', [
+                                            'slug' => $data['data_slug'][0]['slug'],
+                                            'game_name' => $data['data_slug'][0]['game']['slug'],
+                                        ]) }}"><img
                                             src="{{ asset('assets/img/products/twilight_pass.png') }}" alt="img"></a>
                                     <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
                                 </div>
                                 <div class="shop__item-line"></div>
                                 <div class="shop__item-content">
                                     <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">{{ $data['data_tp']['name'] }}</a>
+                                        <h4 class="title"><a
+                                                href="{{ route('game.detail', [
+                                                    'slug' => $data['data_slug'][0]['slug'],
+                                                    'game_name' => $data['data_slug'][0]['game']['slug'],
+                                                ]) }}">{{ $data['data_tp']['name'] }}</a>
                                         </h4>
                                         <div class="shop__item-price">
                                             {{ 'Rp ' . number_format($data['data_tp']['price']['basic'], 0, ',', '.') }}
@@ -61,14 +69,22 @@
                         <div class="col">
                             <div class="shop__item">
                                 <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('assets/img/products/weeklypass.png') }}"
-                                            alt="img"></a>
+                                    <a
+                                        href="{{ route('game.detail', [
+                                            'slug' => $data['data_slug'][1]['slug'],
+                                            'game_name' => $data['data_slug'][1]['game']['slug'],
+                                        ]) }}"><img
+                                            src="{{ asset('assets/img/products/weeklypass.png') }}" alt="img"></a>
                                     <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
                                 </div>
                                 <div class="shop__item-line"></div>
                                 <div class="shop__item-content">
                                     <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">WDP</a>
+                                        <h4 class="title"><a
+                                                href="{{ route('game.detail', [
+                                                    'slug' => $data['data_slug'][1]['slug'],
+                                                    'game_name' => $data['data_slug'][1]['game']['slug'],
+                                                ]) }}">WDP</a>
                                         </h4>
                                         <div class="shop__item-price">
                                             {{ 'Rp ' . number_format($data['data_wdp']['price']['basic'], 0, ',', '.') }}
@@ -82,14 +98,22 @@
                         <div class="col">
                             <div class="shop__item">
                                 <div class="shop__item-thumb">
-                                    <a href="shop-details.html"><img src="{{ asset('assets/img/products/diamond.png') }}"
-                                            alt="img"></a>
+                                    <a
+                                        href="{{ route('game.detail', [
+                                            'slug' => $data['data_slug'][2]['slug'],
+                                            'game_name' => $data['data_slug'][2]['game']['slug'],
+                                        ]) }}"><img
+                                            src="{{ asset('assets/img/products/diamond.png') }}" alt="img"></a>
                                     <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
                                 </div>
                                 <div class="shop__item-line"></div>
                                 <div class="shop__item-content">
                                     <div class="shop__item-content-top">
-                                        <h4 class="title"><a href="shop-details.html">Diamonds</a>
+                                        <h4 class="title"><a
+                                                href="{{ route('game.detail', [
+                                                    'slug' => $data['data_slug'][2]['slug'],
+                                                    'game_name' => $data['data_slug'][2]['game']['slug'],
+                                                ]) }}">Diamonds</a>
                                         </h4>
                                         <div class="shop__item-price">
                                             {{ 'Rp ' . number_format($data['data_mlb'][0]['price']['basic'], 0, ',', '.') }}
