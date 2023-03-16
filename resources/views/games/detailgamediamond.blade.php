@@ -222,13 +222,6 @@
     <script>
         $(document).ready(function() {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-
             $('#game_code').on('change', function(e) {
                 e.preventDefault();
                 var zone_user = $("input[name=zone_user]").val();
@@ -335,8 +328,7 @@
                             throw new Error("Warning: " + response.statusText);
                         }
                     }
-                    $("#submit-btn").html("Pay").removeAttr("disabled");
-                    return response.text(); // add this line to return the response body
+                    return response.text();
                 })
                 .then(text => {
                     window.location.replace(text);

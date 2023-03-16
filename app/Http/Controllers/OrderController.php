@@ -95,7 +95,8 @@ class OrderController extends Controller
                     return $redirectUrl;
                     }
                     DB::commit();
-                    return response()->json(['balance' => 'admin ga duwe duwek'], 208);
+                    return $redirectUrl;
+                    // return response()->json(['balance' => 'admin ga duwe duwek'], 208);
                 }
     
             DB::commit();
