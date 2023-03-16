@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('amount');
             $table->string('email')->nullable();
             $table->string('id_user');
+            $table->string('game_name');
+            $table->string('service');
             $table->string('zone_user')->nullable();
             $table->string('message')->nullable();
             $table->timestamps();

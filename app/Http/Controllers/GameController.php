@@ -26,4 +26,14 @@ class GameController extends Controller
             return view('games.detailgame', compact('game'));
         }
     }
+
+    public function cekUser(Request $request)
+    {
+        $resellerHelper = new ResellerAPIHelper();
+        $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
+        if ($getNickName['result'] == true) {
+            return $getNickName['data'];
+        }
+        return false;
+    }
 }

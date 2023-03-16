@@ -66,34 +66,47 @@
                         <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum solliciin is yaugue
                             euismods Nulla ullaorper.</p>
                     </div>
-                    <form class="offCanvas__newsletter-form" id="payment_form" action="{{ route('place.order', ['game_name'=>'mobile-legend', 'slug'=>'diamonds']) }}" method="post">
+                    <div id="error-message" class=""></div>
+                    <form class="offCanvas__newsletter-form" id="payment_form"
+                        action="{{ route('place.order', ['game_name' => 'mobile-legend', 'slug' => 'diamonds']) }}"
+                        method="post">
                         @csrf
-                        <div class="shop__details-model d-flex align-items-center">
-                            <p class="model m-0">Diamonds:</p>
-                            <div class="row">
-                                <div class="col"></div>
-                                <div class="col">
-                                    <div class="shop__ordering">
-                                        <select name="game_code" class="orderby">
-                                            @foreach ($mlB as $item)
-                                                <option value="{{ $item['code'] . ';' . $item['price']['basic'] }}">
-                                                    <li>{{ $item['name'] }}</li>
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col"></div>
-                            </div>
+                        <div class="offCanvas__newsletter mb-4">
+                            <h4 class="small-title">Account ID <span class="text-danger">*</span></h4>
+                            <input type="text" class="in-num bg-dark text-white" name="id_user" placeholder="account id"
+                                id="id_user" required>
+
+                        </div>
+                        <div class="offCanvas__newsletter mb-4">
+                            <h4 class="small-title">Zone ID <span class="text-danger">*</span></h4>
+                            <input type="text" class="in-num bg-dark text-white" name="zone_user" id="zone_user"
+                                placeholder="zone id" required>
+                        </div>
+                        <div class="offCanvas__newsletter">
+                            <p class="small-title">Diamonds <span class="text-danger">*</span></p>
+                            <select name="game_code" id="game_code" class="text-white form-control bg-dark ml-2 mr-2"
+                                required>
+                                <option value=""> - Choose Package - </option>
+                                @foreach ($mlB as $item)
+                                    <option value="{{ $item['code'] . ';' . $item['price']['basic'] }}">
+                                        <li>{{ $item['name'] }}</li>
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="offCanvas__newsletter" id="nicknameShow">
+                            <h5 class="small-title"></h5>
                         </div>
                         <div class="offCanvas__newsletter">
                             <h4 class="small-title">Total</h4>
-                            <input type="text" class="in-num" name="total_amount" id="total_amount" value="0">
+                            <input type="text" class="in-num bg-dark text-white" readonly name="total_amount"
+                                id="total_amount" value="0">
 
                         </div>
                         <div class="shop__details-qty">
                             <div class="cart-plus-minus d-flex flex-wrap align-items-center">
-                                <button class="shop__details-cart-btn" onclick="submitForm()" type="button">pay</button>
+                                <button class="shop__details-cart-btn" onclick="submitForm()" id="submit-btn"
+                                    type="button">pay</button>
                             </div>
                         </div>
                     </form>
@@ -208,34 +221,131 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('.orderby').on('change', function() {
-                var selectedValue = $(this).val();
-                var parts = selectedValue.split(';');
-                var value = parts[1];
-                const rupiah = (value)=>{
-                    return new Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR"
-                    }).format(value);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-                $('input[name="total_amount"]').val(rupiah(value));
+            });
+
+
+            $('#game_code').on('change', function(e) {
+                e.preventDefault();
+                var zone_user = $("input[name=zone_user]").val();
+                var id_user = $("input[name=id_user]").val();
+                if (zone_user == '' || zone_user == null || id_user == '' || id_user == null) {
+                    const reminder = confirm('Silahkan Masukkan ID Akun dan ID Zone kamu');
+                    $('#game_code').val($("#game_code option:first").val());
+                } else {
+                    var h5Element = $('#nicknameShow h5');
+
+                    if (h5Element.text().trim().length === 0 || $('#nicknameShow h5').hasClass(
+                            'text-danger')) {
+
+                        // loading
+                        $("#submit-btn").html(
+                            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
+                        ).attr("disabled", true);
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('cek.user') }}",
+                            data: {
+                                zone_user: zone_user,
+                                id_user: id_user
+                            },
+                            success: function(data) {
+                                if (data == null || data == undefined || data == '') {
+                                    $('#nicknameShow').addClass('mb-3 mt-3');
+                                    h5Element.text('Account Not Found');
+                                    h5Element.addClass('text-danger');
+                                    $('#game_code').val($("#game_code option:first").val());
+                                } else {
+                                    h5Element.removeClass('text-danger');
+                                    h5Element.text('Account Found : ' + data);
+                                    $('#nicknameShow').addClass('mb-3 mt-3');
+                                    $('#nicknameShow').prepend(
+                                        '<p class="text-warning mb-2">Akun telah di set, jika ingin mengubah account id atau zone id silahkan refresh page ini</p>'
+                                    );
+
+                                    var selectedValue = $('#game_code').val();
+                                    var parts = selectedValue.split(';');
+                                    let value = parseInt(parts[1]);
+                                    let total = (value * 0.03) + value
+                                    const rupiah = (total) => {
+                                        return new Intl.NumberFormat("id-ID", {
+                                            style: "currency",
+                                            currency: "IDR"
+                                        }).format(total);
+                                    }
+                                    $('input[name="total_amount"]').val(rupiah(total));
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                // Handle error response
+                            },
+                            complete: function() {
+                                // Hide spinner and re-enable button
+                                $("#submit-btn").html("Pay").removeAttr("disabled");
+                            }
+                        });
+                    } else {
+                        var selectedValue = $(this).val();
+                        var parts = selectedValue.split(';');
+                        let value = parseInt(parts[1]);
+                        let total = (value * 0.03) + value
+                        const rupiah = (total) => {
+                            return new Intl.NumberFormat("id-ID", {
+                                style: "currency",
+                                currency: "IDR"
+                            }).format(total);
+                        }
+                        $('input[name="total_amount"]').val(rupiah(total));
+
+                        $('#zone_user').attr('readonly', true);
+                        $('#id_user').attr('readonly', true);
+                    }
+                }
+
             });
         });
-        function submitForm() {
-                var form = document.getElementById("payment_form");
-                var formData = new FormData(form);
 
-                fetch(form.action, {
-                method: "POST",
-                body: formData
+        function submitForm() {
+            var form = document.getElementById("payment_form");
+            var formData = new FormData(form);
+
+            $("#submit-btn").html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
+            ).attr("disabled", true);
+
+            fetch(form.action, {
+                    method: "POST",
+                    body: formData
                 })
                 .then(response => {
-                console.log(response);
-                // Lakukan sesuatu setelah berhasil mengirim data form
+                    if (!response.ok) {
+                        if (response.status === 400) {
+                            const errorMessage = document.getElementById("error-message");
+                            errorMessage.innerText = "Pastikan data terisi dengan lengkap";
+                            errorMessage.classList.add('text-danger', 'text-small', 'mb-3');
+                        }
+                        if (response.status === 208) {
+                            const errorMessage = document.getElementById("error-message");
+                            errorMessage.innerText = "Pastikan data terisi dengan lengkap";
+                            errorMessage.classList.add('text-warning', 'text-small', 'mb-3');
+                            throw new Error("Warning: " + response.statusText);
+                        }
+                    }
+                    $("#submit-btn").html("Pay").removeAttr("disabled");
+                    return response.text(); // add this line to return the response body
+                })
+                .then(text => {
+                    window.location.replace(text);
                 })
                 .catch(error => {
-                console.error(error);
-                // Lakukan sesuatu jika terjadi error saat mengirim data form
+                    // console.log(error);
+                })
+                .finally(() => {
+                    $("#submit-btn").html("Pay").removeAttr("disabled");
                 });
         }
     </script>

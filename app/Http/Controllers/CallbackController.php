@@ -27,17 +27,13 @@ class CallbackController extends Controller
                     $transaction->update([
                         'status' => 'PAID'
                     ]);
-                    
+                    DB::commit();
+                    return redirect()->route('payment.success',['id' => $transaction->get('external_id'), 'game' => $transaction->get('game_name')]);
                 } else {
                     $transaction->update([
                         'status' => 'EXPIRED'
                     ]);
                 }
-
-                DB::commit();
-                return response()->json([
-                    'data' => $transaction
-                ])->setStatusCode(200);
             }
 
             return response()->json([
@@ -49,5 +45,4 @@ class CallbackController extends Controller
             return false;
         }
     }
-
 }

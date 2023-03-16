@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\GameController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
@@ -23,15 +24,24 @@ use App\Http\Controllers\MainController;
 Route::get('/', [MainController::class, 'index']);
 Route::get('/about-us', [MainController::class, 'about']);
 
-Route::get('games', [GameController::class, 'listGame']);
-Route::get('detail-game/{game_name}/{slug}', [GameController::class, 'detailGame'])->name('game.detail');
+Route::get('/games', [GameController::class, 'listGame']);
+Route::get('/detail-game/{game_name}/{slug}', [GameController::class, 'detailGame'])->name('game.detail');
+Route::post('/cek-user', [GameController::class, 'cekUser'])->name('cek.user');
 
-Route::get('game/mobile-legends', [LayananController::class, 'listLayananML']);
-Route::post('place-order/{game_name}/{slug}', [OrderController::class, 'placeOrder'])->name('place.order');
-Route::post('cek-status-order', [OrderController::class, 'statusOrder']);
-Route::post('get-nickname-ml', [GetNickNameController::class, 'getNickNameMobileLegend']);
+Route::get('/game/mobile-legends', [LayananController::class, 'listLayananML']);
+Route::post('/place-order/{game_name}/{slug}', [OrderController::class, 'placeOrder'])->name('place.order');
+Route::post('/cek-status-order', [OrderController::class, 'statusOrder']);
 
-Route::get('admin/profile', [ProfileController::class, 'profile']);
+Route::get('/admin/profile', [ProfileController::class, 'profile']);
 
 
-Route::post('in-callback', [CallbackController::class, 'inCallback']);
+Route::post('/in-callback', [CallbackController::class, 'inCallback']);
+
+
+Route::get('/payment-success/{id}/{game}', function () {
+    return view('payment-success');
+})->middleware('temporary')->name('payment.success');
+
+Route::get('/tes', function () {
+    return view('payment-success');
+});

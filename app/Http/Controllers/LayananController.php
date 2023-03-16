@@ -20,6 +20,7 @@ class LayananController extends Controller
             'filter_value' => 'Mobile Legends B',
         ]);
 
+
         $dataMLB = $dataMLB->json();
         $dataMLB = $dataMLB['data'];
 

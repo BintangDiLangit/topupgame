@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Request;
 use Termwind\Components\Dd;
 
 class ResellerAPIHelper
@@ -19,7 +20,6 @@ class ResellerAPIHelper
         ]);
 
         $dataMLB = $dataMLB->json();
-        // dd($dataMLB);
         $dataMLB = $dataMLB['data'];
         $dataFilter = [];
 
@@ -43,4 +43,43 @@ class ResellerAPIHelper
         }
         return $dataFilter;
     }
+
+    public function getNickName($zone_id, $user_id)
+    {
+        $data = Http::asForm()->post(env('API_URL_RESELLER') . '/game-feature', [
+            'key' => env('API_KEY_RESELLER'),
+            'sign' => md5(env('API_ID_RESELLER') . env('API_KEY_RESELLER')),
+            'type' => 'get-nickname',
+            'code' => 'mobile-legends',
+            'target' => $user_id,
+            'additional_target' => $zone_id
+        ]);
+        $data = $data->json();
+        return $data;
+    }
+
+    public function profile()
+    {
+        $data = Http::asForm()->post(env('API_URL_RESELLER').'/profile', [
+            'key' => env('API_KEY_RESELLER'),
+            'sign' => md5(env('API_ID_RESELLER').env('API_KEY_RESELLER')),
+        ]);
+
+        $data = $data->json();
+        return $data;
+    }
+
+    public static function findMobileLegendB($code)
+    {
+        $dataMLB = ResellerAPIHelper::mobileLegendB();
+
+
+        foreach ($dataMLB as $data) {
+            if ($data['code'] == $code) {
+                return $data;
+            }
+        }
+        return false;
+    }
+    
 }
