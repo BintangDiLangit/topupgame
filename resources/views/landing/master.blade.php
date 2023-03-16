@@ -37,6 +37,7 @@
 
     <!-- JS here -->
     @include('landing.script')
+    @stack('script')
 </body>
 
 

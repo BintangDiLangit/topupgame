@@ -19,6 +19,7 @@ class ResellerAPIHelper
         ]);
 
         $dataMLB = $dataMLB->json();
+        // dd($dataMLB);
         $dataMLB = $dataMLB['data'];
         $dataFilter = [];
 

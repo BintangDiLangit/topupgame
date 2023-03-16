@@ -66,16 +66,17 @@
                         <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum solliciin is yaugue
                             euismods Nulla ullaorper.</p>
                     </div>
-                    <form action="#" class="offCanvas__newsletter-form">
+                    <form class="offCanvas__newsletter-form" id="payment_form" action="{{ route('place.order', ['game_name'=>'mobile-legend', 'slug'=>'diamonds']) }}" method="post">
+                        @csrf
                         <div class="shop__details-model d-flex align-items-center">
                             <p class="model m-0">Diamonds:</p>
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col">
                                     <div class="shop__ordering">
-                                        <select name="orderby" class="orderby">
+                                        <select name="game_code" class="orderby">
                                             @foreach ($mlB as $item)
-                                                <option value="">
+                                                <option value="{{ $item['code'] . ';' . $item['price']['basic'] }}">
                                                     <li>{{ $item['name'] }}</li>
                                                 </option>
                                             @endforeach
@@ -87,12 +88,12 @@
                         </div>
                         <div class="offCanvas__newsletter">
                             <h4 class="small-title">Total</h4>
-                            <input type="email" placeholder="0">
+                            <input type="text" class="in-num" name="total_amount" id="total_amount" value="0">
 
                         </div>
                         <div class="shop__details-qty">
                             <div class="cart-plus-minus d-flex flex-wrap align-items-center">
-                                <button class="shop__details-cart-btn">pay</button>
+                                <button class="shop__details-cart-btn" onclick="submitForm()" type="button">pay</button>
                             </div>
                         </div>
                     </form>
@@ -203,3 +204,39 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('.orderby').on('change', function() {
+                var selectedValue = $(this).val();
+                var parts = selectedValue.split(';');
+                var value = parts[1];
+                const rupiah = (value)=>{
+                    return new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR"
+                    }).format(value);
+                }
+                $('input[name="total_amount"]').val(rupiah(value));
+            });
+        });
+        function submitForm() {
+                var form = document.getElementById("payment_form");
+                var formData = new FormData(form);
+
+                fetch(form.action, {
+                method: "POST",
+                body: formData
+                })
+                .then(response => {
+                console.log(response);
+                // Lakukan sesuatu setelah berhasil mengirim data form
+                })
+                .catch(error => {
+                console.error(error);
+                // Lakukan sesuatu jika terjadi error saat mengirim data form
+                });
+        }
+    </script>
+@endpush

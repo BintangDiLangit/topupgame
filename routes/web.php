@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -26,8 +27,11 @@ Route::get('games', [GameController::class, 'listGame']);
 Route::get('detail-game/{game_name}/{slug}', [GameController::class, 'detailGame'])->name('game.detail');
 
 Route::get('game/mobile-legends', [LayananController::class, 'listLayananML']);
-Route::post('place-order', [OrderController::class, 'placeOrder']);
+Route::post('place-order/{game_name}/{slug}', [OrderController::class, 'placeOrder'])->name('place.order');
 Route::post('cek-status-order', [OrderController::class, 'statusOrder']);
 Route::post('get-nickname-ml', [GetNickNameController::class, 'getNickNameMobileLegend']);
 
 Route::get('admin/profile', [ProfileController::class, 'profile']);
+
+
+Route::post('in-callback', [CallbackController::class, 'inCallback']);
