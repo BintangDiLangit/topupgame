@@ -83,18 +83,6 @@
                             <li>rt30</li>
                         </ul>
                     </div>
-                    <div class="shop__details-qty">
-                        <div class="cart-plus-minus d-flex flex-wrap align-items-center">
-                            <form action="#" class="quantity num-block">
-                                <input type="text" class="in-num" value="1" readonly="">
-                                <div class="qtybutton-box">
-                                    <span class="plus"><i class="fas fa-angle-up"></i></span>
-                                    <span class="minus dis"><i class="fas fa-angle-down"></i></span>
-                                </div>
-                            </form>
-                            <button class="shop__details-cart-btn">add to cart</button>
-                        </div>
-                    </div>
                     <div class="shop__details-bottom">
                         <div class="posted_in">
                             <b>Categories :</b>

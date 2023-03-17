@@ -51,18 +51,6 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-5 col-md-7">
-                    <div class="footer-widget">
-                        <h4 class="fw-title">Newsletter</h4>
-                        <div class="footer-newsletter">
-                            <p>Subscribe our newsletter to get our latest update & newsconsectetur</p>
-                            <form action="#" class="footer-newsletter-form">
-                                <input type="email" placeholder="Your email address">
-                                <button type="submit"><i class="flaticon-paper-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

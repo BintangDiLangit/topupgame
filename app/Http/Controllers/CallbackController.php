@@ -19,7 +19,6 @@ class CallbackController extends Controller
                 'external_id' => $request->get('external_id'),
                 'status' => 'PENDING'
             ])->first();
-
             if ($transaction) {
                 DB::beginTransaction();
 
@@ -41,8 +40,9 @@ class CallbackController extends Controller
             ])->setStatusCode(200);
         } catch (\Exception $e) {
             DB::rollBack();
-            $e->getMessage();
-            return false;
+            var_dump($e);
+            die;
+            // return false;
         }
     }
 }

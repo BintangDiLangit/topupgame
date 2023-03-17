@@ -40,7 +40,7 @@ Route::post('/in-callback', [CallbackController::class, 'inCallback']);
 
 Route::get('/payment-success/{id}/{game}', function () {
     return view('payment-success');
-})->middleware('temporary')->name('payment.success');
+})->name('payment.success');
 
 Route::get('/tes', function () {
     return view('payment-success');

@@ -34,12 +34,6 @@
                             <div class="nav-logo">
                                 <a href="/"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo"></a>
                             </div>
-                            <div class="tgmobile__search">
-                                <form action="#">
-                                    <input type="text" placeholder="Search here...">
-                                    <button><i class="flaticon-loupe"></i></button>
-                                </form>
-                            </div>
                             <div class="tgmobile__menu-outer">
                                 <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
                             </div>
@@ -61,30 +55,6 @@
         </div>
     </div>
 
-    <!-- header-search -->
-    <div class="search__popup-wrap">
-        <div class="search__layer"></div>
-        <div class="search__close">
-            <span><i class="flaticon-swords-in-cross-arrangement"></i></span>
-        </div>
-        <div class="search__wrap text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="title">... <span>Search Here</span> ...</h2>
-                        <div class="search__form">
-                            <form action="#">
-                                <input type="text" name="search" placeholder="Type keywords here" required>
-                                <button class="search-btn"><i class="flaticon-loupe"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- header-search-end -->
-
     <!-- offCanvas-area -->
     <div class="offCanvas__wrap">
         <div class="offCanvas__body">
@@ -105,14 +75,6 @@
                         <li><a href="mailto:bintangmfhd@gmail.com">bintangmfhd@gmail.com</a></li>
                         <li>Malang City ,Indonesia</li>
                     </ul>
-                </div>
-                <div class="offCanvas__newsletter">
-                    <h4 class="small-title">Subscribe</h4>
-                    <form action="#" class="offCanvas__newsletter-form">
-                        <input type="email" placeholder="Get News & Updates">
-                        <button type="submit"><i class="flaticon-send"></i></button>
-                    </form>
-                    <p>Subscribe dolor sitamet, consectetur adiping eli. Duis esollici tudin augue.</p>
                 </div>
                 <ul class="offCanvas__social list-wrap">
                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
