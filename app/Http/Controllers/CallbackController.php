@@ -21,7 +21,7 @@ class CallbackController extends Controller
             Xendit::setApiKey(env('API_KEY_XENDIT'));
             $transaction = Transaction::where([
                 'transaction_id' => $request->get('external_id'),
-                'status' => 'PENDING'
+                'status_payment_apigames' => 'Pending'
             ])->first();
 
             if (isset($transaction)) {
