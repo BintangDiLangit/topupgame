@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ResellerAPIHelper;
+use App\Helpers\ApiGamesHelper;
+use App\Helpers\HistoryTransHelper;
 use App\Models\Transaction;
 use App\Models\TransactionOut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Xendit\Xendit;
-use App\Helpers\XenditHelper;
 use Illuminate\Support\Str;
 
 class CallbackController extends Controller
@@ -21,72 +21,47 @@ class CallbackController extends Controller
             Xendit::setApiKey(env('API_KEY_XENDIT'));
             $transaction = Transaction::where([
                 'transaction_id' => $request->get('external_id'),
-                'status' => 'PENDING'
+                'status' => 'PAID'
             ])->first();
 
             if (isset($transaction)) {
                 if ($request->get('status') == 'PAID' || $request->get('status') == 'SETTLED') {
-                    DB::beginTransaction();
                     $transaction->update([
                         'status' => 'PAID'
                     ]);
-                    $resellerHelper = new ResellerAPIHelper();
-                    $balanceAdmin = $resellerHelper->profile();
+                    DB::beginTransaction();
+                    $apiGamesHelper = new ApiGamesHelper();
+                    $balanceAdmin = $apiGamesHelper->profile();
 
-                    if ($balanceAdmin['result'] == true || $balanceAdmin['result'] == 1) {
-                        if ($balanceAdmin['data']['balance'] >= $transaction->amount) {
-                            $resellerHelper->placeOrder(
+                    if ($balanceAdmin['message'] == 'Sukses') {
+                        if ($balanceAdmin['data']['saldo'] >= $transaction->amount) {
+                            $apiGamesHelper->placeOrder(
+                                $transaction->transaction_id,
                                 $transaction->service,
                                 $transaction->id_user,
                                 $transaction->zone_user
                             );
                             DB::commit();
+                            return $transaction;
                         } else {
 
-                            $xenditHelper = new XenditHelper();
                             $desc = 'Melanjukan dana customer ke reseller VIP';
                             $payoutID = 'disb_payout_' . Str::random(10) . uniqid() . time();
-                            // $payoutDana = $xenditHelper->payoutDanaInternal($transaction->amount, 
-                            // $desc, $payoutID, 
-                            // $transaction->transaction_id);
-                            // print_r($transaction->amount.'-'.$payoutID.$desc);
-                            // die;
-                            $params = [
-                                'external_id' => $payoutID,
-                                'amount' => $transaction->amount,
-                                'bank_code' => 'ID_DANA',
-                                'account_holder_name' => 'BINTANG MIFTAQUL HUDA',
-                                'account_number' => '087881377842',
-                                'description' => $desc,
-                            ];
-                            $payout = \Xendit\Disbursements::create($params);
-                            $dataTransactionOut = TransactionOut::create([
-                                'transaction_id'=> $transaction->transaction_id,
-                                'transaction_out_id'=> $payoutID,
-                                'payment_channel'=> 'DANA Forwarder',
-                                'amount'=> $transaction->amount,
-                                'email'=> 'konsulinaja.id@gmail.com',
-                                'message'=> $desc
-                            ]);
-                            // print_r($payout);
-                            // die;
-                            // sleep(20);
-                            // $resellerHelper->placeOrder(
-                            //     $request->service_id,
-                            //     $request->data_id_tujuan,
-                            //     $request->data_zone
-                            // );
+                            HistoryTransHelper::insertToHistoryTrans($transaction->id, json_encode($transaction));
                             DB::commit();
-                            return $dataTransactionOut;
+                            return $transaction;
                         }
-                        // return response()->json(['balance' => 'admin ga duwe duwek'], 208);
                     }
+                    HistoryTransHelper::insertToHistoryTrans($transaction->id, json_encode($transaction));
                     DB::commit();
                     return $transaction;
                 } else {
                     $transaction->update([
                         'status' => 'EXPIRED'
                     ]);
+                    HistoryTransHelper::insertToHistoryTrans($transaction->id, json_encode($transaction));
+                    DB::commit();
+                    return $transaction;
                 }
             } else {
                 return response()->json([
@@ -96,9 +71,7 @@ class CallbackController extends Controller
 
 
         } catch (\Exception $e) {
-            var_dump($e);
-            die;
-            return false;
+            return $e->getMessage();
         }
     }
 

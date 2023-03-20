@@ -58,7 +58,7 @@
                     <h2 class="title">{{ $game->name . ' (' . $game->game->name . ')' }}</h2>
                     <div class="shop__details-price">
                         <span class="amount">
-                            {{ 'Rp ' . number_format($mlB[0]['price']['basic'], 0, ',', '.') }}<span class="stock-status">-
+                            {{ 'Rp ' . number_format($mlB[0]['harga_jual'], 0, ',', '.') }}<span class="stock-status">-
                                 IN
                                 STOCK</span></span>
                     </div>
@@ -88,8 +88,8 @@
                                 required>
                                 <option value=""> - Choose Package - </option>
                                 @foreach ($mlB as $item)
-                                    <option value="{{ $item['code'] . ';' . $item['price']['basic'] }}">
-                                        <li>{{ $item['name'] }}</li>
+                                    <option value="{{ $item['code'] . ';' . $item['harga_jual'] }}">
+                                        <li>{{ $item['jumlah'] . ' Diamonds ' }}</li>
                                     </option>
                                 @endforeach
                             </select>
@@ -270,7 +270,7 @@
                                     var selectedValue = $('#game_code').val();
                                     var parts = selectedValue.split(';');
                                     let value = parseInt(parts[1]);
-                                    let total = (value * 0.03) + value
+                                    let total = value
                                     const rupiah = (total) => {
                                         return new Intl.NumberFormat("id-ID", {
                                             style: "currency",
@@ -292,7 +292,7 @@
                         var selectedValue = $(this).val();
                         var parts = selectedValue.split(';');
                         let value = parseInt(parts[1]);
-                        let total = (value * 0.03) + value
+                        let total = value
                         const rupiah = (total) => {
                             return new Intl.NumberFormat("id-ID", {
                                 style: "currency",

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -23,6 +22,17 @@ return new class extends Migration
             $table->string('service');
             $table->string('zone_user')->nullable();
             $table->string('message')->nullable();
+
+            // APIGAMES
+            $table->string('trx_id')->nullable();
+            $table->string('ref_id')->nullable();
+            $table->string('status_payment_apigames')->default('Pending');
+            $table->string('price_rp_apigames')->nullable();
+            $table->string('rate_apigames')->nullable();
+            $table->string('message_apigames')->nullable();
+            $table->string('sn_apigames')->nullable();
+            $table->string('destination_apigames')->nullable();
+            $table->string('product_code_apigames')->nullable();
             $table->timestamps();
         });
     }

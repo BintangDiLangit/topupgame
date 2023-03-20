@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\HistoryTransHelper;
+use App\Helpers\ProductHelper;
 use App\Helpers\ResellerAPIHelper;
 use App\Helpers\XenditHelper;
+use App\Models\HistoryTransaction;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -29,23 +32,22 @@ class OrderController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $resellerHelper = new ResellerAPIHelper();
+        $productHelper = new ProductHelper();
         $secretXendit = env('API_KEY_XENDIT');
-        // $eWallets = array('GOPAY','OVO','DANA','Link Aja');
         Xendit::setApiKey($secretXendit);
 
         $str = $request->game_code;
         $parts = explode(';', $str);
         $code = $parts[0];
         $value = 0;
-        if ($resellerHelper->findMobileLegendB($code)) {
-            $value = $resellerHelper->findMobileLegendB($code);
-            $value = $value['price']['basic'];
+        if ($productHelper->getDetailProduct($code)) {
+            $value = $productHelper->getDetailProduct($code);
+            $value = $value['harga_jual'];
         } else {
             return response()->json(['error' => $validator->errors()], 400);
         }
-        $keuntungan = 0.03;
-        $amount = ($value * $keuntungan) + $value;
+
+        $amount = $value;
 
         try {
 
@@ -68,7 +70,7 @@ class OrderController extends Controller
 
             $createTransaction = \Xendit\Invoice::create($params);
 
-            $insertTransToDb = Transaction::insert([
+            $insertTransToDb = Transaction::create([
                 'transaction_id' => $externalId,
                 'payment_channel' => 'Payment Link',
                 'email' => $request->email,
@@ -79,6 +81,8 @@ class OrderController extends Controller
                 'game_name' => 'Mobile Legends',
                 'service' => $code,
             ]);
+
+            HistoryTransHelper::insertToHistoryTrans($insertTransToDb->id, json_encode($createTransaction) . json_encode($insertTransToDb));
 
             $redirectUrl = $createTransaction['invoice_url'];
             DB::commit();

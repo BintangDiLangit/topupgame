@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiGamesHelper;
+use App\Helpers\ProductHelper;
 use App\Helpers\ResellerAPIHelper;
 use App\Models\GameDetail;
 use App\Models\Games;
@@ -20,14 +22,14 @@ class GameController extends Controller
         $game = GameDetail::where('slug', $slug)->with('game')->first();
         if (isset($game)) {
             if ($slug == 'diamonds' && $gameName == 'mobile-legend') {
-                $mlB = ResellerAPIHelper::mobileLegendB();
+                $mlB = ProductHelper::listProduct();
                 return view('games.detailgamediamond', compact('game', 'mlB'));
             }
             return view('games.detailgame', compact('game'));
         }
     }
 
-    public function cekUser(Request $request)
+    public function cekUserML(Request $request)
     {
         $resellerHelper = new ResellerAPIHelper();
         $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
@@ -35,5 +37,15 @@ class GameController extends Controller
             return $getNickName['data'];
         }
         return false;
+
+        // try {
+        //     $apiGames = new ApiGamesHelper();
+        //     $getNickName = $apiGames->cekAkunGame('mobilelegend', $request->id_user . $request->zone_user);
+        //     if ($getNickName['data']['is_valid']) {
+        //         return $getNickName['data']['username'];
+        //     }
+        // } catch (\Throwable $th) {
+        //     return $th->getMessage();
+        // }
     }
 }
