@@ -128,6 +128,7 @@ class ResellerAPIHelper
             'data_no' => $data_id_tujuan,
             'data_zone' => $data_zone
         ]);
+        return $data;
     }
 
 }
