@@ -9,7 +9,7 @@ class ProductHelper
 {
     public static function listProduct()
     {
-        $keuntungan = 0.05;
+        $keuntungan = 0.07;
         $products = Produk::select(
             'id',
             'code',
