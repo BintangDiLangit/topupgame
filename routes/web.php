@@ -36,6 +36,7 @@ Route::get('/admin/profile', [ProfileController::class, 'profile']);
 
 
 Route::post('/in-callback', [CallbackController::class, 'inCallback']);
+Route::post('/out-callback', [CallbackController::class, 'outCallback']);
 
 
 Route::get('/payment-success/{id}/{game}', function () {
