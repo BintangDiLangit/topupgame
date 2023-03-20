@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/in-callback',
-        '/out-callback'
+        '/out-callback',
+        '/apigames/transaksi/callback'
     ];
 }
