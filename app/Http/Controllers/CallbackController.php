@@ -35,7 +35,7 @@ class CallbackController extends Controller
 
                     if ($balanceAdmin['message'] == 'Sukses') {
                         // if ($balanceAdmin['data']['saldo'] >= $transaction->amount) {
-                        if ($transaction->amount) {
+                        if ($balanceAdmin['message'] == 'Sukses') {
                             $apiGamesHelper->placeOrder(
                                 $transaction->transaction_id,
                                 $transaction->service,
