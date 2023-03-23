@@ -162,7 +162,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Harga Jual (IDR):</label>
                                                                 <input type="text" name="harga_jual"
-                                                                    value="{{ $item->harga_beli }}"
+                                                                    value="{{ $item->harga_jual }}"
                                                                     class="form-control input-rounded"
                                                                     placeholder="harga jual" required>
                                                             </div>
