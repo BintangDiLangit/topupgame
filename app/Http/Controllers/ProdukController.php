@@ -58,6 +58,7 @@ class ProdukController extends Controller
         $findProd->code = $request->code;
         $findProd->nama = $request->nama;
         $findProd->harga_rupiah = $request->harga_rupiah;
+        $findProd->harga_jual = $request->harga_jual;
         $findProd->price_unit = $request->price_unit;
         $findProd->status = $request->status;
         $findProd->save();
