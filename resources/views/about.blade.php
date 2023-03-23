@@ -10,7 +10,7 @@
                             <h2 class="title">ABOUT US</h2>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">ABOUT US</li>
                                 </ol>
                             </nav>
@@ -35,9 +35,9 @@
                     <div class="about__title-wrap">
                         <h2 class="title">
                             <i>WE ARE</i>
-                            <span>developer</span>
-                            <i>ern nft</i>
-                            <i>gam<b>ing</b></i>
+                            <span>best seller</span>
+                            <i><b>PPOB</b> and Top Up</i>
+                            <i><b>Game</b></i>
                         </h2>
                         <div class="about__content-circle">
                             <img src="{{ asset('assets/img/icons/circle.svg') }}" alt="img">
@@ -83,11 +83,11 @@
                         </div>
                     </div>
                     <div class="about__three-paragraph">
-                        <p class="tg__animate-text style2">Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum
-                            sollicitudin is yaugue euismods Nulla ullamcorper. Morbi pharetra tellus miolslis tincidunt
-                            massa venenatis. Lorem Ipsum is simply dummyd the printing and typesetting industry. Lorem Ipsum
-                            has been the industry's standard dummy text ever since the 1500s when an unknown printer took a
-                            galley.</p>
+                        <p class="tg__animate-text style2">BIMY is a digital platform that provides PPOB and online game
+                            top-up services. With this platform, users can easily and securely make online payments for
+                            bills such as electricity, phone credit, internet, water, and more. In addition, users can also
+                            easily and quickly top up various online games such as Mobile Legends, PUBG, Free Fire, and many
+                            more.</p>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                                 <i class="flaticon-ethereum"></i>
                             </div>
                             <div class="services__content">
-                                <h4 class="title"><a href="services-details.html">Best NFT Game</a></h4>
+                                <h4 class="title"><a href="services-details.html">Best Top Up Game, PPOB</a></h4>
                                 <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p>
                             </div>
                         </div>

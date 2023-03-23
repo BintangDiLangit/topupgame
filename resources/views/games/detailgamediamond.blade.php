@@ -23,26 +23,10 @@
         <div class="container">
             <div class="row">
                 <div class="shop__details-images-wrap">
-                    <ul class="nav nav-tabs" id="imageTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="one-tab" data-bs-toggle="tab" data-bs-target="#one"
-                                type="button" role="tab" aria-controls="one" aria-selected="true">
-                                <img src="{{ asset('assets/img/products/diamond.png') }}" alt="img">
-                            </button>
-                            <button class="nav-link" id="two-tab" data-bs-toggle="tab" data-bs-target="#two"
-                                type="button" role="tab" aria-controls="two" aria-selected="true">
-                                <img src="{{ asset('assets/img/products/diamond-2.png') }}" alt="img">
-                            </button>
-                        </li>
-                    </ul>
                     <div class="tab-content" id="imageTabContent">
                         <div class="tab-pane show active" id="one" role="tabpanel" aria-labelledby="one-tab">
                             <a href="{{ asset('assets/img/products/diamond.png') }}" class="popup-image"><img
                                     src="{{ asset('assets/img/products/diamond.png') }}" alt="img"></a>
-                        </div>
-                        <div class="tab-pane show" id="two" role="tabpanel" aria-labelledby="two-tab">
-                            <a href="{{ asset('assets/img/products/diamond-2.png') }}" class="popup-image"><img
-                                    src="{{ asset('assets/img/products/diamond-2.png') }}" alt="img"></a>
                         </div>
                     </div>
                 </div>
@@ -58,13 +42,20 @@
                     <h2 class="title">{{ $game->name . ' (' . $game->game->name . ')' }}</h2>
                     <div class="shop__details-price">
                         <span class="amount">
-                            {{ 'Rp ' . number_format($mlB[0]['harga_jual'], 0, ',', '.') }}<span class="stock-status">-
+                            {{ 'Start From Rp ' . number_format($mlB[0]['harga_jual'], 0, ',', '.') }}<span
+                                class="stock-status"> -
                                 IN
                                 STOCK</span></span>
                     </div>
                     <div class="shop__details-short-description">
-                        <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum solliciin is yaugue
-                            euismods Nulla ullaorper.</p>
+                        <p class="mb-3">Top up diamond Mobile Legend yang cepat,
+                            aman, dan terpercaya. Dengan harga yang terjangkau, Anda dapat membeli diamond untuk Mobile
+                            Legend dengan mudah dan nyaman. Tim kami siap membantu Anda dalam proses pembelian dan
+                            menjawab segala pertanyaan yang Anda miliki. Selain itu, kami juga menjamin keamanan dan
+                            kerahasiaan data pelanggan.
+                            Dapatkan diamond Mobile Legend Anda sekarang dan jadilah juara di game yang Anda mainkan!
+                        </p>
+                        <a href="">Term & Services</a>
                     </div>
                     <div id="error-message" class=""></div>
                     <form class="offCanvas__newsletter-form" id="payment_form"
@@ -113,15 +104,8 @@
                     <div class="shop__details-bottom">
                         <div class="posted_in">
                             <b>Categories :</b>
-                            <a href="shop.html">Gamdias,</a>
-                            <a href="shop.html">Apple,</a>
-                            <a href="shop.html">Huawei</a>
-                        </div>
-                        <div class="tagged_as">
-                            <b>Tags :</b>
-                            <a href="shop.html">Silver,</a>
-                            <a href="shop.html">Pink,</a>
-                            <a href="shop.html">Green</a>
+                            <a href="{{ route('layanan.game.mobile-legends') }}">Diamonds,</a>
+                            <a href="{{ route('layanan.game.mobile-legends') }}">Mobile Legends,</a>
                         </div>
                         <div class="product_share">
                             <b>Share :</b>
@@ -155,39 +139,26 @@
                         <div class="tab-content" id="descriptionTabContent">
                             <div class="tab-pane animation-none fade show active" id="description" role="tabpanel"
                                 aria-labelledby="description-tab">
-                                <p>Lorem ipsum dolor sit amet, consteur adipiscing Duis elementum solliciin is
-                                    yaugue euismods Nulla ullaorper. Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                                    dummy text
-                                    ever since the 1500s.</p>
-                                <p>Don't look even slightly believable. If you are going to use a passage of Lorem
-                                    Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-                                    middle of text. All the Lorem Ipsum generators on the Internet tend to repeat
-                                    predefined chunks as necessary, making this the first true generator on the
-                                    Internet. It uses a dictionary of over 200 Latin words, combined with a handful
-                                    of model sentence structures, to generate Lorem Ipsum which looks reasonable.
-                                    The generated Lorem Ipsum is therefore always free from repetition, injected
-                                    humour.</p>
+                                <p>Top up diamond Mobile Legend yang cepat,
+                                    aman, dan terpercaya. Dengan harga yang terjangkau, Anda dapat membeli diamond untuk
+                                    Mobile
+                                    Legend dengan mudah dan nyaman. Tim kami siap membantu Anda dalam proses pembelian dan
+                                    menjawab segala pertanyaan yang Anda miliki. Selain itu, kami juga menjamin keamanan dan
+                                    kerahasiaan data pelanggan.
+                                    Dapatkan diamond Mobile Legend Anda sekarang dan jadilah juara di game yang Anda
+                                    mainkan!</p>
                             </div>
                             <div class="tab-pane animation-none fade" id="info" role="tabpanel"
                                 aria-labelledby="info-tab">
                                 <table class="table table-sm">
                                     <tbody>
                                         <tr>
-                                            <th scope="row">General</th>
-                                            <td>PS5 Digital Platform</td>
+                                            <th scope="row">Produk</th>
+                                            <td>Diamonds Mobile Legends</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">Technical Information</th>
+                                            <th scope="row">Term & Services</th>
                                             <td>Qualcomm Snapdragon XR2</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Display</th>
-                                            <td>3664 x 1920</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">RAM & Storage</th>
-                                            <td>8GB/256GB</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Included</th>

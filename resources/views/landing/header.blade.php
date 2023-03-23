@@ -11,9 +11,9 @@
                             </div>
                             <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                 <ul class="navigation">
-                                    <li class="active"><a href="/">Home</a>
-                                    </li>
-                                    <li><a href="/about-us">ABOUT US</a></li>
+                                    <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
+                                    <li class="{{ Request::is('about-us') ? 'active' : '' }}"><a href="/about-us">ABOUT
+                                            US</a></li>
                                     {{-- <li class="menu-item-has-children"><a href="#">TOURNAMENT</a>
                                         <ul class="sub-menu">
                                             <li><a href="tournament.html">TOURNAMENT</a></li>
@@ -21,7 +21,8 @@
                                         </ul>
                                     </li> --}}
                                     <li class=""><a href="#">News</a></li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li class="{{ Request::is('contact') ? 'active' : '' }}"><a
+                                            href="/contact">contact</a></li>
                                 </ul>
                             </div>
 

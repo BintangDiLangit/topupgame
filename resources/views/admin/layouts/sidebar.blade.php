@@ -2,16 +2,16 @@
     <div class="deznav-scroll">
         <div class="main-profile">
             <div class="image-bx">
-                <img src="public/images/Untitled-1.jpg" alt="">
+                <img src="{{ asset('public/images/Untitled-1.jpg') }}" alt="">
                 <a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
             </div>
-            <h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
-            <p class="email">marquezzzz@mail.com</p>
+            <h5 class="name"><span class="font-w400">Hello,</span> {{ Auth::user()->name }}</h5>
+            <p class="email">{{ Auth::user()->email }}</p>
         </div>
         <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
             <li>
-                <a class="has-arrow ai-icon" href="/admin/dashboard" aria-expanded="false">
+                <a class="" href="/admin/dashboard" aria-expanded="false">
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>

@@ -13,7 +13,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $products = ProductHelper::listProduct();
+        $products = ProductHelper::listAllProduct();
         return view('admin.produk.index', compact('products'));
     }
 
@@ -52,9 +52,17 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produk $produk)
+    public function update(Request $request, $id)
     {
-        //
+        $findProd = Produk::find($id);
+        $findProd->code = $request->code;
+        $findProd->nama = $request->nama;
+        $findProd->harga_rupiah = $request->harga_rupiah;
+        $findProd->price_unit = $request->price_unit;
+        $findProd->status = $request->status;
+        $findProd->save();
+
+        return redirect()->back();
     }
 
     /**

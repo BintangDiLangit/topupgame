@@ -3,16 +3,6 @@
         <nav class="navbar navbar-expand">
             <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
-                    <div class="input-group search-area right d-lg-inline-flex d-none">
-                        <input type="text" class="form-control" placeholder="Find something here...">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <a href="javascript:void(0)">
-                                    <i class="flaticon-381-search-2"></i>
-                                </a>
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 <ul class="navbar-nav header-right main-notification">
                     <li class="nav-item dropdown notification_dropdown">
@@ -218,7 +208,7 @@
                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                             <img src="{{ asset('public/images/profile/pic1.jpg') }}" width="20" alt="" />
                             <div class="header-info">
-                                <span>Johndoe</span>
+                                <span>{{ strtok(auth()->user()->name, ' ') }}</span>
                                 <small>Super Admin</small>
                             </div>
                         </a>
@@ -245,7 +235,11 @@
                                 </svg>
                                 <span class="ms-2">Inbox </span>
                             </a>
-                            <a href="page-login.html" class="dropdown-item ai-icon">
+
+                            <a href="{{ route('admin.logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"
+                                class="dropdown-item ai-icon">
                                 <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
                                     width="18" height="18" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -257,6 +251,10 @@
                                 </svg>
                                 <span class="ms-2">Logout </span>
                             </a>
+                            <form action="{{ route('admin.logout') }}" id="logout-form" method="post"
+                                style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>

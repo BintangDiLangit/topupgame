@@ -7,9 +7,8 @@ use App\Models\Produk;
 
 class ProductHelper
 {
-    public static function listProduct()
+    public static function listProduct($brand)
     {
-        $keuntungan = 0.07;
         $products = Produk::select(
             'id',
             'code',
@@ -17,17 +16,33 @@ class ProductHelper
             'jumlah',
             'price_unit',
             'harga_rupiah as harga_beli',
+            'harga_jual',
             'slug',
             'brand',
             'status',
-        )->addSelect(\DB::raw('CEIL((harga_rupiah*' . $keuntungan . ') + harga_rupiah) as harga_jual'))
-            ->where('status', 'active')->get();
+        )->where([['status', 'active'], ['brand', $brand]])->get();
+        return $products;
+    }
+
+    public static function listAllProduct()
+    {
+        $products = Produk::select(
+            'id',
+            'code',
+            'nama',
+            'jumlah',
+            'price_unit',
+            'harga_rupiah as harga_beli',
+            'harga_jual',
+            'slug',
+            'brand',
+            'status',
+        )->get();
         return $products;
     }
 
     public static function getDetailProduct($code)
     {
-        $keuntungan = 0.07;
         $products = Produk::select(
             'id',
             'code',
@@ -35,11 +50,11 @@ class ProductHelper
             'jumlah',
             'price_unit',
             'harga_rupiah as harga_beli',
+            'harga_jual',
             'slug',
             'brand',
             'status',
-        )->addSelect(\DB::raw('CEIL((harga_rupiah*' . $keuntungan . ') + harga_rupiah) as harga_jual'))
-            ->where([['status', 'active'], ['code', $code]])->first();
+        )->where([['status', 'active'], ['code', $code]])->first();
         return $products;
     }
 

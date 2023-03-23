@@ -22,7 +22,7 @@ class GameController extends Controller
         $game = GameDetail::where('slug', $slug)->with('game')->first();
         if (isset($game)) {
             if ($slug == 'diamonds' && $gameName == 'mobile-legend') {
-                $mlB = ProductHelper::listProduct();
+                $mlB = ProductHelper::listProduct('Mobile Legend');
                 return view('games.detailgamediamond', compact('game', 'mlB'));
             }
             return view('games.detailgame', compact('game'));

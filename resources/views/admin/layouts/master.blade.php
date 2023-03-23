@@ -755,6 +755,4 @@
     @include('admin.layouts.script')
 </body>
 
-<!-- Mirrored from zenix.dexignzone.com/laravel/demo/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Mar 2023 09:35:37 GMT -->
-
 </html>
