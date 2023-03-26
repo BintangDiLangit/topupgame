@@ -1,8 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-<!-- Mirrored from themedox.com/demo/mykd/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Mar 2023 18:44:27 GMT -->
-
 <head>
     @include('landing.head')
 </head>
@@ -39,8 +37,5 @@
     @include('landing.script')
     @stack('script')
 </body>
-
-
-<!-- Mirrored from themedox.com/demo/mykd/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Mar 2023 18:44:27 GMT -->
 
 </html>

@@ -20,7 +20,7 @@
                                             <li><a href="tournament-details.html">TOURNAMENT Single</a></li>
                                         </ul>
                                     </li> --}}
-                                    <li class=""><a href="#">News</a></li>
+                                    {{-- <li class=""><a href="#">News</a></li> --}}
                                     <li class="{{ Request::is('contact') ? 'active' : '' }}"><a
                                             href="/contact">contact</a></li>
                                 </ul>
@@ -72,7 +72,7 @@
                 <div class="offCanvas__contact">
                     <h4 class="small-title">CONTACT US</h4>
                     <ul class="offCanvas__contact-list list-wrap">
-                        <li><a href="tel:93332225557">+62 878-8137-7842</a></li>
+                        <li><a href="https://wa.me/6281252519417">+62 8125-2519-417</a></li>
                         <li><a href="mailto:bintangmfhd@gmail.com">bintangmfhd@gmail.com</a></li>
                         <li>Malang City ,Indonesia</li>
                     </ul>

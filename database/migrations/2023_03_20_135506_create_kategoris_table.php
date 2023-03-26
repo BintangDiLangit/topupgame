@@ -14,6 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('nama_kategori');
             $table->string('slug_kategori');
+            $table->text('desc')->nullable();
+            $table->bigInteger('master_kategori_id');
+            $table->string('status')->default('active');
             $table->text('image_kategori')->nullable();
             $table->timestamps();
         });

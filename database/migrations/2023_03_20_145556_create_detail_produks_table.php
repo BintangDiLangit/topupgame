@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('detail_produks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produk_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('produk_id');
             $table->text('image')->nullable();
             $table->timestamps();
         });

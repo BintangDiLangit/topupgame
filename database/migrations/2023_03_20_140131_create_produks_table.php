@@ -14,14 +14,15 @@ return new class extends Migration {
             $table->id();
             $table->string('code');
             $table->string('nama');
-            $table->foreignId('kategori_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('vendor_id')->nullable();
+            $table->bigInteger('kategori_id');
             $table->string('jumlah')->nullable();
             $table->string('harga_beli');
             $table->string('harga_jual')->nullable();
             $table->string('price_unit');
             $table->string('slug')->nullable();
-            $table->string('brand');
             $table->string('status')->default('active');
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

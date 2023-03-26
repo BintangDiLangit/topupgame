@@ -13,7 +13,7 @@
                                 <h2 class="title wow fadeInUp" data-wow-delay=".5s">steaming</h2>
                                 <p class="wow fadeInUp" data-wow-delay=".8s">top up games online</p>
                                 <div class="slider__btn wow fadeInUp" data-wow-delay="1.2s">
-                                    <a href="contact.html" class="tg-btn-1"><span>contact us</span></a>
+                                    <a href="/contact" class="tg-btn-1"><span>contact us</span></a>
                                 </div>
                             </div>
                         </div>
@@ -48,56 +48,18 @@
     <section class="nft-item__area">
         <div class="container custom-container">
             <div class="row justify-content-center">
-                {{-- <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
-                        <div class="nft-item__box">
-                            <div class="nft-item__thumb">
-                                <a href="shop-details.html"><img src="assets/img/nft/nft_img01.jpg"
-                                        alt="img"></a>
-                            </div>
-                            <div class="nft-item__content">
-                                <h4 class="title"><a href="shop-details.html">wolf gaming art</a></h4>
-                                <div class="nft-item__avatar">
-                                    <div class="avatar-img">
-                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar.png"
-                                                alt="img"></a>
-                                    </div>
-                                    <div class="avatar-name">
-                                        <h5 class="name"><a href="shop-details.html">Alax Max</a></h5>
-                                        <span class="designation">Creator</span>
-                                    </div>
-                                </div>
-                                <div class="nft-item__bid">
-                                    <div class="nft-item__price">
-                                        <p>1.002 <span class="currency">Eth</span></p>
-                                        <a href="shop-details.html" class="bid-btn">Bid <i
-                                                class="fas fa-long-arrow-alt-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                @foreach ($games as $item)
+                @foreach ($masterKategoris as $item)
                     <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
                         <div class="nft-item__box">
                             <div class="nft-item__thumb">
-                                <a href="/game/mobile-legends"><img src="{{ $item->image }}" alt="img"></a>
+                                <a href="{{ '/'. $item->slug_master_kategori }}"><img src="{{ $item->image_master_kategori }}" alt="img"></a>
                             </div>
                             <div class="nft-item__content">
-                                <h4 class="title"><a href="/game/mobile-legends">{{ $item->name }}</a></h4>
-                                {{-- <div class="nft-item__avatar">
-                                        <div class="avatar-img">
-                                            <a href="/game/mobile-legends"><img src="assets/img/nft/nft_avatar.png"
-                                                    alt="img"></a>
-                                        </div>
-                                        <div class="avatar-name">
-                                            <h5 class="name"><a href="/game/mobile-legends">Alax Max</a></h5>
-                                            <span class="designation">Creator</span>
-                                        </div>
-                                    </div> --}}
+                                <h4 class="title"><a href="{{ '/'. $item->slug_master_kategori }}">{{ $item->nama_master_kategori }}</a></h4>
                                 <div class="nft-item__bid mt-5">
                                     <div class="nft-item__price">
-                                        <p> <span class="currency">ML Store</span></p>
-                                        <a href="/game/mobile-legends" class="bid-btn">Go! <i
+                                        <p> <span class="currency">Store</span></p>
+                                        <a href="{{ '/'. $item->slug_master_kategori }}" class="bid-btn">GAS! <i
                                                 class="fas fa-long-arrow-alt-right"></i></a>
                                     </div>
                                 </div>
@@ -105,41 +67,13 @@
                         </div>
                     </div>
                 @endforeach
-                {{-- <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
-                        <div class="nft-item__box">
-                            <div class="nft-item__thumb">
-                                <a href="shop-details.html"><img src="assets/img/nft/nft_img03.jpg"
-                                        alt="img"></a>
-                            </div>
-                            <div class="nft-item__content">
-                                <h4 class="title"><a href="shop-details.html">girl firefly art</a></h4>
-                                <div class="nft-item__avatar">
-                                    <div class="avatar-img">
-                                        <a href="shop-details.html"><img src="assets/img/nft/nft_avatar.png"
-                                                alt="img"></a>
-                                    </div>
-                                    <div class="avatar-name">
-                                        <h5 class="name"><a href="shop-details.html">Alax Max</a></h5>
-                                        <span class="designation">Creator</span>
-                                    </div>
-                                </div>
-                                <div class="nft-item__bid">
-                                    <div class="nft-item__price">
-                                        <p>1.024 <span class="currency">Eth</span></p>
-                                        <a href="shop-details.html" class="bid-btn">Bid <i
-                                                class="fas fa-long-arrow-alt-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
             </div>
         </div>
     </section>
     <!-- NFT-item-area-end -->
 
     <!-- area-background-start -->
-    <div class="area-background" data-background="assets/img/bg/area_bg01.jpg">
+    {{-- <div class="area-background" data-background="assets/img/bg/area_bg01.jpg">
 
         <!-- about-area -->
         <section class="about__area section-pt-130 section-pb-130">
@@ -529,7 +463,7 @@
         </section>
         <!-- gallery-area-end -->
 
-    </div>
+    </div> --}}
     <!-- area-background-end -->
 
     <!-- team-area -->
@@ -547,44 +481,33 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
                     <div class="team__item">
                         <div class="team__thumb">
-                            <a href="team-details.html"><img src="assets/img/team/team01.png" alt="img"></a>
+                            <a href="#"><img src="assets/img/team/team01.png" alt="img"></a>
                         </div>
                         <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">killer master</a></h4>
-                            <span class="designation">Blockchain Expert</span>
+                            <h4 class="name"><a href="#">M</a></h4>
+                            <span class="designation">Founder & Marketing</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
                     <div class="team__item">
                         <div class="team__thumb">
-                            <a href="team-details.html"><img src="assets/img/team/team02.png" alt="img"></a>
+                            <a href="#"><img src="assets/img/team/team02.png" alt="img"></a>
                         </div>
                         <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">tanu mark</a></h4>
-                            <span class="designation">Developer</span>
+                            <h4 class="name"><a href="#">B</a></h4>
+                            <span class="designation">CEO & Developer </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
                     <div class="team__item">
                         <div class="team__thumb">
-                            <a href="team-details.html"><img src="assets/img/team/team03.png" alt="img"></a>
+                            <a href="#"><img src="assets/img/team/team03.png" alt="img"></a>
                         </div>
                         <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">Thompson Scot</a></h4>
-                            <span class="designation">Art Director</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
-                    <div class="team__item">
-                        <div class="team__thumb">
-                            <a href="team-details.html"><img src="assets/img/team/team04.png" alt="img"></a>
-                        </div>
-                        <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">Shakh Danial</a></h4>
-                            <span class="designation">Crypto Advisor</span>
+                            <h4 class="name"><a href="#">T</a></h4>
+                            <span class="designation">Developer</span>
                         </div>
                     </div>
                 </div>
@@ -613,7 +536,7 @@
     <!-- video-area-end -->
 
     <!-- roadMap-area -->
-    <section class="roadMap__area roadMap-bg section-pt-150 section-pb-150"
+    {{-- <section class="roadMap__area roadMap-bg section-pt-150 section-pb-150"
         data-background="assets/img/bg/roadmap_bg.jpg">
         <div class="container">
             <div class="row justify-content-center">
@@ -677,11 +600,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- roadMap-area-end -->
 
     <!-- trending-nft-area -->
-    <section class="trendingNft-area section-pt-120 section-pb-90">
+    {{-- <section class="trendingNft-area section-pt-120 section-pb-90">
         <div class="container">
             <div class="trendingNft__title-wrap">
                 <div class="row">
@@ -854,6 +777,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- trending-nft-end -->
 @endsection

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ProductHelper;
+use App\Helpers\KategoriHelper;
+use App\Helpers\ProdukHelper;
+use App\Helpers\VendorHelper;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
@@ -13,64 +16,36 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $products = ProductHelper::listAllProduct();
-        return view('admin.produk.index', compact('products'));
+        $produks = new ProdukHelper();
+        $produks = $produks->listPAdmin();
+        $vendors  = new VendorHelper();
+        $vendors  = $vendors->listVendor();
+        $kategoris = new KategoriHelper();
+        $kategoris = $kategoris->listKAdmin();
+        return view('admin.produk.index', compact('produks','vendors','kategoris'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        $produk = new ProdukHelper();
+        $produk->storeData($request->all());
+        return redirect()->back();
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Produk $produk)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Produk $produk)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
-        $findProd = Produk::find($id);
-        $findProd->code = $request->code;
-        $findProd->nama = $request->nama;
-        $findProd->harga_rupiah = $request->harga_rupiah;
-        $findProd->harga_jual = $request->harga_jual;
-        $findProd->price_unit = $request->price_unit;
-        $findProd->status = $request->status;
-        $findProd->save();
-
+        $produk = new ProdukHelper();
+        $produk->updateData($request->all(), $id);
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produk $produk)
+    public function destroy($id)
     {
-        //
+        $produk = new ProdukHelper();
+        $produk->deleteData($id);
+        return redirect()->back();
     }
 }

@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\HistoryTransHelper;
-use App\Helpers\ProductHelper;
-use App\Helpers\ResellerAPIHelper;
-use App\Helpers\XenditHelper;
-use App\Models\HistoryTransaction;
+use App\Helpers\ProdukHelper;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -32,23 +29,26 @@ class OrderController extends Controller
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $productHelper = new ProductHelper();
+        $productHelper = new ProdukHelper();
         $secretXendit = env('API_KEY_XENDIT');
         Xendit::setApiKey($secretXendit);
 
         $str = $request->game_code;
         $parts = explode(';', $str);
         $code = $parts[0];
-        $value = 0;
-        if ($productHelper->getDetailProduct($code)) {
-            $value = $productHelper->getDetailProduct($code);
-            $value = $value['harga_jual'];
+        $hargaJual = 0;
+        $produkId = '';
+
+        if ($productHelper->getDetailPClientByCode($code)) {
+            $value = $productHelper->getDetailPClientByCode($code);
+            $hargaJual = $value['harga_jual'];
+            $produkId = $value['id'];
         } else {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $amount = $value;
-
+        $amount = $hargaJual;
+       
         try {
 
             // $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
@@ -74,6 +74,7 @@ class OrderController extends Controller
                 'transaction_id' => $externalId,
                 'payment_channel' => 'Payment Link',
                 'email' => $request->email,
+                'produk_id'=> $produkId,
                 'amount' => $amount,
                 'id_user' => $request->id_user,
                 'zone_user' => $request->zone_user,
@@ -82,14 +83,15 @@ class OrderController extends Controller
                 'service' => $code,
             ]);
 
-            HistoryTransHelper::insertToHistoryTrans($insertTransToDb->id, json_encode($createTransaction) . json_encode($insertTransToDb));
+            $historyTrans = new HistoryTransHelper();
+            $historyTrans->insertToHistoryTrans($insertTransToDb->id, json_encode($createTransaction) . json_encode($insertTransToDb));
 
             $redirectUrl = $createTransaction['invoice_url'];
             DB::commit();
             return $redirectUrl;
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'server error'], 501);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
@@ -104,6 +106,5 @@ class OrderController extends Controller
         ]);
 
         // dd(env('API_ID_RESELLER').env('API_KEY_RESELLER'));
-        dd($data->body());
     }
 }

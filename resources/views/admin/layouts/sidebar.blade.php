@@ -15,13 +15,37 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-label">Products</li>
+            <li class="nav-label">Master Data</li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-077-menu-1"></i>
-                    <span class="nav-text">Products</span>
+                    <span class="nav-text">Master Kategori</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.produk.index') }}">Products</a></li>
+                    <li><a href="{{ route('admin.master.kategori.index') }}">Master Kategori</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-077-menu-1"></i>
+                    <span class="nav-text">Kategori</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.kategori.index') }}">Kategori</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-077-menu-1"></i>
+                    <span class="nav-text">Vendor</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.vendor.index') }}">Vendor</a></li>
+                </ul>
+            </li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-077-menu-1"></i>
+                    <span class="nav-text">Produk</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.produk.index') }}">Produk</a></li>
                 </ul>
             </li>
             <li class="nav-label">Transactions</li>

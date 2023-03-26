@@ -111,8 +111,8 @@
                                 <i class="flaticon-diamond"></i>
                             </div>
                             <div class="services__content">
-                                <h4 class="title"><a href="services-details.html">Year Experience</a></h4>
-                                <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p>
+                                <h4 class="title"><a href="#">Year Experience</a></h4>
+                                {{-- <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p> --}}
                             </div>
                         </div>
                         <div class="services__item">
@@ -120,8 +120,8 @@
                                 <i class="flaticon-user-profile"></i>
                             </div>
                             <div class="services__content">
-                                <h4 class="title"><a href="services-details.html">Expert Teams</a></h4>
-                                <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p>
+                                <h4 class="title"><a href="#">Expert Teams</a></h4>
+                                {{-- <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p> --}}
                             </div>
                         </div>
                         <div class="services__item">
@@ -129,8 +129,8 @@
                                 <i class="flaticon-ethereum"></i>
                             </div>
                             <div class="services__content">
-                                <h4 class="title"><a href="services-details.html">Best Top Up Game, PPOB</a></h4>
-                                <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p>
+                                <h4 class="title"><a href="#">Best Top Up Game, PPOB</a></h4>
+                                {{-- <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p> --}}
                             </div>
                         </div>
                         <div class="services__item">
@@ -138,8 +138,8 @@
                                 <i class="flaticon-settings-1"></i>
                             </div>
                             <div class="services__content">
-                                <h4 class="title"><a href="services-details.html">Worldwide Client</a></h4>
-                                <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p>
+                                <h4 class="title"><a href="#">Worldwide Client</a></h4>
+                                {{-- <p>Lorem ipsum dolor sitamet const adipiscng Duis eletum sollicitudin is yaugue euismods</p> --}}
                             </div>
                         </div>
                     </div>
@@ -148,25 +148,25 @@
                     <div class="services__images">
                         <div class="services__images-item active">
                             <img src="{{ asset('assets/img/others/services_img01.jpg') }}" alt="img">
-                            <a href="services-details.html" class="services__link">
+                            <a href="#" class="services__link">
                                 <i class="flaticon-next"></i>
                             </a>
                         </div>
                         <div class="services__images-item">
                             <img src="{{ asset('assets/img/others/services_img02.jpg') }}" alt="img">
-                            <a href="services-details.html" class="services__link">
+                            <a href="#" class="services__link">
                                 <i class="flaticon-next"></i>
                             </a>
                         </div>
                         <div class="services__images-item">
                             <img src="{{ asset('assets/img/others/services_img03.jpg') }}" alt="img">
-                            <a href="services-details.html" class="services__link">
+                            <a href="#" class="services__link">
                                 <i class="flaticon-next"></i>
                             </a>
                         </div>
                         <div class="services__images-item">
                             <img src="{{ asset('assets/img/others/services_img04.jpg') }}" alt="img">
-                            <a href="services-details.html" class="services__link">
+                            <a href="#" class="services__link">
                                 <i class="flaticon-next"></i>
                             </a>
                         </div>

@@ -7,7 +7,6 @@
         <div class="card-header d-sm-flex d-block">
             <div class="me-auto mb-sm-0 mb-3">
                 <h4 class="card-title mb-2">List Produk</h4>
-                <span>Lorem Ipsum sit amet</span>
             </div>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">+
@@ -25,32 +24,59 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label class="form-label">Code :</label>
+                                    <label class="form-label">Code : <span class="text-danger">*</span></label>
                                     <input type="text" name="code" class="form-control input-rounded"
                                         placeholder="code" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Nama :</label>
+                                    <label class="form-label">Nama : <span class="text-danger">*</span></label>
                                     <input type="text" name="nama" class="form-control input-rounded"
                                         placeholder="nama" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Harga Beli (IDR):</label>
-                                    <input type="text" name="harga_rupiah" class="form-control input-rounded"
+                                    <label class="form-label">Vendor :</label>
+                                    <select name="vendor_id" class="form-control input-rounded">
+                                        <option value=""> - Pilih - </option>
+                                        @foreach ($vendors as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Kategori :</label>
+                                    <select name="kategori_id" class="form-control input-rounded" required>
+                                        <option value=""> - Pilih - </option>
+                                        @foreach ($kategoris as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Jumlah:</label>
+                                    <input type="number" name="jumlah" class="form-control input-rounded"
+                                        placeholder="jumlah">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Harga Beli (IDR): <span class="text-danger">*</span></label>
+                                    <input type="text" name="harga_beli" class="form-control input-rounded"
                                         placeholder="harga beli" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Harga Jual (IDR):</label>
+                                    <label class="form-label">Harga Jual (IDR): <span class="text-danger">*</span></label>
                                     <input type="text" name="harga_jual" class="form-control input-rounded"
                                         placeholder="harga jual" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Price Unit:</label>
+                                    <label class="form-label">Price Unit: <span class="text-danger">*</span></label>
                                     <input type="text" name="price_unit" class="form-control input-rounded"
                                         placeholder="price unit" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Status:</label>
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea name="desc" id="" cols="30" rows="10" class="form-control input-rounded"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Status: <span class="text-danger">*</span></label>
                                     <select name="status" id="" class="form-control input-rounded" name="status"
                                         required>
                                         <option value="">Pilih Status</option>
@@ -60,11 +86,10 @@
                                             Disabled</option>
                                     </select>
                                 </div>
-
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -72,6 +97,15 @@
             </div>
         </div>
         <div class="card-body">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="table-responsive">
                 <table class="table style-1" id="example">
                     <thead>
@@ -80,15 +114,17 @@
                             <th>Code</th>
                             <th>Nama</th>
                             <th>Jumlah</th>
+                            <th>Vendor</th>
                             <th>Harga Beli (IDR)</th>
                             <th>Harga Jual (IDR)</th>
                             <th>Price Unit</th>
-                            <th>STATUS</th>
-                            <th>ACTION</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
+
                     <tbody>
-                        @foreach ($products as $item)
+                        @foreach ($produks as $item)
                             <tr>
                                 <td>
                                     <h6>{{ $loop->iteration }}</h6>
@@ -100,7 +136,10 @@
                                     {{ $item->nama }}
                                 </td>
                                 <td>
-                                    {{ $item->jumlah . ' Diamonds' }}
+                                    {{ $item->jumlah }}
+                                </td>
+                                <td>
+                                    {{ isset($item->nama_vendor) ? $item->nama_vendor : '-' }}
                                 </td>
                                 <td>
                                     {{ 'Rp ' . number_format($item->harga_beli, 0, ',', '.') }}
@@ -114,7 +153,8 @@
                                 <td><span class="badge badge-warning">{{ $item->status }}</span></td>
                                 <td>
                                     <div class="d-flex action-button">
-                                        <button type="button" class="btn btn-info btn-xs light px-2" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-info btn-xs light px-2"
+                                            data-bs-toggle="modal"
                                             data-bs-target="#exampleModalCenter{{ $item->id }}">
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -139,42 +179,83 @@
                                                         @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <label class="form-label">Code :</label>
+                                                                <label class="form-label">Code : <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input type="text" name="code"
                                                                     class="form-control input-rounded"
                                                                     value="{{ $item->code }}" placeholder="code"
                                                                     required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Nama :</label>
+                                                                <label class="form-label">Nama : <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input type="text" name="nama"
                                                                     class="form-control input-rounded"
                                                                     value="{{ $item->nama }}" placeholder="nama"
                                                                     required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Harga Beli (IDR):</label>
-                                                                <input type="text" name="harga_rupiah"
+                                                                <label class="form-label">Vendor :</label>
+                                                                <select name="vendor_id"
+                                                                    class="form-control input-rounded">
+                                                                    <option value=""> - Pilih - </option>
+                                                                    @foreach ($vendors as $v)
+                                                                        <option value="{{ $v->id }}"
+                                                                            {{ $v->id == $item->vendor_id ? 'selected' : '' }}>
+                                                                            {{ $item->nama }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Kategori :</label>
+                                                                <select name="kategori_id"
+                                                                    class="form-control input-rounded" required>
+                                                                    <option value=""> - Pilih - </option>
+                                                                    @foreach ($kategoris as $k)
+                                                                        <option value="{{ $k->id }}"
+                                                                            {{ $k->id == $item->kategori_id ? 'selected' : '' }}>
+                                                                            {{ $k->nama_kategori }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Jumlah:</label>
+                                                                <input type="number" name="jumlah"
+                                                                    value="{{ $item->jumlah }}"
+                                                                    class="form-control input-rounded"
+                                                                    placeholder="jumlah">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Harga Beli (IDR): <span
+                                                                        class="text-danger">*</span></label>
+                                                                <input type="text" name="harga_beli"
                                                                     value="{{ $item->harga_beli }}"
                                                                     class="form-control input-rounded"
                                                                     placeholder="harga beli" required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Harga Jual (IDR):</label>
+                                                                <label class="form-label">Harga Jual (IDR): <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input type="text" name="harga_jual"
                                                                     value="{{ $item->harga_jual }}"
                                                                     class="form-control input-rounded"
                                                                     placeholder="harga jual" required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Price Unit:</label>
+                                                                <label class="form-label">Price Unit: <span
+                                                                        class="text-danger">*</span></label>
                                                                 <input type="text" name="price_unit"
                                                                     value="{{ $item->price_unit }}"
                                                                     class="form-control input-rounded"
                                                                     placeholder="price unit" required>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Status:</label>
+                                                                <label class="form-label">Deskripsi</label>
+                                                                <textarea name="desc" id="" cols="30" rows="10" class="form-control input-rounded">{{ $item->desc }}</textarea>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Status: <span
+                                                                        class="text-danger">*</span></label>
                                                                 <select name="status" id=""
                                                                     class="form-control input-rounded" name="status"
                                                                     required>
@@ -198,7 +279,9 @@
                                             </div>
                                         </div>
 
-                                        <a href="javascript:void(0);" class="ms-2 btn btn-xs px-2 light btn-danger">
+                                        <button type="button" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal{{ $item->id }}"
+                                            class="ms-2 btn btn-xs px-2 light btn-danger">
                                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M3 6H5H21" stroke="#fff" stroke-width="2"
@@ -208,9 +291,33 @@
                                                     stroke="#fff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round"></path>
                                             </svg>
-
-                                        </a>
-                                    </div>
+                                        </button>
+                                        <div class="modal fade" id="deleteModal{{ $item->id }}"
+                                            style="display: none;" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Hapus Produk</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                        </button>
+                                                    </div>
+                                                    <form
+                                                        action="{{ route('admin.produk.destroy', ['id' => $item->id]) }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="modal-body">
+                                                            Anda yakin menghapus item ini?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger light"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary">Ya</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </td>
                             </tr>
                         @endforeach

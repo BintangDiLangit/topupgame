@@ -6,7 +6,7 @@ use App\Models\HistoryTransaction;
 
 class HistoryTransHelper
 {
-    public static function insertToHistoryTrans($transactionIdRef, $dataEncoded)
+    public function insertToHistoryTrans($transactionIdRef, $dataEncoded)
     {
         HistoryTransaction::create([
             'transaction_id' => $transactionIdRef,

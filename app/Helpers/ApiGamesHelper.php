@@ -86,7 +86,8 @@ class ApiGamesHelper
                 'destination_apigames' => $data['destination'],
                 'product_code_apigames' => $data['product_code'],
             ])->save();
-            HistoryTransHelper::insertToHistoryTrans($transaksi->id, json_encode($data) . json_encode($transaksi));
+            $historyTrans = new HistoryTransHelper();
+            $historyTrans->insertToHistoryTrans($transaksi->id, json_encode($data) . json_encode($transaksi));
             \DB::commit();
             return true;
         } catch (\Throwable $th) {

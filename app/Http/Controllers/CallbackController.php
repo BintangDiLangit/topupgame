@@ -21,10 +21,11 @@ class CallbackController extends Controller
             Xendit::setApiKey(env('API_KEY_XENDIT'));
             $transaction = Transaction::where([
                 'transaction_id' => $request->get('external_id'),
-                'status_payment_apigames' => 'Pending'
+                'status_payment_vendor' => 'Pending'
             ])->first();
 
             if (isset($transaction)) {
+                $historyTrans = new HistoryTransHelper();
                 if ($request->get('status') == 'PAID' || $request->get('status') == 'SETTLED') {
                     $transaction->update([
                         'status' => 'PAID'
@@ -48,19 +49,19 @@ class CallbackController extends Controller
 
                             $desc = 'Melanjukan dana customer ke reseller VIP';
                             $payoutID = 'disb_payout_' . Str::random(10) . uniqid() . time();
-                            HistoryTransHelper::insertToHistoryTrans($transaction->id, json_encode($transaction));
+                            $historyTrans->insertToHistoryTrans($transaction->id, json_encode($transaction));
                             DB::commit();
                             return $transaction;
                         }
                     }
-                    HistoryTransHelper::insertToHistoryTrans($transaction->id, json_encode($transaction));
+                    $historyTrans->insertToHistoryTrans($transaction->id, json_encode($transaction));
                     DB::commit();
                     return $transaction;
                 } else {
                     $transaction->update([
                         'status' => 'EXPIRED'
                     ]);
-                    HistoryTransHelper::insertToHistoryTrans($transaction->id, json_encode($transaction));
+                    $historyTrans->insertToHistoryTrans($transaction->id, json_encode($transaction));
                     DB::commit();
                     return $transaction;
                 }
@@ -104,8 +105,6 @@ class CallbackController extends Controller
                 'data' => 'Data not Found'
             ])->setStatusCode(200);
         } catch (\Exception $e) {
-            var_dump($e);
-            die;
             return false;
         }
     }

@@ -8,8 +8,7 @@
                             <a href="/"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo"></a>
                         </div>
                         <div class="footer-text">
-                            <p class="desc">Lorem ipsum dolor sitamet consectur adipiscing Duis esollici tudin
-                                augue euismod. Nulla ullam dolor sitamet consectetur</p>
+                            <p class="desc">PT AIRA TECHNOLOGY INDONESIA - BIMY</p>
                             <p class="social-title">Active <span>With Us <i
                                         class="fas fa-angle-double-right"></i></span></p>
                             <div class="footer-social">
@@ -29,12 +28,7 @@
                     <div class="footer-widget widget_nav_menu">
                         <h4 class="fw-title">quick link</h4>
                         <ul class="list-wrap menu">
-                            <li><a href="#">Gaming</a></li>
-                            <li><a href="#">Product</a></li>
-                            <li><a href="#">All NFTs</a></li>
-                            <li><a href="#">Social Network</a></li>
-                            <li><a href="#">Domain Names</a></li>
-                            <li><a href="#">Collectibles</a></li>
+                            <li><a href="/mobile-legend">Mobile Legends</a></li>
                         </ul>
                     </div>
                 </div>
@@ -42,12 +36,8 @@
                     <div class="footer-widget widget_nav_menu">
                         <h4 class="fw-title">Supports</h4>
                         <ul class="list-wrap menu">
-                            <li><a href="#">Setting & Privacy</a></li>
-                            <li><a href="#">Help & Support</a></li>
-                            <li><a href="#">Live Auctions</a></li>
-                            <li><a href="#">Item Details</a></li>
-                            <li><a href="#">24/7 Supports</a></li>
-                            <li><a href="#">Our News</a></li>
+                            <li><a href="/tos/page/bimy">Term & Service</a></li>
+                            <li><a href="https://wa.me/6281252519417">Help & Support</a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,11 +52,11 @@
                         <p>Copyright © 2023 - All Rights Reserved By <span>BiMy</span></p>
                     </div>
                 </div>
-                <div class="col-md-5">
+                {{-- <div class="col-md-5">
                     <div class="copyright__card text-center text-md-end">
                         <img src="{{ asset('assets/img/others/payment_card.png') }}" alt="img">
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

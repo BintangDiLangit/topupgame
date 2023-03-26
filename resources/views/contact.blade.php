@@ -30,12 +30,12 @@
                     <div class="contact__content">
                         <h2 class="overlay-title"><span>contact us</span></h2>
                         <h2 class="title">CONTACT US AND FIND YOUR bimy</h2>
-                        <p>Axcepteur sint occaecat atat non proident, sunt culpa officia deserunt mollit anim id est labor
-                            umLor emdolor</p>
+                        {{-- <p>Axcepteur sint occaecat atat non proident, sunt culpa officia deserunt mollit anim id est labor
+                            umLor emdolor</p> --}}
                         <div class="footer-el-widget">
                             <h4 class="title">information</h4>
                             <ul class="list-wrap">
-                                <li><a href="tel:123">+6287881377842</a></li>
+                                <li><a href="https://wa.me/6281252519417">+62 8125-2519-417</a></li>
                                 <li><a href="mailto:team@konsulinaja.id">team@konsulinaja.id</a></li>
                                 <li>Malang, Indonesia</li>
                             </ul>
@@ -44,7 +44,8 @@
                 </div>
                 <div class="col-lg-6 col-md-10">
                     <div class="contact__form-wrap">
-                        <form id="contact-form" action="https://themedox.com/demo/mykd/assets/mail.php" method="POST">
+                        <form id="contact-form" action="/contact" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="input-grp">
