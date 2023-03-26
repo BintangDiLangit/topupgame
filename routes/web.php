@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AI\BlogController;
 use App\Http\Controllers\ApiGamesCallbackController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CallbackController;
@@ -93,4 +94,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     Route::get('/transaksi', [TransaksiController::class,'transaksi'])->name('transaksi.index');
     Route::get('/riwayat-transaksi', [TransaksiController::class,'riwayatTransaksis'])->name('riwayat.transaksi.index');
+
+    // OPENAI
+    Route::get('/generate-blog',[BlogController::class,'generateText']);
 });
