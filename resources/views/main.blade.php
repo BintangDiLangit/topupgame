@@ -52,14 +52,14 @@
                     <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-9">
                         <div class="nft-item__box">
                             <div class="nft-item__thumb">
-                                <a href="{{ '/'. $item->slug_master_kategori }}"><img src="{{ $item->image_master_kategori }}" alt="img"></a>
+                                <a href="{{ '/client/'. $item->slug_master_kategori }}"><img src="{{ $item->image_master_kategori }}" alt="img"></a>
                             </div>
                             <div class="nft-item__content">
-                                <h4 class="title"><a href="{{ '/'. $item->slug_master_kategori }}">{{ $item->nama_master_kategori }}</a></h4>
+                                <h4 class="title"><a href="{{ '/client/'. $item->slug_master_kategori }}">{{ $item->nama_master_kategori }}</a></h4>
                                 <div class="nft-item__bid mt-5">
                                     <div class="nft-item__price">
                                         <p> <span class="currency">Store</span></p>
-                                        <a href="{{ '/'. $item->slug_master_kategori }}" class="bid-btn">GAS! <i
+                                        <a href="{{ '/client/'. $item->slug_master_kategori }}" class="bid-btn">GAS! <i
                                                 class="fas fa-long-arrow-alt-right"></i></a>
                                     </div>
                                 </div>

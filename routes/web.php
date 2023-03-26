@@ -11,6 +11,7 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MasterKategoriController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -35,9 +36,9 @@ Route::get('/contact', [MainController::class, 'contact']);
 Route::post('send-message', [MainController::class, 'sendMessage'])->name('send.message');
 
 // Main Page
-Route::get('/{kategori}', [DetailClientController::class, 'kategori']);
-Route::get('/detail-game/{game_name}/{slug}', [DetailClientController::class, 'detailGame'])->name('game.detail');
-Route::get('/{kategori}/{produk}', [ProdukClientController::class, 'index'])->name('client.produk.index');
+Route::get('client/{kategori}', [DetailClientController::class, 'kategori']);
+Route::get('client/detail-game/{game_name}/{slug}', [DetailClientController::class, 'detailGame'])->name('game.detail');
+Route::get('client/{kategori}/{produk}', [ProdukClientController::class, 'index'])->name('client.produk.index');
 
 // Cek User
 Route::post('/cek-user', [CekUserController::class, 'cekUserML'])->name('cek.user');
@@ -58,8 +59,8 @@ Route::get('/tos/page/bimy', function (){
 })->name('tos');
 
 // Admin Page
-Route::get('/login', [AuthController::class, 'loginView'])->name('login');
-Route::post('/login', [AuthController::class, 'loginOl'])->name('loginol');
+Route::get('admin/login', [AuthController::class, 'loginView'])->name('login');
+Route::post('admin/login', [AuthController::class, 'loginOl'])->name('loginol');
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -89,4 +90,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::get('/deposit', [DepositController::class, 'depositView']);
     Route::post('/deposit', [DepositController::class, 'depositSaldo']);
+
+    Route::get('/transaksi', [TransaksiController::class,'transaksi'])->name('transaksi.index');
+    Route::get('/riwayat-transaksi', [TransaksiController::class,'riwayatTransaksis'])->name('riwayat.transaksi.index');
 });

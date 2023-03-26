@@ -10,9 +10,13 @@ class MainController extends Controller
 {
     public function index()
     {
-        $masterKategoris = new MasterKategoriHelper();
-        $masterKategoris = $masterKategoris->listMKClient();
-        return view('main', compact('masterKategoris'));
+        try {
+            $masterKategoris = new MasterKategoriHelper();
+            $masterKategoris = $masterKategoris->listMKClient();
+            return view('main', compact('masterKategoris'));
+        } catch (\Throwable $th) {
+            return redirect()->back();
+        }
     }
 
     public function about()
@@ -27,6 +31,6 @@ class MainController extends Controller
 
     public function sendMessage(Request $request)
     {
-        
+
     }
 }

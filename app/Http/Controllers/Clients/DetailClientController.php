@@ -11,10 +11,14 @@ class DetailClientController extends Controller
 {
     public function kategori($slug)
     {
-        $MKHelper = new MasterKategoriHelper();
-        $MKHelper = $MKHelper->getDetailMKClient($slug);
-        $KHelper = new KategoriHelper();
-        $KHelper = $KHelper->getKClientByIdMaster($MKHelper->id);
-        return view('client.kategori', compact('KHelper'));
+        try {
+            $MKHelper = new MasterKategoriHelper();
+            $MKHelper = $MKHelper->getDetailMKClient($slug);
+            $KHelper = new KategoriHelper();
+            $KHelper = $KHelper->getKClientByIdMaster($MKHelper->id);
+            return view('client.kategori', compact('KHelper'));
+        } catch (\Throwable $th) {
+            return redirect()->back();
+        }
     }
 }

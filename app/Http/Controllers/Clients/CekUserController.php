@@ -10,12 +10,16 @@ class CekUserController extends Controller
 {
     public function cekUserML(Request $request)
     {
-        $resellerHelper = new ResellerAPIHelper();
-        $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
-        if ($getNickName['result'] == true) {
-            return $getNickName['data'];
+        try {
+            $resellerHelper = new ResellerAPIHelper();
+            $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
+            if ($getNickName['result'] == true) {
+                return $getNickName['data'];
+            }
+            return false;
+        } catch (\Throwable $th) {
+            return redirect()->back();
         }
-        return false;
 
         // try {
         //     $apiGames = new ApiGamesHelper();

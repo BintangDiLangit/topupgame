@@ -11,14 +11,18 @@ class ProdukClientController extends Controller
 {
     public function index($mkSlug, $kSlug)
     {
-        $kategori = new KategoriHelper();
-        $kategori->getDetailKClientBySlug($kSlug);
-        $kategori = $kategori->getDetailKClientBySlug($kSlug);
+        try {
+            $kategori = new KategoriHelper();
+            $kategori->getDetailKClientBySlug($kSlug);
+            $kategori = $kategori->getDetailKClientBySlug($kSlug);
 
-        $produks = new ProdukHelper();
-        $produks = $produks->listPClientByKId($kategori->id);
-        
-        return view('client.produk',compact('produks'));
+            $produks = new ProdukHelper();
+            $produks = $produks->listPClientByKId($kategori->id);
+
+            return view('client.produk', compact('produks'));
+        } catch (\Throwable $th) {
+            return redirect()->back();
+        }
 
     }
 }

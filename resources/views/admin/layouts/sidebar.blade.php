@@ -54,8 +54,8 @@
                     <span class="nav-text">Transaksi</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="table-bootstrap-basic.html">Transaksi</a></li>
-                    <li><a href="table-datatable-basic.html">Riwayat</a></li>
+                    <li><a href="{{ route('admin.transaksi.index') }}">Transaksi</a></li>
+                    <li><a href="{{ route('admin.riwayat.transaksi.index') }}">Riwayat</a></li>
                     <li><a href="/admin/deposit">Deposit</a></li>
                 </ul>
             </li>

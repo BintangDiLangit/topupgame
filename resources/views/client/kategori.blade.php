@@ -43,7 +43,7 @@
                                 <div class="shop__item">
                                     <div class="shop__item-thumb">
                                         <a
-                                            href="{{ (!empty($item->produks->first()) ? $item->masterKategori->slug_master_kategori . '/' . $item->slug_kategori : '/error/page/503')}}"><img
+                                            href="{{ (!empty($item->produks->first()) ? '/client/' . $item->masterKategori->slug_master_kategori . '/' . $item->slug_kategori : '/error/page/503')}}"><img
                                                 src="{{ $item->image_kategori }}" alt="img"></a>
                                         <a href="#" class="wishlist-button"><i class="far fa-heart"></i></a>
                                     </div>
