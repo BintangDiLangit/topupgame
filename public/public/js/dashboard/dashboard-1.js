@@ -73,9 +73,6 @@
           },
         },
         };
-
-        var chart = new ApexCharts(document.querySelector("#marketChart"), options);
-        chart.render();
 	}
 	var currentChart = function(){
 		 var options = {
@@ -150,8 +147,6 @@
 			
 			
 			load:function(){
-					marketChart();
-					currentChart();
 					recentContact();
 					
 			},
