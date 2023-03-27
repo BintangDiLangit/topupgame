@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\AI\BlogController;
+use App\Http\Controllers\AI\BlogController as OpenAIBlog;
 use App\Http\Controllers\ApiGamesCallbackController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\KategoriBlogController;
+use App\Http\Controllers\Blog\KomentarController;
 use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\Clients\CekUserController;
 use App\Http\Controllers\Clients\DetailClientController;
@@ -95,6 +98,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/transaksi', [TransaksiController::class,'transaksi'])->name('transaksi.index');
     Route::get('/riwayat-transaksi', [TransaksiController::class,'riwayatTransaksis'])->name('riwayat.transaksi.index');
 
+
+    Route::resource('kategori-blog', KategoriBlogController::class);
+    Route::resource('blog', BlogController::class);
+    Route::resource('komentar', KomentarController::class);
+
+
     // OPENAI
-    Route::get('/generate-blog',[BlogController::class,'generateText']);
+    Route::get('/generate-blog',[OpenAIBlog::class,'generateText']);
 });
