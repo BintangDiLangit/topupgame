@@ -68,7 +68,7 @@
                             <input type="text" class="in-num bg-dark text-white" name="zone_user" id="zone_user"
                                 placeholder="zone id" required>
                         </div>
-                        <div class="offCanvas__newsletter">
+                        <div class="offCanvas__newsletter mb-4">
                             <p class="small-title">Diamonds <span class="text-danger">*</span></p>
                             <select name="game_code" id="game_code" class="text-white form-control bg-dark ml-2 mr-2"
                                 required>
@@ -79,6 +79,12 @@
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="offCanvas__newsletter mb-4">
+                            <h4 class="small-title">Akun Email  <span class="text-danger">*</span></h4>
+                            <input type="email" class="in-num bg-dark text-white" name="email" placeholder="email kamu"
+                                id="email" required>
+
                         </div>
                         <div class="offCanvas__newsletter" id="nicknameShow">
                             <h5 class="small-title"></h5>

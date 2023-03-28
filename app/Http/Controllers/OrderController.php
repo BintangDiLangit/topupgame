@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'game_code' => 'required|string',
-            'email' => 'nullable|string',
+            'email' => 'required|email',
             'total_amount' => 'required|string',
             'id_user' => 'required|string',
             'zone_user' => 'required|string',
@@ -47,7 +47,7 @@ class OrderController extends Controller
         }
 
         $amount = $hargaJual;
-       
+
         try {
 
             // $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
@@ -61,7 +61,7 @@ class OrderController extends Controller
             $externalId = 'mobile_legends_diamond' . uniqid() . time();
             $params = [
                 "external_id" => $externalId,
-                "payer_email" => 'bintang@b.com',
+                "payer_email" => $request->email,
                 'amount' => $amount,
                 'invoice_duration' => 1200,
                 'description' => 'Mobile Legends Top Up',
