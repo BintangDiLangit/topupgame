@@ -35,7 +35,6 @@ class CallbackController extends Controller
                     $balanceAdmin = $apiGamesHelper->profile();
 
                     if ($balanceAdmin['message'] == 'Sukses') {
-                        // if ($balanceAdmin['data']['saldo'] >= $transaction->amount) {
                         if ($balanceAdmin['message'] == 'Sukses') {
                             $apiGamesHelper->placeOrder(
                                 $transaction->transaction_id,
@@ -46,9 +45,6 @@ class CallbackController extends Controller
                             DB::commit();
                             return $transaction;
                         } else {
-
-                            $desc = 'Melanjukan dana customer ke reseller VIP';
-                            $payoutID = 'disb_payout_' . Str::random(10) . uniqid() . time();
                             $historyTrans->insertToHistoryTrans($transaction->id, json_encode($transaction));
                             DB::commit();
                             return $transaction;

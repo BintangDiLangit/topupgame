@@ -49,10 +49,23 @@ Route::post('/cek-user', [CekUserController::class, 'cekUserML'])->name('cek.use
 
 // Transaksi Page
 Route::post('/place-order/{game_name}/{slug}', [OrderController::class, 'placeOrder'])->name('place.order');
-Route::post('/cek-status-order', [OrderController::class, 'statusOrder']);
+
+// Route::post('/cek-status-order', [OrderController::class, 'statusOrder']);
 Route::post('/apigames/transaksi/callback', [ApiGamesCallbackController::class, 'transaksi']);
 Route::post('/in-callback', [CallbackController::class, 'inCallback']);
 Route::post('/out-callback', [CallbackController::class, 'outCallback']);
+
+Route::get('/checkout/success',function ()
+{
+    return view('payment-success');
+});
+
+Route::get('/checkout/failed',function ()
+{
+    return view('payment-failed');
+});
+
+
 
 Route::get('/error/page/503', function (){
     return view('errors.503');

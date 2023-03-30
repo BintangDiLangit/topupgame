@@ -17,4 +17,10 @@ class TransaksiHelper{
         $riwayatTransaksis = HistoryTransaction::all();
         return $riwayatTransaksis;
     }
+
+    public function getTransaksiById($transaksiId)
+    {
+        $transaksi = Transaction::where('transaction_id',$transaksiId)->first();
+        return $transaksi;
+    }
 }

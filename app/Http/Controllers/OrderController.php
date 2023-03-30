@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiGamesHelper;
 use App\Helpers\HistoryTransHelper;
 use App\Helpers\ProdukHelper;
+use App\Helpers\TransaksiHelper;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -49,13 +51,6 @@ class OrderController extends Controller
         $amount = $hargaJual;
 
         try {
-
-            // $getNickName = $resellerHelper->getNickName($request->zone_user, $request->id_user);
-            // sleep(5);
-            // if ($getNickName['result'] == false) {
-            //     return response()->json(['error' => 'account not found'], 400);
-            // }
-
             DB::beginTransaction();
             Xendit::setApiKey(env('API_KEY_XENDIT'));
             $externalId = 'mobile_legends_diamond' . uniqid() . time();
@@ -65,6 +60,8 @@ class OrderController extends Controller
                 'amount' => $amount,
                 'invoice_duration' => 1200,
                 'description' => 'Mobile Legends Top Up',
+                'success_redirect_url' => env('APP_URL') . '/checkout/success',
+                'failure_redirect_url' => env('APP_URL') . '/checkout/failed'
             ];
 
             $createTransaction = \Xendit\Invoice::create($params);
@@ -94,16 +91,18 @@ class OrderController extends Controller
         }
     }
 
-    public function statusOrder(Request $request)
-    {
-        $data = Http::asForm()->post(env('API_URL_RESELLER') . '/game-feature', [
-            'key' => env('API_KEY_RESELLER'),
-            'sign' => md5(env('API_ID_RESELLER') . env('API_KEY_RESELLER')),
-            'type' => 'status',
-            'trxid' => $request->transaksi_id, // id transaksi
-            // 'limit' => $request->data_id_tujuan, // integer
-        ]);
 
-        // dd(env('API_ID_RESELLER').env('API_KEY_RESELLER'));
+    public function checkoutPage($transactionId, $status)
+    {
+        try {
+            $transaksi = new TransaksiHelper();
+            $apiGamesHelper = new ApiGamesHelper();
+            sleep(3);
+            $refId = $transaksi->getTransaksiById($transactionId)->ref_id;
+            $data = $apiGamesHelper->checkStatusOrder($refId);
+            return view('payment-success');
+        } catch (\Throwable $th) {
+            return view('payment-failed');
+        }
     }
 }
