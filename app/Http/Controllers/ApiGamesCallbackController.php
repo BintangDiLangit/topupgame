@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\HistoryTransHelper;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -11,23 +12,26 @@ class ApiGamesCallbackController extends Controller
     {
         try {
             $transaction = Transaction::where([
-                'ref_id' => $request->get('ref_id'),
-                'status_payment_apigames' => 'Pending'
+                'trx_id' => $request->get('trx_id'),
+                'status_payment_vendor' => 'PENDING'
             ])->first();
             if (isset($transaction)) {
                 if ($request->get('status') == 'Sukses') {
                     \DB::beginTransaction();
                     $transaction->update([
-                        'status_payment_apigames' => 'Sukses',
-                        'message' => $request->get('message')
+                        'status_payment_vendor' => 'SUKSES',
+                        'message_vendor' => $request->get('message')
                     ]);
-
+                    $historyTrans = new HistoryTransHelper();
+                    $historyTrans->insertToHistoryTrans($transaction->id, json_encode($request->all()) . json_encode($transaction));
                     \DB::commit();
                     return $transaction;
                 } else {
                     $transaction->update([
-                        'status' => 'Gagal'
+                        'status_payment_vendor' => 'GAGAL'
                     ]);
+                    $historyTrans = new HistoryTransHelper();
+                    $historyTrans->insertToHistoryTrans($transaction->id, json_encode($request->all()) . json_encode($transaction));
                     \DB::commit();
                     return $transaction;
                 }

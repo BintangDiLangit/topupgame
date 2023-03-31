@@ -107,7 +107,7 @@
                 </div>
             @endif
             <div class="table-responsive">
-                <table class="table style-1" id="example">
+                <table class="table style-1" id="example2">
                     <thead>
                         <tr>
                             <th>#</th>

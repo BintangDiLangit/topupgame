@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-xl-6 col-lg-7">
                             <div class="breadcrumb__content">
-                                <h2 class="title">Saldomu sudah berhasil terkirim, Enjoyyy</h2>
+                                <h2 class="title">Mohon Maaf, Ada kegagalan pada sistem kami, segera kami perbaiki dan kami akan melanjutkan transaksi anda</h2>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-5 position-relative d-none d-lg-block">

@@ -48,7 +48,7 @@
                     <li><a href="{{ route('admin.produk.index') }}">Produk</a></li>
                 </ul>
             </li>
-            <li class="nav-label">Transactions</li>
+            <li class="nav-label">Transaksi</li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-network"></i>
                     <span class="nav-text">Transaksi</span>
@@ -57,6 +57,17 @@
                     <li><a href="{{ route('admin.transaksi.index') }}">Transaksi</a></li>
                     <li><a href="{{ route('admin.riwayat.transaksi.index') }}">Riwayat</a></li>
                     <li><a href="/admin/deposit">Deposit</a></li>
+                </ul>
+            </li>
+            <li class="nav-label">Blog</li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-049-copy"></i>
+                    <span class="nav-text">Blog</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.kategori-blog.index') }}">Kategori Blog</a></li>
+                    <li><a href="{{ route('admin.blog.index') }}">Blog</a></li>
+                    <li><a href="{{ route('admin.komentar.index') }}">Komentar</a></li>
                 </ul>
             </li>
         </ul>

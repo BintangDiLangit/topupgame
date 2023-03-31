@@ -1,6 +1,6 @@
 @extends('landing.master')
 @section('content')
-    <section class="breadcrumb-area breadcrumb__hide-img" data-background="assets/img/bg/breadcrumb_bg02.jpg">
+    <section class="breadcrumb-area breadcrumb__hide-img">
         <div class="container">
             <div class="breadcrumb__wrapper">
                 <div class="row">
@@ -39,7 +39,9 @@
                         <i class="fas fa-star"></i>
                         <span class="rating-count">( 3 Customer Review )</span>
                     </div>
-                    <h2 class="title">{{ $produks[0]->kategori->masterKategori->nama_master_kategori . ' (' . $produks[0]->kategori->nama_kategori . ')' }}</h2>
+                    <h2 class="title">
+                        {{ $produks[0]->kategori->masterKategori->nama_master_kategori . ' (' . $produks[0]->kategori->nama_kategori . ')' }}
+                    </h2>
                     <div class="shop__details-price">
                         <span class="amount">
                             {{ 'Start From Rp ' . number_format($produks[0]->harga_jual, 0, ',', '.') }}<span
@@ -53,24 +55,43 @@
                         <a href="/tos/page/bimy">Term & Services</a>
                     </div>
                     <div id="error-message" class=""></div>
-                    <form class="offCanvas__newsletter-form" id="payment_form"
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form class="offCanvas__newsletter" id="payment_form"
                         action="{{ route('place.order', ['game_name' => 'mobile-legend', 'slug' => 'diamonds']) }}"
                         method="post">
                         @csrf
                         <div class="offCanvas__newsletter mb-4">
-                            <h4 class="small-title">Account ID <span class="text-danger">*</span></h4>
+                            <h4 class="small-title">Account ID <span
+                                    class="text-danger @error('id_user') is-invalid @enderror">*</span></h4>
                             <input type="text" class="in-num bg-dark text-white" name="id_user" placeholder="account id"
-                                id="id_user" required>
+                                id="id_user" required value="{{ old('id_user') }}">
+                            @error('id_user')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
 
                         </div>
                         <div class="offCanvas__newsletter mb-4">
                             <h4 class="small-title">Zone ID <span class="text-danger">*</span></h4>
-                            <input type="text" class="in-num bg-dark text-white" name="zone_user" id="zone_user"
-                                placeholder="zone id" required>
+                            <input type="text" class="in-num bg-dark text-white @error('id_user') is-invalid @enderror"
+                                name="zone_user" id="zone_user" placeholder="zone id" required
+                                value="{{ old('zone_user') }}">
+                            @error('zone_user')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <div class="offCanvas__newsletter">
+                        <div class="offCanvas__newsletter mb-4">
                             <p class="small-title">Diamonds <span class="text-danger">*</span></p>
-                            <select name="game_code" id="game_code" class="text-white form-control bg-dark ml-2 mr-2"
+                            <select name="game_code" id="game_code"
+                                class="text-white form-control bg-dark ml-2 mr-2 
+                                @error('game_code') is-invalid @enderror"
                                 required>
                                 <option value=""> - Choose Package - </option>
                                 @foreach ($produks as $item)
@@ -78,10 +99,22 @@
                                         <li>{{ $item['jumlah'] . ' Diamonds ' }}</li>
                                     </option>
                                 @endforeach
+                                @error('game_code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </select>
                         </div>
                         <div class="offCanvas__newsletter" id="nicknameShow">
                             <h5 class="small-title"></h5>
+                        </div>
+                        <div class="offCanvas__newsletter mb-4">
+                            <h4 class="small-title">Akun Email</h4>
+                            <input type="email" class="in-num bg-dark text-white @error('game_code') is-invalid @enderror"
+                                name="email" placeholder="email kamu" id="email">
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <div class="offCanvas__newsletter">
                             <h4 class="small-title">Total</h4>
@@ -91,8 +124,8 @@
                         </div>
                         <div class="shop__details-qty">
                             <div class="cart-plus-minus d-flex flex-wrap align-items-center">
-                                <button class="shop__details-cart-btn" onclick="submitForm()" id="submit-btn"
-                                    type="button">pay</button>
+                                <button class="shop__details-cart-btn comment-form" onclick="submitForm()" id="submit-btn"
+                                    type="submit">pay</button>
                             </div>
                         </div>
                     </form>
@@ -122,6 +155,7 @@
                             <div class="tab-pane animation-none fade show active" id="description" role="tabpanel"
                                 aria-labelledby="description-tab">
                                 <p>{{ $produks[0]->kategori->desc }}</p>
+                                <p>Butuh bantuan? langsung hubungi kami <a href="https://wa.me/6281252519417">disini</a> yaa</p>
                             </div>
                             <div class="tab-pane animation-none fade" id="info" role="tabpanel"
                                 aria-labelledby="info-tab">
@@ -222,11 +256,8 @@
                                     $('input[name="total_amount"]').val(rupiah(total));
                                 }
                             },
-                            error: function(jqXHR, textStatus, errorThrown) {
-                                // Handle error response
-                            },
+                            error: function(jqXHR, textStatus, errorThrown) {},
                             complete: function() {
-                                // Hide spinner and re-enable button
                                 $("#submit-btn").html("Pay").removeAttr("disabled");
                             }
                         });
@@ -255,39 +286,17 @@
             var form = document.getElementById("payment_form");
             var formData = new FormData(form);
 
-            $("#submit-btn").html(
-                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
-            ).attr("disabled", true);
+            if ($('#id_user').val() && $('#zone_user').val() && $('#game_code').val()) {
+                $("#submit-btn").html(
+                    '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
+                ).attr("disabled", true);
+                $("#payment_form").submit(); // Menambahkan ini untuk mengirimkan formulir
+            } else if ($('#game_code').val()) {
+                $("#submit-btn").html(
+                    'Pay'
+                ).attr("disabled", false);
+            }
 
-            fetch(form.action, {
-                    method: "POST",
-                    body: formData
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        if (response.status === 400) {
-                            const errorMessage = document.getElementById("error-message");
-                            errorMessage.innerText = "Pastikan data terisi dengan lengkap";
-                            errorMessage.classList.add('text-danger', 'text-small', 'mb-3');
-                        }
-                        if (response.status === 208) {
-                            const errorMessage = document.getElementById("error-message");
-                            errorMessage.innerText = "Pastikan data terisi dengan lengkap";
-                            errorMessage.classList.add('text-warning', 'text-small', 'mb-3');
-                            throw new Error("Warning: " + response.statusText);
-                        }
-                    }
-                    return response.text();
-                })
-                .then(text => {
-                    window.location.replace(text);
-                })
-                .catch(error => {
-                    // console.log(error);
-                })
-                .finally(() => {
-                    $("#submit-btn").html("Pay").removeAttr("disabled");
-                });
         }
     </script>
 @endpush

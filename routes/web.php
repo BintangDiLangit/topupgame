@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AI\BlogController as OpenAIBlog;
 use App\Http\Controllers\ApiGamesCallbackController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\Blog\KategoriBlogController;
+use App\Http\Controllers\Blog\KomentarController;
 use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\Clients\CekUserController;
 use App\Http\Controllers\Clients\DetailClientController;
@@ -45,10 +49,23 @@ Route::post('/cek-user', [CekUserController::class, 'cekUserML'])->name('cek.use
 
 // Transaksi Page
 Route::post('/place-order/{game_name}/{slug}', [OrderController::class, 'placeOrder'])->name('place.order');
-Route::post('/cek-status-order', [OrderController::class, 'statusOrder']);
+
+// Route::post('/cek-status-order', [OrderController::class, 'statusOrder']);
 Route::post('/apigames/transaksi/callback', [ApiGamesCallbackController::class, 'transaksi']);
 Route::post('/in-callback', [CallbackController::class, 'inCallback']);
 Route::post('/out-callback', [CallbackController::class, 'outCallback']);
+
+Route::get('/checkout/success',function ()
+{
+    return view('payment-success');
+});
+
+Route::get('/checkout/failed',function ()
+{
+    return view('payment-failed');
+});
+
+
 
 Route::get('/error/page/503', function (){
     return view('errors.503');
@@ -93,4 +110,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     Route::get('/transaksi', [TransaksiController::class,'transaksi'])->name('transaksi.index');
     Route::get('/riwayat-transaksi', [TransaksiController::class,'riwayatTransaksis'])->name('riwayat.transaksi.index');
+
+
+    Route::resource('kategori-blog', KategoriBlogController::class);
+    Route::resource('blog', BlogController::class);
+    Route::resource('komentar', KomentarController::class);
+
+
+    // OPENAI
+    Route::get('/generate-blog',[OpenAIBlog::class,'generateText']);
 });
