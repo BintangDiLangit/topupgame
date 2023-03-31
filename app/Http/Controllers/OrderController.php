@@ -20,14 +20,14 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'game_code' => 'required|string',
-            'email' => 'required|email',
+            'email' => 'nullable|email',
             'total_amount' => 'required|string',
             'id_user' => 'required|string',
             'zone_user' => 'required|string',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $productHelper = new ProdukHelper();
@@ -45,10 +45,15 @@ class OrderController extends Controller
             $hargaJual = $value['harga_jual'];
             $produkId = $value['id'];
         } else {
-            return response()->json(['error' => $validator->errors()], 400);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $amount = $hargaJual;
+
+        $email = $request->email;
+        if(empty($email)){
+            $email = 'team@bimy-store.com';
+        }
 
         try {
             DB::beginTransaction();
@@ -56,7 +61,7 @@ class OrderController extends Controller
             $externalId = 'mobile_legends_diamond' . uniqid() . time();
             $params = [
                 "external_id" => $externalId,
-                "payer_email" => $request->email,
+                "payer_email" => $email,
                 'amount' => $amount,
                 'invoice_duration' => 1200,
                 'description' => 'Mobile Legends Top Up',
@@ -69,7 +74,7 @@ class OrderController extends Controller
             $insertTransToDb = Transaction::create([
                 'transaction_id' => $externalId,
                 'payment_channel' => 'Payment Link',
-                'email' => $request->email,
+                'email' => $email,
                 'produk_id'=> $produkId,
                 'amount' => $amount,
                 'id_user' => $request->id_user,
@@ -84,10 +89,10 @@ class OrderController extends Controller
 
             $redirectUrl = $createTransaction['invoice_url'];
             DB::commit();
-            return $redirectUrl;
+            return redirect()->to($redirectUrl);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => $e->getMessage()], 500);
+            return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
 
