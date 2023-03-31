@@ -155,6 +155,7 @@
                             <div class="tab-pane animation-none fade show active" id="description" role="tabpanel"
                                 aria-labelledby="description-tab">
                                 <p>{{ $produks[0]->kategori->desc }}</p>
+                                <p>Butuh bantuan? langsung hubungi kami <a href="https://wa.me/6281252519417">disini</a> yaa</p>
                             </div>
                             <div class="tab-pane animation-none fade" id="info" role="tabpanel"
                                 aria-labelledby="info-tab">
