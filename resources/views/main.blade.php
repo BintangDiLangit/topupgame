@@ -467,7 +467,7 @@
     <!-- area-background-end -->
 
     <!-- team-area -->
-    <section class="team__area team-bg section-pt-130 section-pb-100" data-background="assets/img/bg/team_bg.jpg">
+    {{-- <section class="team__area team-bg section-pt-130 section-pb-100" data-background="assets/img/bg/team_bg.jpg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-7 col-md-10">
@@ -513,7 +513,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- team-area-end -->
 
     <!-- video-area -->

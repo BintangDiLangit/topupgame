@@ -16,12 +16,14 @@ class UserSeeder extends Seeder
             'name' => 'Bintang Miftaqul Huda',
             'email' => 'bintangmfhd@gmail.com',
             'password' => bcrypt('hfe8we8fujewfGUGU5^'),
+            'role_id' => 1,
             'email_verified_at' => now(),
         ]);
         \DB::table('users')->insert([
             'name' => 'Helmy Dianty Putri',
             'email' => 'helmy48@gmail.com',
             'password' => bcrypt('password^'),
+            'role_id' => 2,
             'email_verified_at' => now(),
         ]);
     }
