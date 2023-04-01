@@ -70,6 +70,18 @@
                     <li><a href="{{ route('admin.komentar.index') }}">Komentar</a></li>
                 </ul>
             </li>
+            <li class="nav-label">Account</li>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-049-copy"></i>
+                    <span class="nav-text">Account</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.roles.index') }}">Roles</a></li>
+                </ul>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.users.index') }}">Users</a></li>
+                </ul>
+            </li>
         </ul>
         <div class="copyright">
             <p><strong>Admin Dashboard</strong> © 2023 All Rights Reserved</p>

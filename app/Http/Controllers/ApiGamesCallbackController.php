@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HistoryTransHelper;
 use App\Models\Transaction;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class ApiGamesCallbackController extends Controller
@@ -11,6 +12,7 @@ class ApiGamesCallbackController extends Controller
     public function transaksi(Request $request)
     {
         try {
+
             $transaction = Transaction::where([
                 'trx_id' => $request->get('trx_id'),
                 'status_payment_vendor' => 'PENDING'

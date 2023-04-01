@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Users\RoleController;
+use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\AI\BlogController as OpenAIBlog;
 use App\Http\Controllers\ApiGamesCallbackController;
 use App\Http\Controllers\AuthController;
@@ -116,7 +118,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('blog', BlogController::class);
     Route::resource('komentar', KomentarController::class);
 
-
+    // users
+    Route::resource('users', UserController::class);
+    // roles
+    Route::resource('roles', RoleController::class);
+    
     // OPENAI
     Route::get('/generate-blog',[OpenAIBlog::class,'generateText']);
 });

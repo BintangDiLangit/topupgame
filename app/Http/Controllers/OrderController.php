@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ApiGamesHelper;
 use App\Helpers\HistoryTransHelper;
 use App\Helpers\ProdukHelper;
+use App\Helpers\ResellerAPIHelper;
 use App\Helpers\TransaksiHelper;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -29,6 +30,10 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        $resellerApiHelper = new ResellerAPIHelper();
+        $resellerApiHelper = $resellerApiHelper->cekKoneksiVendor('smileone');
+        // dd($resellerApiHelper);
 
         $productHelper = new ProdukHelper();
         $secretXendit = env('API_KEY_XENDIT');
