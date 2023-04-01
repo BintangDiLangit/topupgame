@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('hfe8we8fujewfGUGU5^'),
             'role_id' => 1,
             'email_verified_at' => now(),
+            'role_id' => 1,
         ]);
         \DB::table('users')->insert([
             'name' => 'Helmy Dianty Putri',
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('password^'),
             'role_id' => 2,
             'email_verified_at' => now(),
+            'role_id' => 2,
         ]);
     }
 }

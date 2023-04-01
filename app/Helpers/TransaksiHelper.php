@@ -8,13 +8,13 @@ use App\Models\Transaction;
 class TransaksiHelper{
     public function getDataTransaksi()
     {
-        $transaksis = Transaction::all();
+        $transaksis = Transaction::orderBy('created_at','desc')->get();
         return $transaksis;
     }
 
     public function getDataRiwayatTransaksi()
     {
-        $riwayatTransaksis = HistoryTransaction::all();
+        $riwayatTransaksis = HistoryTransaction::orderBy('created_at','desc')->get();
         return $riwayatTransaksis;
     }
 

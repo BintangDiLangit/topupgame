@@ -24,6 +24,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Created At</th>
                             <th>Transaksi ID</th>
                             <th>Payment Channel</th>
                             <th>Status Payment</th>
@@ -40,6 +41,9 @@
                             <tr>
                                 <td>
                                     <h6>{{ $loop->iteration }}</h6>
+                                </td>
+                                <td>
+                                    {{ $item->created_at }}
                                 </td>
                                 <td>
                                     {{ $item->transaction_id }}

@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($riwayatTransaksis as $item)
+                        @foreach ($blogKategoris as $item)
                             <tr>
                                 <td>
                                     <h6>{{ $loop->iteration }}</h6>
