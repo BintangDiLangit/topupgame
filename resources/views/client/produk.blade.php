@@ -139,7 +139,7 @@
                         <div class="input-grp mb-4">
                             <h4 class="small-title">Akun Email</h4>
                             <input type="email"
-                                class="in-num bg-dark text-white @error('game_code') is-invalid @enderror" name="email"
+                                class="in-num bg-dark text-white @error('email') is-invalid @enderror" name="email"
                                 placeholder="email kamu" id="email" />
                             <!-- <div class="valid-feedback">
                             Looks good!
@@ -173,66 +173,8 @@
                                                 action="{{ route('place.order', ['game_name' => 'mobile-legend', 'slug' => 'diamonds']) }}"
                                                 method="post">
                                                 @csrf
-                                                <div class="modal-body">
-                                                    <div class="px-2">
-                                                        <ul class="list-unstyled">
-                                                            <li class="" id="nicknameShow">Hello John Doe</li>
-                                                            <!-- <div class="offCanvas__newsletter" id="nicknameShow">
-                                                            <h5 class="small-title"></h5>
-                                                        </div> -->
-                                                            <li class="mt-1">
-                                                                April 17 2021
-                                                            </li>
-                                                        </ul>
-                                                        <div class="row">
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Account ID</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    2133431
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Zone ID</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    2033
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Email</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    thoriq@gmail.com
-                                                                </p>
-                                                            </div>
-                                                            <hr style="border: 2px solid white;" />
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Diamonds</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    86
-                                                                </p>
-                                                            </div>
-                                                            <hr style="border: 2px solid white;" />
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-12">
-                                                                <p class="small-title float-start">
-                                                                    <b>TOTAL : </b>
-                                                                </p>
-                                                                <p class="small-title float-end">
-                                                                    Rp. 20.000
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="modal-body" id="modalInvoice">
+                                                    
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn shop__details-cart-btn">
@@ -392,16 +334,17 @@
 @endsection @push('script')
 <script>
     $(document).ready(function () {
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
 
         $("#checkout").click(function () {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
             var zone_user = $("input[name=zone_user]").val();
             var id_user = $("input[name=id_user]").val();
-            var game_code = $("#game_code").val()
+            var game_code = $("#game_code").val();
+            var email = $("#email").val();
 
             $("#err-zone_user").attr("class", "invalid-feedback text-danger");
             $("#err-id_user").attr("class", "invalid-feedback text-danger");
@@ -444,6 +387,8 @@
                     data: {
                         zone_user: zone_user,
                         id_user: id_user,
+                        email: email,
+                        game_code: game_code,
                     },
                     success: function (data) {
                         if (
@@ -458,12 +403,89 @@
                                 $("#game_code option:first").val()
                             );
                         } else {
-                            h5Element.removeClass("text-danger");
-                            h5Element.text("Account Found : " + data);
-                            $("#nicknameShow").addClass("mb-3 mt-3");
-                            $("#nicknameShow").prepend(
-                                '<p class="text-warning mb-2">Akun telah di set, jika ingin mengubah account id atau zone id silahkan refresh page ini</p>'
-                            );
+                            // console.log(data);
+                            const timeElapsed = Date.now();
+                            const today = new Date(timeElapsed);
+                            const options = { 
+                                day: '2-digit', 
+                                month: 'short', 
+                                year: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                second: 'numeric',
+                                hour12: false,
+                                timeZone: 'Asia/Jakarta'
+                            };
+
+                            const formattedDate = today.toLocaleString('id-ID', options)
+                                .replace(/\s/g, ', ')
+                                .replace(/\//g, '-');
+
+                            let harga_jual = data["harga"];
+                            const harga = (harga_jual) => {
+                                return new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(harga_jual);
+                            };
+                            if ($('#modalPopup')) {
+                                $('#modalPopup').remove();
+                            }
+                            const dataModal = `<div class="px-2" id="modalPopup">
+                                                        <ul class="list-unstyled">
+                                                            <li class="" id="nicknameShow">Halo, ${data["nickname"]}</li>
+                                                            <li class="mt-1">${formattedDate}</li>
+                                                        </ul>
+                                                        <div class="row">
+                                                            <div class="col-xl-12">
+                                                                <p class="float-start">
+                                                                    <b>Account ID</b>
+                                                                </p>
+                                                                <p class="float-end">
+                                                                    ${data["user_id"]}
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-xl-12">
+                                                                <p class="float-start">
+                                                                    <b>Zone ID</b>
+                                                                </p>
+                                                                <p class="float-end">
+                                                                    ${data["zone_id"]}
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-xl-12">
+                                                                <p class="float-start">
+                                                                    <b>Email</b>
+                                                                </p>
+                                                                <p class="float-end">
+                                                                    ${(data["email"] == "" || data["email"]==null) ? "-" : data["email"]}
+                                                                </p>
+                                                            </div>
+                                                            <hr style="border: 2px solid white;" />
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xl-12">
+                                                                <p class="float-start">
+                                                                    <b>Diamonds</b>
+                                                                </p>
+                                                                <p class="float-end">
+                                                                    ${data["jumlah"]}
+                                                                </p>
+                                                            </div>
+                                                            <hr style="border: 2px solid white;" />
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xl-12">
+                                                                <p class="small-title float-start">
+                                                                    <b>TOTAL : </b>
+                                                                </p>
+                                                                <p class="small-title float-end" style="color:#45f882">
+                                                                    ${harga(harga_jual)}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>`;
+                            $('#modalInvoice').append(dataModal);
 
                         }
                     },

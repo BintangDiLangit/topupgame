@@ -15,9 +15,7 @@ class CallbackController extends Controller
 {
     public function inCallback(Request $request)
     {
-
         try {
-
             Xendit::setApiKey(env('API_KEY_XENDIT'));
             $transaction = Transaction::where([
                 'transaction_id' => $request->get('external_id'),
@@ -36,14 +34,16 @@ class CallbackController extends Controller
 
                     if ($balanceAdmin['message'] == 'Sukses') {
                         if ($balanceAdmin['message'] == 'Sukses') {
-                            // $apiGamesHelper->placeOrder(
-                            //     $transaction->transaction_id,
-                            //     $transaction->service,
-                            //     $transaction->id_user,
-                            //     $transaction->zone_user
-                            // );
-                            DB::commit();
-                            return $transaction;
+                            if (env('APP_URL')=='https://bimy-store.com') {
+                                $apiGamesHelper->placeOrder(
+                                    $transaction->transaction_id,
+                                    $transaction->service,
+                                    $transaction->id_user,
+                                    $transaction->zone_user
+                                );
+                                DB::commit();
+                                return $transaction;
+                            }
                         } else {
                             $historyTrans->insertToHistoryTrans($transaction->id, json_encode($transaction));
                             DB::commit();

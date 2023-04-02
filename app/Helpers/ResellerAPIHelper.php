@@ -91,7 +91,6 @@ class ResellerAPIHelper
             'target' => $user_id,
             'additional_target' => $zone_id
         ]);
-        dd($data->body());
         $data = $data->json();
         return $data;
     }
