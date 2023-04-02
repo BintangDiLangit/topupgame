@@ -47,7 +47,6 @@ class ApiGamesHelper
                 . $amount . '&secret=' . env('API_GAMES_SECRET_KEY');
             $data = Http::get($url);
             $data = $data->json();
-            dd($data);
             if ($data['rc'] == 200) {
                 \DB::commit();
                 return $data;

@@ -22,7 +22,6 @@ class ResellerAPIHelper
 
             $dataMLB = $dataMLB->json();
             if ($dataMLB['result'] == false) {
-                dd($dataMLB);
             }
             $dataMLB = $dataMLB['data'];
             $dataFilter = [];
@@ -134,12 +133,10 @@ class ResellerAPIHelper
     
     public function cekKoneksiVendor($engine)
     {    
-        // dd(env('API_GAMES_URL') . '/merchant/' . env('API_GAMES_MERCHANT_ID') . '/cek-koneksi?engine=smileone&signature='.md5(env('API_GAMES_MERCHANT_ID') . env('API_GAMES_SECRET_KEY')));
         $data = Http::asForm()->get(env('API_GAMES_URL') . '/merchant/' . env('API_GAMES_MERCHANT_ID') . '/cek-koneksi', [
             'engine' => $engine,
             'signature' => md5(env('API_GAMES_MERCHANT_ID') . env('API_GAMES_SECRET_KEY')),
         ]);
-        // dd($data->body());
         $data = $data->json();
         return $data;
     }

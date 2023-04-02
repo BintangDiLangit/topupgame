@@ -33,7 +33,6 @@ class OrderController extends Controller
 
         $resellerApiHelper = new ResellerAPIHelper();
         $resellerApiHelper = $resellerApiHelper->cekKoneksiVendor('smileone');
-        // dd($resellerApiHelper);
 
         $productHelper = new ProdukHelper();
         $secretXendit = env('API_KEY_XENDIT');
