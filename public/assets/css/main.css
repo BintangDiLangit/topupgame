@@ -9403,6 +9403,14 @@ blockquote p {
     color: var(--tg-common-color-white);
     padding: 15px 25px;
 }
+.contact__form-wrap .input-grp select {
+    display: block;
+    width: 100%;
+    border: 1px solid #262f39;
+    background: transparent;
+    color: var(--tg-common-color-white);
+    padding: 15px 25px;
+}
 .contact__form-wrap .input-grp textarea {
     height: 148px;
     max-height: 148px;
