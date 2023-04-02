@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/plugins.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
+
 <!-- Page-Revealer -->
 <script src="{{ asset('assets/js/tg-page-head.js') }}"></script>
 

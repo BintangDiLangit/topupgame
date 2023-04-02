@@ -36,12 +36,12 @@ class CallbackController extends Controller
 
                     if ($balanceAdmin['message'] == 'Sukses') {
                         if ($balanceAdmin['message'] == 'Sukses') {
-                            $apiGamesHelper->placeOrder(
-                                $transaction->transaction_id,
-                                $transaction->service,
-                                $transaction->id_user,
-                                $transaction->zone_user
-                            );
+                            // $apiGamesHelper->placeOrder(
+                            //     $transaction->transaction_id,
+                            //     $transaction->service,
+                            //     $transaction->id_user,
+                            //     $transaction->zone_user
+                            // );
                             DB::commit();
                             return $transaction;
                         } else {
@@ -66,8 +66,6 @@ class CallbackController extends Controller
                     'data' => 'Data not Found'
                 ])->setStatusCode(200);
             }
-
-
         } catch (\Exception $e) {
             return $e->getMessage();
         }

@@ -82,6 +82,7 @@ class ResellerAPIHelper
 
     public function getNickName($zone_id, $user_id)
     {
+
         $data = Http::asForm()->post(env('API_URL_RESELLER') . '/game-feature', [
             'key' => env('API_KEY_RESELLER'),
             'sign' => md5(env('API_ID_RESELLER') . env('API_KEY_RESELLER')),
@@ -90,6 +91,7 @@ class ResellerAPIHelper
             'target' => $user_id,
             'additional_target' => $zone_id
         ]);
+        dd($data->body());
         $data = $data->json();
         return $data;
     }
@@ -130,5 +132,4 @@ class ResellerAPIHelper
         ]);
         return $data;
     }
-
 }

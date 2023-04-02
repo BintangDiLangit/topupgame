@@ -16,7 +16,7 @@ class CekUserController extends Controller
             if ($getNickName['result'] == true) {
                 return $getNickName['data'];
             }
-            return false;
+            return true;
         } catch (\Throwable $th) {
             return redirect()->back();
         }
