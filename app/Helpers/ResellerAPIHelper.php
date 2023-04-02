@@ -22,7 +22,6 @@ class ResellerAPIHelper
 
             $dataMLB = $dataMLB->json();
             if ($dataMLB['result'] == false) {
-                dd($dataMLB);
             }
             $dataMLB = $dataMLB['data'];
             $dataFilter = [];
@@ -82,6 +81,7 @@ class ResellerAPIHelper
 
     public function getNickName($zone_id, $user_id)
     {
+
         $data = Http::asForm()->post(env('API_URL_RESELLER') . '/game-feature', [
             'key' => env('API_KEY_RESELLER'),
             'sign' => md5(env('API_ID_RESELLER') . env('API_KEY_RESELLER')),
@@ -130,5 +130,14 @@ class ResellerAPIHelper
         ]);
         return $data;
     }
-
+    
+    public function cekKoneksiVendor($engine)
+    {    
+        $data = Http::asForm()->get(env('API_GAMES_URL') . '/merchant/' . env('API_GAMES_MERCHANT_ID') . '/cek-koneksi', [
+            'engine' => $engine,
+            'signature' => md5(env('API_GAMES_MERCHANT_ID') . env('API_GAMES_SECRET_KEY')),
+        ]);
+        $data = $data->json();
+        return $data;
+    }
 }

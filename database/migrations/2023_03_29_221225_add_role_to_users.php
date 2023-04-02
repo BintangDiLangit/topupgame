@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('role_id');
+            $table->text('image_profile')->nullable();
+            $table->text('status')->default(1);
         });
     }
 
@@ -23,6 +25,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role_id');
+            $table->dropColumn('image_profile');
+            $table->dropColumn('status');
         });
     }
 };
