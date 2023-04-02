@@ -14,53 +14,26 @@
                             /></a>
                         </div>
                         <div class="footer-text">
-                            <p class="desc">
-                                PT AIRA TECHNOLOGY INDONESIA - BIMY
-                            </p>
-                            <p class="social-title">
-                                Active
-                                <span
-                                    >With Us
-                                    <i class="fas fa-angle-double-right"></i
-                                ></span>
-                            </p>
-                            <div class="footer-social">
-                                <a href="#"
-                                    ><img
-                                        src="{{
-                                            asset(
-                                                'assets/img/icons/social_icon01.png'
-                                            )
-                                        }}"
-                                        alt="iocn"
-                                /></a>
-                                <a href="#"
-                                    ><img
-                                        src="{{
-                                            asset(
-                                                'assets/img/icons/social_icon02.png'
-                                            )
-                                        }}"
-                                        alt="iocn"
-                                /></a>
-                                <a href="#"
-                                    ><img
-                                        src="{{
-                                            asset(
-                                                'assets/img/icons/social_icon03.png'
-                                            )
-                                        }}"
-                                        alt="iocn"
-                                /></a>
-                                <a href="#"
-                                    ><img
-                                        src="{{
-                                            asset(
-                                                'assets/img/icons/social_icon04.png'
-                                            )
-                                        }}"
-                                        alt="iocn"
-                                /></a>
+                            <p class="desc">PT AIRA TECHNOLOGY INDONESIA - BIMY</p>
+                            <ul class="list-wrap menu">
+                                <li>
+                                    <span><i class="fas fa-angle-double-right"></i></span>
+                                    <span class="text-secondary">Jl. Polowijen 2, No 312, Blimbing, Kota Malang, Jawa Timur</span>
+                                </li>
+                                <li>
+                                    <span><i class="fas fa-angle-double-right"></i></span>
+                                    <span class="text-secondary">Telp. +62 8788 1377 842 | +62 8125 2519 417</span>
+                                </li>
+                            </ul>
+                            <div class="footer-social mt-4">
+                                <a href="#"><img src="{{ asset('assets/img/icons/social_icon01.png') }}"
+                                        alt="iocn"></a>
+                                <a href="#"><img src="{{ asset('assets/img/icons/social_icon02.png') }}"
+                                        alt="iocn"></a>
+                                <a href="#"><img src="{{ asset('assets/img/icons/social_icon03.png') }}"
+                                        alt="iocn"></a>
+                                <a href="#"><img src="{{ asset('assets/img/icons/social_icon04.png') }}"
+                                        alt="iocn"></a>
                             </div>
                         </div>
                     </div>

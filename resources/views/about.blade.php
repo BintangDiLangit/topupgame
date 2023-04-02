@@ -178,8 +178,7 @@
     <!-- services-area-end -->
 
     <!-- team-area -->
-    <section class="team__area team-bg section-pt-130 section-pb-100"
-        data-background="{{ asset('assets/img/bg/team_bg.jpg') }}">
+    <section class="team__area team-bg section-pt-130 section-pb-100" data-background="assets/img/bg/team_bg.jpg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-7 col-md-10">
@@ -193,48 +192,33 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
                     <div class="team__item">
                         <div class="team__thumb">
-                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team01.png') }}"
-                                    alt="img"></a>
+                            <a href="#"><img src="assets/img/team/team01.png" alt="img"></a>
                         </div>
                         <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">killer master</a></h4>
-                            <span class="designation">Blockchain Expert</span>
+                            <h4 class="name"><a href="#">M</a></h4>
+                            <span class="designation">Founder & Marketing</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
                     <div class="team__item">
                         <div class="team__thumb">
-                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team02.png') }}"
-                                    alt="img"></a>
+                            <a href="#"><img src="assets/img/team/team02.png" alt="img"></a>
                         </div>
                         <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">tanu mark</a></h4>
-                            <span class="designation">Developer</span>
+                            <h4 class="name"><a href="#">B</a></h4>
+                            <span class="designation">CEO & Developer </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
                     <div class="team__item">
                         <div class="team__thumb">
-                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team03.png') }}"
-                                    alt="img"></a>
+                            <a href="#"><img src="assets/img/team/team03.png" alt="img"></a>
                         </div>
                         <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">Thompson Scot</a></h4>
-                            <span class="designation">Art Director</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
-                    <div class="team__item">
-                        <div class="team__thumb">
-                            <a href="team-details.html"><img src="{{ asset('assets/img/team/team04.png') }}"
-                                    alt="img"></a>
-                        </div>
-                        <div class="team__content">
-                            <h4 class="name"><a href="team-details.html">Shakh Danial</a></h4>
-                            <span class="designation">Crypto Advisor</span>
+                            <h4 class="name"><a href="#">A</a></h4>
+                            <span class="designation">Admin & Marketing</span>
                         </div>
                     </div>
                 </div>
