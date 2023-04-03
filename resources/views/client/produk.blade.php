@@ -408,6 +408,11 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xl-12">
+                                                                <p class="small-title float-start text-warning">
+                                                                    (!) Pembayaran dapat dilakukan dengan semua jenis Bank dan E-Wallet via QRIS
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-xl-12">
                                                                 <p class="small-title float-start">
                                                                     <b>TOTAL : </b>
                                                                 </p>
