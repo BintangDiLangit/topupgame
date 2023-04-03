@@ -12,7 +12,7 @@ class ProdukHelper
     public function __construct()
     {
         $this->kursSoc = 294;
-        $this->untung = 0.07;
+        $this->untung = 0.063;
 
     }
     public function listPAdmin()
