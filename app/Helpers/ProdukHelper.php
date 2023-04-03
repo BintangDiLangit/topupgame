@@ -22,7 +22,7 @@ class ProdukHelper
         $produks = \DB::table('produks as p')
         ->leftJoin('vendors as v', 'p.vendor_id', '=', 'v.id')
         ->selectRaw('p.jumlah, p.price_unit,p.id, p.code, p.nama, p.kategori_id, p.vendor_id, p.status, p.harga_beli as harga_beli 
-        , v.nama as nama_vendor, p.harga_beli*'.$kursSoc.' as harga_beli_rp,p.desc, ROUND((p.harga_beli*'. $kursSoc * $untung.') +
+        , v.nama as nama_vendor, p.harga_beli*'.$kursSoc.' as harga_beli_rp,p.desc, ceil((p.harga_beli*'. $kursSoc * $untung.') +
         p.harga_beli*'.$kursSoc.') as harga_jual')
         ->get();
         return $produks;
@@ -103,7 +103,7 @@ class ProdukHelper
         ])
         ->selectRaw('produks.jumlah, produks.price_unit, produks.id, produks.code, produks.nama, 
         produks.kategori_id, produks.vendor_id, produks.status, v.nama as nama_vendor, produks.harga_beli as harga_beli,
-        (produks.harga_beli * '.$kursSoc.') as harga_beli_rp, produks.desc, ROUND(((produks.harga_beli * '.$kursSoc.') * '.$untung.' ) + 
+        (produks.harga_beli * '.$kursSoc.') as harga_beli_rp, produks.desc, ceil(((produks.harga_beli * '.$kursSoc.') * '.$untung.' ) + 
         (produks.harga_beli * '.$kursSoc.')) as harga_jual')
         ->get();
         
@@ -128,7 +128,7 @@ class ProdukHelper
         ])
         ->selectRaw('produks.jumlah, produks.price_unit, produks.id, produks.code, produks.nama, 
         produks.kategori_id, produks.vendor_id, produks.status, v.nama as nama_vendor, produks.harga_beli as harga_beli,
-        (produks.harga_beli * '.$kursSoc.') as harga_beli_rp, produks.desc, ROUND(((produks.harga_beli * '.$kursSoc.') * '.$untung.' ) + 
+        (produks.harga_beli * '.$kursSoc.') as harga_beli_rp, produks.desc, ceil(((produks.harga_beli * '.$kursSoc.') * '.$untung.' ) + 
         (produks.harga_beli * '.$kursSoc.')) as harga_jual')
         ->first();
         return $products;
