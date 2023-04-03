@@ -54,9 +54,9 @@
                                                     href="">
                                                     {{ $item->nama_kategori }}</a>
                                             </h4>
-                                            <div class="shop__item-price">
+                                            {{-- <div class="shop__item-price">
                                                 {{ 'Rp ' . (!empty($item->produks->first()) ? number_format($item->produks->first()->harga_jual, 0, ',', '.') : '-') }}
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="shop__item-cat"><a href="shop.html">{{ $item->nama_kategori }}</a></div>
                                     </div>
