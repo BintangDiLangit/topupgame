@@ -57,14 +57,9 @@
                                         placeholder="jumlah">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Harga Beli (IDR): <span class="text-danger">*</span></label>
+                                    <label class="form-label">SOC: <span class="text-danger">*</span></label>
                                     <input type="text" name="harga_beli" class="form-control input-rounded"
-                                        placeholder="harga beli" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Harga Jual (IDR): <span class="text-danger">*</span></label>
-                                    <input type="text" name="harga_jual" class="form-control input-rounded"
-                                        placeholder="harga jual" required>
+                                        placeholder="soc" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Price Unit: <span class="text-danger">*</span></label>
@@ -115,7 +110,7 @@
                             <th>Nama</th>
                             <th>Jumlah</th>
                             <th>Vendor</th>
-                            <th>Harga Beli (IDR)</th>
+                            <th>Harga SOC</th>
                             <th>Harga Jual (IDR)</th>
                             <th>Price Unit</th>
                             <th>Status</th>
@@ -142,7 +137,7 @@
                                     {{ isset($item->nama_vendor) ? $item->nama_vendor : '-' }}
                                 </td>
                                 <td>
-                                    {{ 'Rp ' . number_format($item->harga_beli, 0, ',', '.') }}
+                                    {{ $item->harga_beli }}
                                 </td>
                                 <td>
                                     {{ 'Rp ' . number_format($item->harga_jual, 0, ',', '.') }}
@@ -226,20 +221,12 @@
                                                                     placeholder="jumlah">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label class="form-label">Harga Beli (IDR): <span
+                                                                <label class="form-label">SOC: <span
                                                                         class="text-danger">*</span></label>
                                                                 <input type="text" name="harga_beli"
                                                                     value="{{ $item->harga_beli }}"
                                                                     class="form-control input-rounded"
-                                                                    placeholder="harga beli" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Harga Jual (IDR): <span
-                                                                        class="text-danger">*</span></label>
-                                                                <input type="text" name="harga_jual"
-                                                                    value="{{ $item->harga_jual }}"
-                                                                    class="form-control input-rounded"
-                                                                    placeholder="harga jual" required>
+                                                                    placeholder="soc" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label">Price Unit: <span
