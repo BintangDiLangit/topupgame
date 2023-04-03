@@ -109,8 +109,8 @@
                             <th>Code</th>
                             <th>Nama</th>
                             <th>Jumlah</th>
-                            <th>Vendor</th>
-                            <th>Harga SOC</th>
+                            <th>Harga Koin</th>
+                            <th>Harga Beli (IDR)</th>
                             <th>Harga Jual (IDR)</th>
                             <th>Price Unit</th>
                             <th>Status</th>
@@ -134,10 +134,10 @@
                                     {{ $item->jumlah }}
                                 </td>
                                 <td>
-                                    {{ isset($item->nama_vendor) ? $item->nama_vendor : '-' }}
+                                    {{ $item->harga_beli }}
                                 </td>
                                 <td>
-                                    {{ $item->harga_beli }}
+                                    {{ 'Rp ' . number_format($item->harga_beli_rp, 0, ',', '.') }}
                                 </td>
                                 <td>
                                     {{ 'Rp ' . number_format($item->harga_jual, 0, ',', '.') }}
