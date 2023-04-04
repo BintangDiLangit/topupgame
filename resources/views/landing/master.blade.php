@@ -3,6 +3,7 @@
 
 <head>
     @include('landing.head')
+    @yield('head_style')
 </head>
 
 <body>
