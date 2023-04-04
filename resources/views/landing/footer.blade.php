@@ -44,7 +44,7 @@
                         <ul class="list-wrap menu">
                             <li>
                                 <a
-                                    href="{{ '/client/'. $item->slug_master_kategori }}"
+                                    href="{{ '/client/mobile-legend' }}"
                                     >Mobile Legends</a
                                 >
                             </li>
