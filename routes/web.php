@@ -80,50 +80,54 @@ Route::get('/tos/page/bimy', function () {
 Route::get('admin/login', [AuthController::class, 'loginView'])->name('login');
 Route::post('admin/login', [AuthController::class, 'loginOl'])->name('loginol');
 
-Route::get('/try', [Controller::class, 'try']);
-
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('role:1,2,3');
 
-    Route::get('/vendor', [VendorController::class, 'index'])->name('vendor.index')->middleware('role:1,2,3');
-    Route::post('/vendor', [VendorController::class, 'store'])->name('vendor.store')->middleware('role:1,2,3');
-    Route::put('/vendor/{id}', [VendorController::class, 'update'])->name('vendor.update')->middleware('role:1,2,3');
-    Route::delete('/vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.destroy')->middleware('role:1,2,3');
+    Route::middleware('role:1,2,3')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/master-kategori', [MasterKategoriController::class, 'index'])->name('master.kategori.index')->middleware('role:1,2');
-    Route::post('/master-kategori', [MasterKategoriController::class, 'store'])->name('master.kategori.store')->middleware('role:1,2');
-    Route::put('/master-kategori/{id}', [MasterKategoriController::class, 'update'])->name('master.kategori.update')->middleware('role:1,2');
-    Route::delete('/master-kategori/{id}', [MasterKategoriController::class, 'destroy'])->name('master.kategori.destroy')->middleware('role:1,2');
+        Route::get('/vendor', [VendorController::class, 'index'])->name('vendor.index');
+        Route::post('/vendor', [VendorController::class, 'store'])->name('vendor.store');
+        Route::put('/vendor/{id}', [VendorController::class, 'update'])->name('vendor.update');
+        Route::delete('/vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.destroy');
 
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index')->middleware('role:1,2');
-    Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store')->middleware('role:1,2');
-    Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update')->middleware('role:1,2');
-    Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy')->middleware('role:1,2');
+        Route::get('/products', [ProdukController::class, 'index'])->name('produk.index');
+        Route::post('/product', [ProdukController::class, 'store'])->name('produk.store');
+        Route::put('/product/{id}', [ProdukController::class, 'update'])->name('produk.update');
+        Route::delete('/product/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
-    Route::get('/products', [ProdukController::class, 'index'])->name('produk.index')->middleware('role:1,2,3');
-    Route::post('/product', [ProdukController::class, 'store'])->name('produk.store')->middleware('role:1,2,3');
-    Route::put('/product/{id}', [ProdukController::class, 'update'])->name('produk.update')->middleware('role:1,2,3');
-    Route::delete('/product/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy')->middleware('role:1,2,3');
+        Route::get('/deposit', [DepositController::class, 'depositView'])->name('deposit.index');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/profile', [ProfileController::class, 'profile']);
+        // Route::get('/deposit', [DepositController::class, 'depositView'])->middleware('role:1,2');
+        Route::post('/deposit', [DepositController::class, 'depositSaldo']);
 
-    Route::get('/deposit', [DepositController::class, 'depositView'])->name('deposit.index')->middleware('role:1,2,3');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('role:1,2,3');
-    Route::get('/profile', [ProfileController::class, 'profile'])->middleware('role:1,2,3');
-    // Route::get('/deposit', [DepositController::class, 'depositView'])->middleware('role:1,2');
-    Route::post('/deposit', [DepositController::class, 'depositSaldo'])->middleware('role:1,2,3');
+        Route::get('/transaksi', [TransaksiController::class, 'transaksi'])->name('transaksi.index');
+        Route::get('/riwayat-transaksi', [TransaksiController::class, 'riwayatTransaksis'])->name('riwayat.transaksi.index');
 
-    Route::get('/transaksi', [TransaksiController::class, 'transaksi'])->name('transaksi.index')->middleware('role:1,2,3');
-    Route::get('/riwayat-transaksi', [TransaksiController::class, 'riwayatTransaksis'])->name('riwayat.transaksi.index')->middleware('role:1,2,3');
+        Route::resource('kategori-blog', KategoriBlogController::class);
+        Route::resource('blog', BlogController::class);
+        Route::resource('komentar', KomentarController::class);
 
+        // OPENAI
+        Route::get('/generate-blog', [OpenAIBlog::class, 'generateText']);
+    });
 
-    Route::resource('kategori-blog', KategoriBlogController::class)->middleware('role:1,2,3');
-    Route::resource('blog', BlogController::class)->middleware('role:1,2,3');
-    Route::resource('komentar', KomentarController::class)->middleware('role:1,2,3');
+    Route::middleware('role:1,2')->group(function () {
+        Route::get('/master-kategori', [MasterKategoriController::class, 'index'])->name('master.kategori.index');
+        Route::post('/master-kategori', [MasterKategoriController::class, 'store'])->name('master.kategori.store');
+        Route::put('/master-kategori/{id}', [MasterKategoriController::class, 'update'])->name('master.kategori.update');
+        Route::delete('/master-kategori/{id}', [MasterKategoriController::class, 'destroy'])->name('master.kategori.destroy');
 
-    // users
-    Route::resource('users', UserController::class)->middleware('role:1');
-    // roles
-    Route::resource('roles', RoleController::class)->middleware('role:1');
+        Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+        Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+        Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+        Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+    });
 
-    // OPENAI
-    Route::get('/generate-blog', [OpenAIBlog::class, 'generateText'])->middleware('role:1,2,3');
+    Route::middleware('role:1')->group(function () {
+        // users
+        Route::resource('users', UserController::class);
+        // roles
+        Route::resource('roles', RoleController::class);
+    });
 });

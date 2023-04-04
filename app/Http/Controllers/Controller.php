@@ -10,9 +10,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-
-    public function try(Request $request)
-    {
-        return $request->user();
-    }
 }
