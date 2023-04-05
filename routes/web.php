@@ -13,7 +13,6 @@ use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\Clients\CekUserController;
 use App\Http\Controllers\Clients\DetailClientController;
 use App\Http\Controllers\Clients\ProdukClientController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\KategoriController;

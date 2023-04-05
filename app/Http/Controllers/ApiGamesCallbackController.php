@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\HistoryTransHelper;
 use App\Models\Transaction;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Spatie\WebhookServer\WebhookCall;
 
 class ApiGamesCallbackController extends Controller
 {
@@ -30,14 +28,18 @@ class ApiGamesCallbackController extends Controller
                     \DB::commit();
                     return $transaction;
                 } else {
+                    \Http::post(env('URL_WEBHOOK_DISCORD_PAYMENT_GAGAL'), [
+                        'content' => "Top Up ke Customer Gagal",
+                        'embeds' => [
+                            [
+                                'title' => "Coba Cek Api gamesnya BROO",
+                                'description' => "ini bro transaksi id nya : " . $transaction->transaction_id
+                            ]
+                        ],
+                    ]);
                     $transaction->update([
                         'status_payment_vendor' => 'GAGAL'
                     ]);
-                    WebhookCall::create()
-                        ->url(env('URL_WEBHOOK_DISCORD_PAYMENT_GAGAL'))
-                        ->payload(['key' => 'value'])
-                        ->useSecret('sign-using-this-secret')
-                        ->dispatch();
                     $historyTrans = new HistoryTransHelper();
                     $historyTrans->insertToHistoryTrans($transaction->id, json_encode($request->all()) . json_encode($transaction));
                     \DB::commit();
