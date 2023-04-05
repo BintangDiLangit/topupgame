@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\IklanCarouselController;
 use App\Http\Controllers\Admin\Users\RoleController;
 use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\AI\BlogController as OpenAIBlog;
@@ -67,7 +68,6 @@ Route::get('/checkout/failed', function () {
 });
 
 
-
 Route::get('/error/page/503', function () {
     return view('errors.503');
 })->name('error.503');
@@ -98,7 +98,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/deposit', [DepositController::class, 'depositView'])->name('deposit.index');
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/profile', [ProfileController::class, 'profile']);
-        // Route::get('/deposit', [DepositController::class, 'depositView'])->middleware('role:1,2');
+        
+        // Deposit API GAMES
         Route::post('/deposit', [DepositController::class, 'depositSaldo']);
 
         Route::get('/transaksi', [TransaksiController::class, 'transaksi'])->name('transaksi.index');
@@ -107,6 +108,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::resource('kategori-blog', KategoriBlogController::class);
         Route::resource('blog', BlogController::class);
         Route::resource('komentar', KomentarController::class);
+
+        // Iklan
+        Route::resource('iklan-carousel', IklanCarouselController::class);
 
         // OPENAI
         Route::get('/generate-blog', [OpenAIBlog::class, 'generateText']);

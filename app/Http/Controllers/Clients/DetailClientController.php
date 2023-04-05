@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Clients;
 
+use App\Helpers\Admin\IklanCarouselHelper;
 use App\Helpers\KategoriHelper;
 use App\Helpers\MasterKategoriHelper;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,9 @@ class DetailClientController extends Controller
             $MKHelper = $MKHelper->getDetailMKClient($slug);
             $KHelper = new KategoriHelper();
             $KHelper = $KHelper->getKClientByIdMaster($MKHelper->id);
-            return view('client.kategori', compact('KHelper'));
+            $IklanCarousel = new IklanCarouselHelper();
+            $IklanCarousel = $IklanCarousel->listForClient($MKHelper->id);
+            return view('client.kategori', compact('KHelper','IklanCarousel'));
         } catch (\Throwable $th) {
             return redirect()->back();
         }

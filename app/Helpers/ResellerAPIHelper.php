@@ -75,7 +75,10 @@ class ResellerAPIHelper
             }
             return $dataFilter;
         } catch (\Throwable $th) {
-            dd($th->getMessage());
+            return [
+                'status' => 'error',
+                'message' => $th->getMessage(),
+            ];
         }
     }
 
