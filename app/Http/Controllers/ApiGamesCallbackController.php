@@ -35,9 +35,8 @@ class ApiGamesCallbackController extends Controller
                         'content' => "Top Up ke Customer Gagal",
                         'embeds' => [
                             [
-                                'title' => "Proses top up ke client gagal BROOO",
-                                'description' => "Coba Cek Api gamesnya",
-                                'data' => $transaction
+                                'title' => "Coba Cek Api gamesnya BROO",
+                                'description' => $transaction
                             ]
                         ],
                     ]);
