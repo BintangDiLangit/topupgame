@@ -19,6 +19,9 @@ class StoreImageHelper
         } elseif ($jenis == 'P') {
             $dataImage->move(public_path('assets/img/produk'), $imageName);
             $imagePathName = env('APP_URL') . '/assets/img/produk/' . $imageName;
+        }elseif ($jenis == 'IKLANWEB') {
+            $dataImage->move(public_path('assets/img/iklanweb'), $imageName);
+            $imagePathName = env('APP_URL') . '/assets/img/iklanweb/' . $imageName;
         } else {
             return response()->json([
                 'message' => 'Jenis Image Tidak Valid'

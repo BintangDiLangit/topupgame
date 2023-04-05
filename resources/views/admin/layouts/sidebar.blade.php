@@ -15,6 +15,16 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
+            <li class="nav-label">Iklan</li>
+            <li>
+                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                <i class="flaticon-077-menu-1"></i>
+                <span class="nav-text">Iklan Web</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('admin.iklan-carousel.index') }}">Iklan</a></li>
+                </ul>
+            </li>
             <li class="nav-label">Master Data</li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-077-menu-1"></i>

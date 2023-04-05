@@ -8,31 +8,18 @@
 <section class="breadcrumb-area breadcrumb__hide-img"
     data-background="{{ asset('assets/img/bg/breadcrumb_bg02.jpg') }}">
     <div class="container">
-
-        <div class="breadcrumb__wrapper">
-            <div class="container">
-                <div class="row position-relative">
-                    <div class="col">
-                        <!-- Set up Carousel -->
-                        <div class="owl-carousel owl-theme">
-                            <div class="item">
-                                <!-- width: 1240px; height:360px  -->
-                                <a href="" class=""><img style="max-width: 100%;"
-                                        src="{{ asset('assets/img/blog/blog_post01.jpg') }}" alt="img" /></a>
+            <div class="breadcrumb__wrapper mb-4">
+                <div class="container">
+                    <div class="row position-relative">
+                        <div class="col">
+                            <div class="owl-carousel owl-theme">
+                                @foreach ($IklanCarousel as $item)
+                                    <div class="item">
+                                        <a href="{{ isset($item->link) ? $item->link : '#' }}" class=""><img style="max-width: 100%;"
+                                                src="{{ $item->image }}" alt="img" /></a>
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="item">
-                                <a href="" class="img-fluid"><img style="max-width: 100%;"
-                                        src="{{ asset('assets/img/blog/blog_post02.jpg') }}" alt="img" /></a>
-                            </div>
-                            <div class="item">
-                                <a href="" class="img-fluid"><img style="max-width: 100%;"
-                                        src="{{ asset('assets/img/blog/blog_post03.jpg') }}" alt="img" /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col position-absolute">
-                        <div class="owl-theme">
-                            asass
                         </div>
                     </div>
                 </div>
@@ -86,10 +73,6 @@
                                     <h4 class="title"><a href="">
                                             {{ $item->nama_kategori }}</a>
                                     </h4>
-                                    {{-- <div class="shop__item-price">
-                                        {{ 'Rp ' . (!empty($item->produks->first()) ?
-                                        number_format($item->produks->first()->harga_jual, 0, ',', '.') : '-') }}
-                                    </div> --}}
                                 </div>
                                 <div class="shop__item-cat"><a href="shop.html">{{ $item->nama_kategori }}</a></div>
                             </div>
