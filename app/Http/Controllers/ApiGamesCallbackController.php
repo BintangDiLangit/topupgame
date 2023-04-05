@@ -35,8 +35,8 @@ class ApiGamesCallbackController extends Controller
                     ]);
                     WebhookCall::create()
                         ->url(env('URL_WEBHOOK_DISCORD_PAYMENT_GAGAL'))
-                        ->payload(['key' => 'value'])
-                        ->useSecret('sign-using-this-secret')
+                        ->payload(['message' => 'Proses top up ke client gagal BROOO',
+                        'data'=>$transaction])
                         ->dispatch();
                     $historyTrans = new HistoryTransHelper();
                     $historyTrans->insertToHistoryTrans($transaction->id, json_encode($request->all()) . json_encode($transaction));

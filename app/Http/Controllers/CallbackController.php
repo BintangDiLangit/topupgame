@@ -34,7 +34,7 @@ class CallbackController extends Controller
 
                     if ($balanceAdmin['message'] == 'Sukses') {
                         if ($balanceAdmin['message'] == 'Sukses') {
-                            if (env('APP_URL')=='https://bimy-store.com') {
+                            // if (env('APP_URL')=='https://bimy-store.com') {
                                 $apiGamesHelper->placeOrder(
                                     $transaction->transaction_id,
                                     $transaction->service,
@@ -43,7 +43,7 @@ class CallbackController extends Controller
                                 );
                                 DB::commit();
                                 return $transaction;
-                            }
+                            // }
                         } else {
                             $historyTrans->insertToHistoryTrans($transaction->id, json_encode($transaction));
                             DB::commit();
