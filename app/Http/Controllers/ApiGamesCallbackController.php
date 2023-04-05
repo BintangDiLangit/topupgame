@@ -33,7 +33,7 @@ class ApiGamesCallbackController extends Controller
                         'embeds' => [
                             [
                                 'title' => "Coba Cek Api gamesnya BROO",
-                                'description' => $transaction
+                                'description' => "ini bro transaksi id nya : " . $transaction->transaction_id
                             ]
                         ],
                     ]);
