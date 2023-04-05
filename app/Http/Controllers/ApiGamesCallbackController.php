@@ -28,9 +28,6 @@ class ApiGamesCallbackController extends Controller
                     \DB::commit();
                     return $transaction;
                 } else {
-                    $transaction->update([
-                        'status_payment_vendor' => 'GAGAL'
-                    ]);
                     \Http::post(env('URL_WEBHOOK_DISCORD_PAYMENT_GAGAL'), [
                         'content' => "Top Up ke Customer Gagal",
                         'embeds' => [
@@ -39,6 +36,9 @@ class ApiGamesCallbackController extends Controller
                                 'description' => $transaction
                             ]
                         ],
+                    ]);
+                    $transaction->update([
+                        'status_payment_vendor' => 'GAGAL'
                     ]);
                     $historyTrans = new HistoryTransHelper();
                     $historyTrans->insertToHistoryTrans($transaction->id, json_encode($request->all()) . json_encode($transaction));
