@@ -47,7 +47,7 @@
                                     <select name="kategori_id" class="form-control input-rounded" required>
                                         <option value=""> - Pilih - </option>
                                         @foreach ($kategoris as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->masterKategori->nama_master_kategori .' - ' . $item->nama_kategori }}</option>
                                         @endforeach
                                     </select>
                                 </div>
