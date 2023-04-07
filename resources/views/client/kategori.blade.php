@@ -47,15 +47,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-9 col-lg-8 col-md-11">
-                <div class="shop__top-wrap">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-sm-6">
-                            <div class="shop__showing-result">
-                                <p>Showing 1 - 3 of 3 results</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div
                     class="row justify-content-center row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-2 row-cols-1">
                     @foreach ($KHelper as $item)
@@ -70,20 +61,15 @@
                             <div class="shop__item-line"></div>
                             <div class="shop__item-content">
                                 <div class="shop__item-content-top">
-                                    <h4 class="title"><a href="">
+                                    <h4 class="title"><a href="{{ (!empty($item->produks->first()) ? '/client/' . $item->masterKategori->slug_master_kategori . '/' . $item->slug_kategori : '/error/page/503')}}">
                                             {{ $item->nama_kategori }}</a>
                                     </h4>
                                 </div>
-                                <div class="shop__item-cat"><a href="shop.html">{{ $item->nama_kategori }}</a></div>
+                                <div class="shop__item-cat"><a href="{{ (!empty($item->produks->first()) ? '/client/' . $item->masterKategori->slug_master_kategori . '/' . $item->slug_kategori : '/error/page/503')}}">{{ $item->nama_kategori }}</a></div>
                             </div>
                         </div>
                     </div>
                     @endforeach
-                </div>
-                <div class="pagination__wrap">
-                    <ul class="list-wrap d-flex flex-wrap justify-content-center">
-                        <li><a href="#" class="page-numbers current">01</a></li>
-                    </ul>
                 </div>
             </div>
         </div>

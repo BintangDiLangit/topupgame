@@ -197,7 +197,7 @@
                                                                     @foreach ($vendors as $v)
                                                                         <option value="{{ $v->id }}"
                                                                             {{ $v->id == $item->vendor_id ? 'selected' : '' }}>
-                                                                            {{ $item->nama }}</option>
+                                                                            {{ $v->nama }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>

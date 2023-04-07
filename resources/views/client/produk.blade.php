@@ -81,7 +81,7 @@
                         @csrf
                         <div class="input-grp mb-4">
                             <p class="small-title">
-                                Diamonds <span class="text-danger">*</span>
+                                {{ $produks[0]->kategori->nama_kategori }} <span class="text-danger">*</span>
                             </p>
                             <select name="game_code" id="game_code"
                                 class="text-white form-control bg-dark ml-2 mr-2 @error('game_code') is-invalid @enderror"
@@ -89,7 +89,7 @@
                                 <option value="">- Choose Package -</option>
                                 @foreach ($produks as $item)
                                 <option value="{{ $item['code'] . ';' . $item['harga_jual'] }}">
-                                    <li>{{ $item['jumlah'] . ' Diamonds ' }}</li>
+                                    <li>{{ $item['nama'] }}</li>
                                 </option>
                                 @endforeach @error('game_code')
                                 <div class="alert alert-danger">{{ $message }}</div>
