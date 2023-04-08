@@ -84,17 +84,23 @@ class ResellerAPIHelper
 
     public function getNickName($zone_id, $user_id)
     {
-
-        $data = Http::asForm()->post(env('API_URL_RESELLER') . '/game-feature', [
-            'key' => env('API_KEY_RESELLER'),
-            'sign' => md5(env('API_ID_RESELLER') . env('API_KEY_RESELLER')),
-            'type' => 'get-nickname',
-            'code' => 'mobile-legends',
-            'target' => $user_id,
-            'additional_target' => $zone_id
-        ]);
-        $data = $data->json();
-        return $data;
+        try {
+            $data = Http::asForm()->post(env('API_URL_RESELLER') . '/game-feature', [
+                'key' => env('API_KEY_RESELLER'),
+                'sign' => md5(env('API_ID_RESELLER') . env('API_KEY_RESELLER')),
+                'type' => 'get-nickname',
+                'code' => 'mobile-legends',
+                'target' => $user_id,
+                'additional_target' => $zone_id
+            ]);
+            $data = $data->json();
+            return $data;
+        } catch (\Throwable $th) {
+            return [
+                'status' => 'not found',
+                'message'=>'data tidak ditemukan'
+            ];
+        }
     }
 
     public function profile()

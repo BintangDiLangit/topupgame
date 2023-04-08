@@ -52,7 +52,10 @@ class CekUserController extends Controller
             }
 
         } catch (\Throwable $th) {
-            return ['message'=>$th->getMessage()];
+            return [
+                'message'=> 'Silahkan input data yang sesuai',
+                    'status' => 'Data akun kamu tidak ada'
+            ];
         }
     }
 }
