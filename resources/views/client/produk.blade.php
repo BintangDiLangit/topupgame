@@ -177,8 +177,8 @@
                                                     
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn shop__details-cart-btn">
-                                                        Pay
+                                                    <button type="submit" id="last-execution" class="btn shop__details-cart-btn">
+                                                        Bayar
                                                     </button>
                                                 </div>
                                             </form>
@@ -335,94 +335,111 @@
                                 $("#game_code option:first").val()
                             );
                         } else {
-                            // console.log(data);
-                            const timeElapsed = Date.now();
-                            const today = new Date(timeElapsed);
-                            const options = { 
-                                day: '2-digit', 
-                                month: 'short', 
-                                year: 'numeric',
-                                hour: 'numeric',
-                                minute: 'numeric',
-                                second: 'numeric',
-                                hour12: false,
-                                timeZone: 'Asia/Jakarta'
-                            };
+                            
+                            if (typeof data.status === 'undefined') {
+                                $('#last-execution').attr('type', 'submit').text('Bayar').removeAttr('data-bs-dismiss', 'modal').removeAttr('aria-label', 'Close')
+                                const timeElapsed = Date.now();
+                                const today = new Date(timeElapsed);
+                                const options = { 
+                                    day: '2-digit', 
+                                    month: 'short', 
+                                    year: 'numeric',
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    second: 'numeric',
+                                    hour12: false,
+                                    timeZone: 'Asia/Jakarta'
+                                };
+    
+                                const formattedDate = today.toLocaleString('id-ID', options)
+                                    .replace(/\s/g, ', ')
+                                    .replace(/\//g, '-');
+    
+                                let harga_jual = data["harga"];
+                                const harga = (harga_jual) => {
+                                    return new Intl.NumberFormat("id-ID", {
+                                        style: "currency",
+                                        currency: "IDR",
+                                    }).format(harga_jual);
+                                };
+                                if ($('#modalPopup')) {
+                                    $('#modalPopup').remove();
+                                }
+                                const dataModal = `<div class="px-2" id="modalPopup">
+                                                            <ul class="list-unstyled">
+                                                                <li class="" id="nicknameShow">Halo, ${data["nickname"]}</li>
+                                                                <li class="mt-1">${formattedDate}</li>
+                                                            </ul>
+                                                            <div class="row">
+                                                                <div class="col-xl-12">
+                                                                    <p class="float-start">
+                                                                        <b>Account ID</b>
+                                                                    </p>
+                                                                    <p class="float-end">
+                                                                        ${data["user_id"]}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-xl-12">
+                                                                    <p class="float-start">
+                                                                        <b>Zone ID</b>
+                                                                    </p>
+                                                                    <p class="float-end">
+                                                                        ${data["zone_id"]}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-xl-12">
+                                                                    <p class="float-start">
+                                                                        <b>Email</b>
+                                                                    </p>
+                                                                    <p class="float-end">
+                                                                        ${(data["email"] == "" || data["email"]==null) ? "-" : data["email"]}
+                                                                    </p>
+                                                                </div>
+                                                                <hr style="border: 2px solid white;" />
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xl-12">
+                                                                    <p class="float-start">
+                                                                        <b>Diamonds</b>
+                                                                    </p>
+                                                                    <p class="float-end">
+                                                                        ${data["jumlah"]}
+                                                                    </p>
+                                                                </div>
+                                                                <hr style="border: 2px solid white;" />
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xl-12">
+                                                                    <p class="small-title float-start text-warning">
+                                                                        Pembayaran dapat dilakukan dengan semua jenis Bank dan E-Wallet via QRIS
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-xl-12">
+                                                                    <p class="small-title float-start">
+                                                                        <b>TOTAL : </b>
+                                                                    </p>
+                                                                    <p class="small-title float-end" style="color:#45f882">
+                                                                        ${harga(harga_jual)}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>`;
+                                $('#modalInvoice').append(dataModal);
+                            }else{
+                                if ($('#modalPopup')) {
+                                    $('#modalPopup').remove();
+                                }
+                                const dataModal = `<div class="px-2" id="modalPopup">
+                                                            <ul class="list-unstyled text-center">
+                                                                <li class="text-warning" id="">Data tidak valid</li>
+                                                                <li class="mt-1">Silahkan masukkan akun id dan server id yang sesuai</li>
+                                                            </ul>
+                                                        </div>`;
 
-                            const formattedDate = today.toLocaleString('id-ID', options)
-                                .replace(/\s/g, ', ')
-                                .replace(/\//g, '-');
+                                $('#last-execution').attr('type', 'button').text('Kembali').attr('data-bs-dismiss', 'modal').attr('aria-label', 'Close')
 
-                            let harga_jual = data["harga"];
-                            const harga = (harga_jual) => {
-                                return new Intl.NumberFormat("id-ID", {
-                                    style: "currency",
-                                    currency: "IDR",
-                                }).format(harga_jual);
-                            };
-                            if ($('#modalPopup')) {
-                                $('#modalPopup').remove();
+                                $('#modalInvoice').append(dataModal);
                             }
-                            const dataModal = `<div class="px-2" id="modalPopup">
-                                                        <ul class="list-unstyled">
-                                                            <li class="" id="nicknameShow">Halo, ${data["nickname"]}</li>
-                                                            <li class="mt-1">${formattedDate}</li>
-                                                        </ul>
-                                                        <div class="row">
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Account ID</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    ${data["user_id"]}
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Zone ID</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    ${data["zone_id"]}
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Email</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    ${(data["email"] == "" || data["email"]==null) ? "-" : data["email"]}
-                                                                </p>
-                                                            </div>
-                                                            <hr style="border: 2px solid white;" />
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-12">
-                                                                <p class="float-start">
-                                                                    <b>Diamonds</b>
-                                                                </p>
-                                                                <p class="float-end">
-                                                                    ${data["jumlah"]}
-                                                                </p>
-                                                            </div>
-                                                            <hr style="border: 2px solid white;" />
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-xl-12">
-                                                                <p class="small-title float-start text-warning">
-                                                                    (!) Pembayaran dapat dilakukan dengan semua jenis Bank dan E-Wallet via QRIS
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-xl-12">
-                                                                <p class="small-title float-start">
-                                                                    <b>TOTAL : </b>
-                                                                </p>
-                                                                <p class="small-title float-end" style="color:#45f882">
-                                                                    ${harga(harga_jual)}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>`;
-                            $('#modalInvoice').append(dataModal);
 
                         }
                     },
