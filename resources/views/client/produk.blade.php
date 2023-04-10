@@ -96,7 +96,7 @@
                                 @enderror
                             </select>
                             <div id="err-game_code" class="invalid-feedback text-danger">
-                                Please choose Package.
+                                Pilih paketnya dulu yaa.
                             </div>
                         </div>
                         <div class="input-grp mb-4">
@@ -115,7 +115,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div id="err-id_user" class="invalid-feedback text-danger">
-                                Please provide a Account ID.
+                                Akun ID kamu jangan sampai lupa diisi ya.
                             </div>
                         </div>
                         <div class="input-grp mb-4">
@@ -129,21 +129,26 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div id="err-zone_user" class="invalid-feedback text-danger">
-                                Please provide a valid Server ID.
+                                Server ID kamu jangan lupa diisi ya.
                             </div>
                         </div>
-
-                        <!-- <div class="offCanvas__newsletter" id="nicknameShow">
-                        <h5 class="small-title"></h5>
-                    </div> -->
+                        <div class="input-grp mb-4">
+                            <h4 class="small-title">Nomor Whatsapp <span class="text-danger">*</span><span class="text-warning" style="font-size: 15px"> (ex. +628123456789)</span></h4> 
+                            <input type="text"
+                                class="in-num bg-dark text-white @error('phone_number') is-invalid @enderror" name="phone_number"
+                                placeholder="nomor whatsapp kamu" id="phone_number" required/>
+                            @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <div id="err-phone_number" class="invalid-feedback text-danger">
+                                Nomor Whatsapp kamu jangan lupa diisi ya.
+                            </div>
+                        </div>
                         <div class="input-grp mb-4">
                             <h4 class="small-title">Akun Email</h4>
                             <input type="email"
                                 class="in-num bg-dark text-white @error('email') is-invalid @enderror" name="email"
                                 placeholder="email kamu" id="email" />
-                            <!-- <div class="valid-feedback">
-                            Looks good!
-                        </div> -->
                             @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -276,11 +281,13 @@
             var zone_user = $("input[name=zone_user]").val();
             var id_user = $("input[name=id_user]").val();
             var game_code = $("#game_code").val();
+            var phone_number = $("#phone_number").val();
             var email = $("#email").val();
 
             $("#err-zone_user").attr("class", "invalid-feedback text-danger");
             $("#err-id_user").attr("class", "invalid-feedback text-danger");
             $("#err-game_code").attr("class", "invalid-feedback text-danger");
+            $("#err-phone_number").attr("class", "invalid-feedback text-danger");
 
             if (zone_user == "" ||
                 zone_user == null) {
@@ -293,6 +300,10 @@
             if (game_code == "" ||
                 game_code == null) {
                 $("#err-game_code").attr("class", "invalid-feedback-active text-danger");
+            }
+            if (phone_number == "" ||
+                phone_number == null) {
+                $("#err-phone_number").attr("class", "invalid-feedback-active text-danger");
             }
             if (
                 zone_user == "" ||
