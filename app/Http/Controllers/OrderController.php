@@ -98,7 +98,7 @@ class OrderController extends Controller
                     'email' => $email,
                     'mobile_number' => $phoneNumber,
                 ],
-                'description' => 'Mobile Legends Top Up',
+                'description' => 'Mobile Legends Top Up : ' . $namaProd,
                 'success_redirect_url' => env('APP_URL') . '/checkout/success',
                 'failure_redirect_url' => env('APP_URL') . '/checkout/failed',
                 'currency' => 'IDR',
