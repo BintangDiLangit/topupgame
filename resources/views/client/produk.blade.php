@@ -80,9 +80,9 @@
                         method="post">
                         @csrf
                         <div class="input-grp mb-4">
-                            <p class="small-title">
+                            <h4 class="small-title">
                                 {{ $produks[0]->kategori->nama_kategori }} <span class="text-danger">*</span>
-                            </p>
+                            </h4>
                             <select name="game_code" id="game_code"
                                 class="text-white form-control bg-dark ml-2 mr-2 @error('game_code') is-invalid @enderror"
                                 required>
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                         <div class="input-grp mb-4">
-                            <h4 class="small-title">Akun Email</h4>
+                            <h4 class="small-title">Alamat Email</h4>
                             <input type="email"
                                 class="in-num bg-dark text-white @error('email') is-invalid @enderror" name="email"
                                 placeholder="email kamu" id="email" />
