@@ -71,7 +71,7 @@ class OrderController extends Controller
                 "external_id" => $externalId,
                 "payer_email" => $email,
                 'amount' => $amount,
-                'invoice_duration' => 86400,
+                'invoice_duration' => 900,
                 'customer_notification_preference' => [
                     'invoice_created' => [
                         'whatsapp',
