@@ -9,7 +9,6 @@ use App\Helpers\ResellerAPIHelper;
 use App\Helpers\TransaksiHelper;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Xendit\Xendit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +21,7 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), [
             'game_code' => 'required|string',
             'email' => 'nullable|email',
+            'phone_number' => 'nullable|string',
             'total_amount' => 'required|string',
             'id_user' => 'required|string',
             'zone_user' => 'required|string',
@@ -43,11 +43,13 @@ class OrderController extends Controller
         $code = $parts[0];
         $hargaJual = 0;
         $produkId = '';
+        $namaProd = '';
 
         if ($productHelper->getDetailPClientByCode($code)) {
             $value = $productHelper->getDetailPClientByCode($code);
             $hargaJual = $value['harga_jual'];
             $produkId = $value['id'];
+            $namaProd = $value['nama'];
         } else {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -55,8 +57,10 @@ class OrderController extends Controller
         $amount = $hargaJual;
 
         $email = $request->email;
+        $phoneNumber = $request->phone_number;
         if(empty($email)){
             $email = 'team@bimy-store.com';
+            $phoneNumber = '+6287881377842';
         }
 
         try {
@@ -67,10 +71,45 @@ class OrderController extends Controller
                 "external_id" => $externalId,
                 "payer_email" => $email,
                 'amount' => $amount,
-                'invoice_duration' => 1200,
-                'description' => 'Mobile Legends Top Up',
+                'invoice_duration' => 900,
+                'customer_notification_preference' => [
+                    'invoice_created' => [
+                        'whatsapp',
+                        'sms',
+                        'email'
+                    ],
+                    'invoice_reminder' => [
+                        'whatsapp',
+                        'sms',
+                        'email'
+                    ],
+                    'invoice_paid' => [
+                        'whatsapp',
+                        'sms',
+                        'email'
+                    ],
+                    'invoice_expired' => [
+                        'whatsapp',
+                        'sms',
+                        'email'
+                    ]
+                ],
+                'customer' => [
+                    'email' => $email,
+                    'mobile_number' => $phoneNumber,
+                ],
+                'description' => 'Mobile Legends Top Up : ' . $namaProd,
                 'success_redirect_url' => env('APP_URL') . '/checkout/success',
-                'failure_redirect_url' => env('APP_URL') . '/checkout/failed'
+                'failure_redirect_url' => env('APP_URL') . '/checkout/failed',
+                'currency' => 'IDR',
+                'items' => [
+                    [
+                        'name' => $namaProd,
+                        'quantity' => 1,
+                        'price' => $amount,
+                        'category' => 'Mobile Legends',
+                    ]
+                ],
             ];
 
             $createTransaction = \Xendit\Invoice::create($params);
