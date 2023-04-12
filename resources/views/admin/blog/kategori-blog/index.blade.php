@@ -1,12 +1,40 @@
 @extends('admin.layouts.master')
 @section('title')
-    Blog
+    Kategori Blog
 @endsection
 @section('content')
     <div class="card">
         <div class="card-header d-sm-flex d-block">
             <div class="me-auto mb-sm-0 mb-3">
-                <h4 class="card-title mb-2">List Blog</h4>
+                <h4 class="card-title mb-2">List Kategori Blog</h4>
+            </div>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalKategoriBlog">+
+                Tambah Kategori
+            </button>
+            <div class="modal fade" id="modalKategoriBlog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Tambah Master Kategori</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            </button>
+                        </div>
+                        <form action="{{ route('admin.kategori-blog.index') }}" method="post">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Nama Kategori : <span class="text-danger">*</span></label>
+                                    <input type="text" name="nama" class="form-control input-rounded"
+                                        placeholder="nama kategori">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -24,8 +52,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Transaksi ID</th>
-                            <th>Data Encoded</th>
+                            <th>Nama Kategori</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,10 +62,7 @@
                                     <h6>{{ $loop->iteration }}</h6>
                                 </td>
                                 <td>
-                                    {{ $item->transaction_id }}
-                                </td>
-                                <td>
-                                    {{ $item->dataencoded }}
+                                    {{ $item->nama }}
                                 </td>
                             </tr>
                         @endforeach

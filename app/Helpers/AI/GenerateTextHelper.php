@@ -26,16 +26,15 @@ class GenerateTextHelper{
         ]))
         ->make();
     }
-    public function generateText($prompt="Write an blog post about http://bimy-store.com, it should in HTML format, include 5 unique points, 
-    using informative tone.", $model="text-davinci-003", $max_tokens=800, $temperature = 0.85)
+    public function generateText($prompt)
     {
         try {
             $response = $this->openAI->completions()->create([
-                'model' => $model,
+                'model' => "text-davinci-003",
                 'prompt' => $prompt,
-                'max_tokens' => $max_tokens,
+                'max_tokens' => 800,
                 'n' => 1,
-                'temperature' => $temperature,
+                'temperature' => 0.85,
             ]);
             $usage = $response;
             return $usage;
