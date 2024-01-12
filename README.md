@@ -1,66 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Bimy Store - Game Top-Up API Documentation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+Welcome to the Bimy Store Game Top-Up API documentation! This repository provides information and resources for developers looking to integrate the Bimy Store API into their applications for game top-up functionality.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Bimy Store is a platform that facilitates the seamless integration of game top-up services, allowing users to conveniently purchase in-game currency, items, and other virtual goods. This documentation will guide you through the API endpoints, authentication process, and provide examples to help you get started with integrating Bimy Store into your project.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Getting Started
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+To begin using the Bimy Store Game Top-Up API, follow these steps:
 
-## Learning Laravel
+1. **Sign Up for Bimy Store Account**: Make sure you have a Bimy Store account. If not, you can sign up at [Bimy Store](https://bimy-store.com/).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Get API Key**: After signing up, obtain your API key from the Bimy Store developer portal. The API key is required for authentication in API requests.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Explore Documentation**: Review the API documentation to understand the available endpoints, request and response formats, and any additional requirements.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Authentication
 
-## Laravel Sponsors
+All requests to the Bimy Store Game Top-Up API must include an API key for authentication. Include the API key in the `Authorization` header of your HTTP requests using the `Bearer` token format.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```http
+Authorization: Bearer YOUR_API_KEY
+```
 
-### Premium Partners
+## API Endpoints
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 1. Top-Up Request
 
-## Contributing
+Endpoint: `POST /api/topup`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Use this endpoint to initiate a game top-up request. Provide the necessary parameters in the request body, including the game ID, user ID, and amount.
 
-## Code of Conduct
+```json
+{
+  "game_id": "your_game_id",
+  "user_id": "user_unique_id",
+  "amount": 100
+}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Check Top-Up Status
 
-## Security Vulnerabilities
+Endpoint: `GET /api/topup/status/{transaction_id}`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Check the status of a specific top-up transaction using its unique identifier.
 
-## License
+### 3. Get Game List
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Endpoint: `GET /api/games`
+
+Retrieve the list of supported games along with their respective IDs.
+
+## Examples
+
+### cURL Example
+
+```bash
+curl -X POST -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" -d '{"game_id": "your_game_id", "user_id": "user_unique_id", "amount": 100}' https://bimy-store.com/api/topup
+```
+
+### Python Example
+
+```python
+import requests
+
+url = "https://bimy-store.com/api/topup"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+data = {
+    "game_id": "your_game_id",
+    "user_id": "user_unique_id",
+    "amount": 100
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+
+## Support
+
+If you encounter any issues or have questions, please [contact Bimy Store support](https://bimy-store.com/contact-us).
+
+Happy coding!
