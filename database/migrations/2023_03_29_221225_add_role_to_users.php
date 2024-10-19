@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('role_id');
             $table->text('image_profile')->nullable();
-            $table->text('status')->default(1);
+            $table->string('status')->default('1');
         });
     }
 
